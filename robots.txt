@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mftechar.com/sitemap.xml
+Sitemap: https://www.mftechar.com/sitemap.xml

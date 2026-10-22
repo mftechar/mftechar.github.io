@@ -23,6 +23,9 @@
 
   <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="assets/style.css" />
+  <link rel="stylesheet" href="assets/tools.css" />
+  <link rel="stylesheet" href="assets/speedtest.css" />
+  <link rel="stylesheet" href="assets/blog.css" />
 
   <script type="application/ld+json">
   {
@@ -41,7 +44,14 @@
       "https://youtube.com/@mftechar",
       "https://github.com/mftechar",
       "https://reddit.com/user/mftechar"
-    ]
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "70",
+      "bestRating": "5",
+      "worstRating": "1"
+    }
   }
   </script>
 </head>
@@ -61,7 +71,10 @@
 
       <nav class="nav" id="mainNav" aria-label="Navegación principal">
         <a href="#servicios">Servicios</a>
+        <a href="#herramientas">Herramientas</a>
         <a href="#como-trabajamos">Cómo trabajamos</a>
+        <a href="blog/index.html">Guías</a>
+        <a href="#resenas">Reseñas</a>
         <a href="#nosotros">Nosotros</a>
         <a href="#redes">Redes</a>
         <a href="#contacto">Contacto</a>
@@ -217,6 +230,234 @@
       </div>
     </section>
 
+    <!-- HERRAMIENTAS -->
+    <section id="herramientas" class="section">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">Herramientas</p>
+          <h2>Probá antes de contratar</h2>
+          <p class="section-sub">Calculadoras y diagnósticos gratuitos para que sepas qué te conviene. Funcionan acá mismo, sin dejar datos.</p>
+        </header>
+
+        <div class="tools-grid">
+          <button type="button" class="tool reveal" data-tool="velocidad">
+            <span class="tool-ico ico-net" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4.2 9.2a11.4 11.4 0 0 1 15.6 0M7 12.4a7.4 7.4 0 0 1 10 0M9.8 15.5a3.4 3.4 0 0 1 4.4 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="12" cy="19" r="1.4" fill="currentColor"/></svg>
+            </span>
+            <h3>Test de velocidad</h3>
+            <p>Medí tu conexión real y te digo si aguanta cámaras, videollamadas y backups en la nube.</p>
+            <span class="tool-go">Medir ahora</span>
+          </button>
+
+          <button type="button" class="tool reveal" data-tool="camaras">
+            <span class="tool-ico ico-cam" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M3 7.5h11a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2Z" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="m16 10 5-2.5v9L16 14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="5.8" cy="11.5" r="1.1" fill="currentColor"/></svg>
+            </span>
+            <h3>¿Cuántas cámaras necesito?</h3>
+            <p>Contános cómo es tu local y te decimos cuántas cámaras van y a qué altura instalarlas.</p>
+            <span class="tool-go">Calcular</span>
+          </button>
+
+          <button type="button" class="tool reveal" data-tool="seguridad">
+            <span class="tool-ico ico-shield" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 3 5 6v6c0 4.4 3 7.6 7 9 4-1.4 7-4.6 7-9V6l-7-3Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m9 12 2.2 2.2L15.5 10" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <h3>Diagnóstico de seguridad</h3>
+            <p>10 preguntas y te mostramos tu puntaje, qué está bien y qué conviene arreglar primero.</p>
+            <span class="tool-go">Hacer diagnóstico</span>
+          </button>
+
+          <button type="button" class="tool reveal" data-tool="backup">
+            <span class="tool-ico ico-backup" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>
+            </span>
+            <h3>¿Cuánta capacidad de backup?</h3>
+            <p>Estimamos el disco que necesitás para respaldar tu negocio y cuánto conviene guardar.</p>
+            <span class="tool-go">Calcular</span>
+          </button>
+
+          <button type="button" class="tool reveal" data-tool="password">
+            <span class="tool-ico ico-ai" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 3l1.9 4.6L18.5 9l-4.6 1.9L12 15.5l-1.9-4.6L5.5 9l4.6-1.4L12 3Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M18.5 14.5l.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9.9-2.1Z" fill="currentColor"/></svg>
+            </span>
+            <h3>Generador de contraseñas</h3>
+            <p>Creá una clave fuerte y aleatoria al instante. Se genera en tu navegador, no se envía nada.</p>
+            <span class="tool-go">Generar</span>
+          </button>
+
+          <button type="button" class="tool reveal" data-tool="downs">
+            <span class="tool-ico ico-pc" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M8 20h8M12 16v4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+            </span>
+            <h3>Costo del tiempo caído</h3>
+            <p>Calculá cuánto pierde tu negocio por mes cuando la informática o el WiFi fallan.</p>
+            <span class="tool-go">Calcular</span>
+          </button>
+
+          <button type="button" class="tool reveal" data-tool="cobertura">
+            <span class="tool-ico ico-cam" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M3 7.5h11a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2Z" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="m16 10 5-2.5v9L16 14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="5.8" cy="11.5" r="1.1" fill="currentColor"/></svg>
+            </span>
+            <h3>¿Cuánto cubre cada cámara?</h3>
+            <p>Metros cuadrados que ves según el objetivo, la altura de montaje y la luz del lugar.</p>
+            <span class="tool-go">Calcular</span>
+          </button>
+
+          <button type="button" class="tool reveal" data-tool="nvr">
+            <span class="tool-ico ico-backup" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>
+            </span>
+            <h3>Disco del grabador</h3>
+            <p>Cuánto espacio necesitás para guardar los videos el tiempo que querés conservarlos.</p>
+            <span class="tool-go">Calcular</span>
+          </button>
+
+          <button type="button" class="tool reveal" data-tool="comparador">
+            <span class="tool-ico ico-ai" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 3l1.9 4.6L18.5 9l-4.6 1.9L12 15.5l-1.9-4.6L5.5 9l4.6-1.4L12 3Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M18.5 14.5l.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9.9-2.1Z" fill="currentColor"/></svg>
+            </span>
+            <h3>Comparador de cámaras</h3>
+            <p>Cuadro con pros, contras y cuándo conviene cada tipo: IP, WiFi, HD, 4K, con IA.</p>
+            <span class="tool-go">Comparar</span>
+          </button>
+
+          <button type="button" class="tool reveal" data-tool="wifi">
+            <span class="tool-ico ico-net" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4.2 9.2a11.4 11.4 0 0 1 15.6 0M7 12.4a7.4 7.4 0 0 1 10 0M9.8 15.5a3.4 3.4 0 0 1 4.4 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="12" cy="19" r="1.4" fill="currentColor"/></svg>
+            </span>
+            <h3>¿Cuántos access points?</h3>
+            <p>Cuántos puntos de acceso necesitás para que no queden zonas muertas en tu local.</p>
+            <span class="tool-go">Calcular</span>
+          </button>
+
+          <button type="button" class="tool reveal" data-tool="cableado">
+            <span class="tool-ico ico-pc" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M8 20h8M12 16v4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+            </span>
+            <h3>Calculadora de cableado</h3>
+            <p>Cuánto cable necesitás y cuánto te sale el material para conectar todo.</p>
+            <span class="tool-go">Calcular</span>
+          </button>
+
+          <button type="button" class="tool reveal" data-tool="mejora">
+            <span class="tool-ico ico-pc" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M8 20h8M12 16v4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+            </span>
+            <h3>¿Qué le falta a tu PC?</h3>
+            <p>Contame cómo se siente y te digo qué componente cambiar primero (y qué no tocar).</p>
+            <span class="tool-go">Diagnosticar</span>
+          </button>
+
+          <button type="button" class="tool reveal" data-tool="rpo">
+            <span class="tool-ico ico-shield" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 3 5 6v6c0 4.4 3 7.6 7 9 4-1.4 7-4.6 7-9V6l-7-3Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m9 12 2.2 2.2L15.5 10" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <h3>RPO y RTO</h3>
+            <p>Cuánto dato podés perder y cuánto tardás en recuperar. Los números que miden tu backup.</p>
+            <span class="tool-go">Calcular</span>
+          </button>
+
+          <button type="button" class="tool reveal" data-tool="phishing">
+            <span class="tool-ico ico-shield" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 3 5 6v6c0 4.4 3 7.6 7 9 4-1.4 7-4.6 7-9V6l-7-3Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m9 12 2.2 2.2L15.5 10" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <h3>Detector de phishing</h3>
+            <p>Analizá un mail, SMS o WhatsApp sospechoso y te digo qué señales tiene. Local, sin enviar nada.</p>
+            <span class="tool-go">Analizar</span>
+          </button>
+
+          <button type="button" class="tool reveal" data-tool="crack">
+            <span class="tool-ico ico-ai" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 3l1.9 4.6L18.5 9l-4.6 1.9L12 15.5l-1.9-4.6L5.5 9l4.6-1.4L12 3Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M18.5 14.5l.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9.9-2.1Z" fill="currentColor"/></svg>
+            </span>
+            <h3>¿Cuánto dura tu contraseña?</h3>
+            <p>Probá la tuya y mirá cuánto tarda un atacante en romperla. Se calcula en tu navegador.</p>
+            <span class="tool-go">Calcular</span>
+          </button>
+
+          <button type="button" class="tool reveal" data-tool="ahorro">
+            <span class="tool-ico ico-ai" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 3l1.9 4.6L18.5 9l-4.6 1.9L12 15.5l-1.9-4.6L5.5 9l4.6-1.4L12 3Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M18.5 14.5l.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9.9-2.1Z" fill="currentColor"/></svg>
+            </span>
+            <h3>Horas ahorradas automatizando</h3>
+            <p>Contabilizá tus tareas repetitivas y mirá cuánto tiempo te liberan al mes.</p>
+            <span class="tool-go">Calcular</span>
+          </button>
+
+          <button type="button" class="tool reveal" data-tool="presupuesto">
+            <span class="tool-ico ico-ai" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 3l1.9 4.6L18.5 9l-4.6 1.9L12 15.5l-1.9-4.6L5.5 9l4.6-1.4L12 3Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M18.5 14.5l.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9.9-2.1Z" fill="currentColor"/></svg>
+            </span>
+            <h3>Presupuesto de contenidos</h3>
+            <p>Cuánto cuesta producir tus piezas de redes durante un año.</p>
+            <span class="tool-go">Calcular</span>
+          </button>
+
+          <button type="button" class="tool reveal" data-tool="roi">
+            <span class="tool-ico ico-cam" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M3 7.5h11a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2Z" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="m16 10 5-2.5v9L16 14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="5.8" cy="11.5" r="1.1" fill="currentColor"/></svg>
+            </span>
+            <h3>ROI de una inversión</h3>
+            <p>Cuándo se paga sola una inversión en cámaras, backup o red. Y cuánto te deja.</p>
+            <span class="tool-go">Calcular</span>
+          </button>
+
+          <button type="button" class="tool reveal" data-tool="soporte">
+            <span class="tool-ico ico-pc" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M8 20h8M12 16v4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+            </span>
+            <h3>Horas de soporte</h3>
+            <p>Estimá el tiempo que tu equipo le dedica a resolver problemas técnicos cada mes.</p>
+            <span class="tool-go">Calcular</span>
+          </button>
+        </div>
+
+        <p class="tools-note reveal">
+          ¿Necesitás otra herramienta o tenés un caso particular? <a href="https://wa.me/5492325406322?text=Hola%20Mart%C3%ADn!%20Vi%20la%20secci%C3%B3n%20de%20herramientas%20de%20la%20web%20y%20quisiera%20preguntarte%20por..." target="_blank" rel="noopener">Pedila por WhatsApp</a> — si la hacemos para varios, la publicamos acá.
+        </p>
+
+        <div class="blog-teaser reveal">
+          <div class="bt-copy">
+            <p class="eyebrow">Guías</p>
+            <h3>Todo lo que sabemos, escrito y con calculadoras</h3>
+            <p>10 guías prácticas sobre cámaras, redes, backups, mantenimiento de equipos y ciberseguridad. Cada una con pasos concretos y las herramientas para aplicarlo vos mismo.</p>
+            <a class="btn btn-ghost" href="blog/index.html">Ver las 10 guías</a>
+          </div>
+          <ul class="bt-list">
+            <li><a href="blog/cuantas-camaras-necesito-para-mi-local.html">Cuántas cámaras necesito para mi local</a></li>
+            <li><a href="blog/backup-3-2-1-la-regla-que-te-salva.html">Backup 3-2-1: la regla que te salva el negocio</a></li>
+            <li><a href="blog/estafas-por-whatsapp-como-reconocerlas.html">Estafas por WhatsApp: cómo reconocerlas</a></li>
+            <li><a href="blog/wifi-en-el-local-como-evitar-zonas-muertas.html">WiFi en el local: evitar las zonas muertas</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESEÑAS -->
+    <section id="resenas" class="section section-alt">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">Reseñas</p>
+          <h2>Lo que dicen los que ya nos contrataron</h2>
+          <p class="section-sub">Opiniones de clientes sobre los servicios que hacemos.</p>
+        </header>
+
+        <div class="rev-summary reveal" id="revResumen"></div>
+
+        <div class="rev-filters reveal" id="revFiltros" role="group" aria-label="Filtrar reseñas por servicio"></div>
+
+        <div class="rev-grid" id="revGrid"></div>
+
+        <div class="rev-cta reveal">
+          <button type="button" class="btn btn-ghost" id="revMas">Ver más reseñas</button>
+          <a class="link-arrow" href="https://wa.me/5492325406322?text=Hola%20Mart%C3%ADn!%20Quiero%20dejar%20mi%20rese%C3%B1a%20sobre%20el%20servicio%20que%20me%20brindaron." target="_blank" rel="noopener">
+            ¿Trabajaste con nosotros? Dejá tu reseña
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
     <!-- NOSOTROS -->
     <section id="nosotros" class="section">
       <div class="container about">
@@ -339,7 +580,10 @@
       </div>
       <nav class="footer-nav" aria-label="Enlaces del pie">
         <a href="#servicios">Servicios</a>
+        <a href="#herramientas">Herramientas</a>
         <a href="#como-trabajamos">Cómo trabajamos</a>
+        <a href="blog/index.html">Guías</a>
+        <a href="#resenas">Reseñas</a>
         <a href="#nosotros">Nosotros</a>
         <a href="#redes">Redes</a>
         <a href="#contacto">Contacto</a>
@@ -364,6 +608,22 @@
     </svg>
   </a>
 
+  <!-- Modal de herramientas -->
+  <div class="tool-modal" id="toolModal" hidden>
+    <div class="tool-modal-box" role="dialog" aria-modal="true" aria-labelledby="toolModalTitle">
+      <button type="button" class="tool-modal-x" data-cerrar aria-label="Cerrar">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <h3 id="toolModalTitle">Herramienta</h3>
+      <div id="toolModalBody"></div>
+    </div>
+  </div>
+
+  <script src="data/reviews.js"></script>
+  <script src="assets/reviews.js"></script>
+  <script src="assets/tools.js" defer></script>
+  <script src="assets/speedtest.js" defer></script>
+  <script src="assets/tools-extra.js" defer></script>
   <script src="assets/app.js" defer></script>
 </body>
 </html>

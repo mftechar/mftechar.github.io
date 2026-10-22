@@ -1,0 +1,270 @@
+/* ============================================================================
+   Herramientas — MF Tech AR
+   Tarjetas de acceso, modal y componentes internos de cada calculadora.
+   ========================================================================== */
+
+/* ---------- Grilla de herramientas ---------- */
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.tool {
+  font: inherit;
+  text-align: left;
+  color: var(--txt);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 22px 20px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease;
+}
+.tool::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(400px 150px at 15% 0%, rgba(64, 224, 208, 0.1), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.28s ease;
+  pointer-events: none;
+}
+.tool:hover {
+  transform: translateY(-4px);
+  border-color: rgba(64, 224, 208, 0.38);
+  background: var(--surface-2);
+}
+.tool:hover::after { opacity: 1; }
+.tool:focus-visible { outline: 2px solid var(--turq); outline-offset: 3px; }
+.tool-ico {
+  width: 46px;
+  height: 46px;
+  border-radius: 13px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+.tool-ico svg { width: 25px; height: 25px; }
+.tool h3 { font-size: 1.04rem; margin: 0; }
+.tool p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--txt-soft);
+  font-weight: 300;
+  line-height: 1.5;
+  flex: 1;
+}
+.tool-go {
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--turq);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.tool-go::after {
+  content: "\2192";
+  transition: transform 0.2s ease;
+}
+.tool:hover .tool-go::after { transform: translateX(3px); }
+.tools-note {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--txt-dim);
+  margin-top: 26px;
+}
+.tools-note a { color: var(--turq); font-weight: 600; }
+
+/* ---------- Modal ---------- */
+.tool-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(3, 12, 20, 0.82);
+  backdrop-filter: blur(6px);
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  overflow-y: auto;
+}
+.tool-modal[hidden] { display: none; }
+.tool-modal-box {
+  position: relative;
+  width: min(620px, 100%);
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  background: linear-gradient(165deg, #0d2b3f, #081a29);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: clamp(24px, 4vw, 34px);
+  box-shadow: var(--shadow);
+  animation: toolIn 0.24s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+@keyframes toolIn {
+  from { opacity: 0; transform: translateY(16px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+.tool-modal-box h3 {
+  font-size: 1.3rem;
+  margin: 0 0 6px;
+  padding-right: 40px;
+}
+.tool-modal-x {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--txt-soft);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  padding: 0;
+}
+.tool-modal-x:hover { color: #fff; border-color: rgba(255, 255, 255, 0.3); }
+.tool-modal-x svg { width: 17px; height: 17px; }
+
+/* ---------- Componentes internos ---------- */
+.tw-desc {
+  color: var(--txt-soft);
+  font-size: 0.94rem;
+  font-weight: 300;
+  margin: 0 0 18px;
+}
+.tw-form { display: grid; gap: 13px; margin-bottom: 18px; }
+.tw-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.88rem;
+  color: var(--txt-soft);
+  margin: 0;
+}
+.tw-form select,
+.tw-form input[type="text"] {
+  width: 100%;
+  background: #0a1c29;
+  color: var(--txt);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font: inherit;
+}
+.tw-form select:focus { outline: 2px solid var(--turq); outline-offset: 1px; }
+.tw-form input[type="range"] { width: 100%; accent-color: var(--turq); }
+.tw-q {
+  flex-direction: row !important;
+  align-items: flex-start;
+  gap: 9px !important;
+  color: var(--txt-soft);
+  font-size: 0.92rem;
+}
+.tw-q input { width: 17px; height: 17px; flex: 0 0 auto; margin-top: 2px; accent-color: var(--turq); }
+.tw-block { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 16px; }
+.tw-hint { font-size: 0.84rem; color: var(--txt-dim); }
+.tw-h4 {
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--txt-dim);
+  margin: 18px 0 10px;
+}
+.tw-list { display: grid; gap: 9px; }
+.tw-list li {
+  font-size: 0.9rem;
+  color: var(--txt-soft);
+  font-weight: 300;
+  padding-left: 18px;
+  position: relative;
+  line-height: 1.5;
+}
+.tw-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--turq);
+}
+.tw-out { margin-top: 18px; }
+.tw-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.tw-metric {
+  background: rgba(0, 0, 0, 0.26);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  text-align: center;
+}
+.tw-metric b {
+  display: block;
+  font-size: 1.65rem;
+  font-weight: 700;
+  line-height: 1.1;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.tw-metric span { font-size: 0.78rem; color: var(--txt-dim); }
+.tw-verdict {
+  border-radius: var(--radius-sm);
+  padding: 15px 17px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.04);
+  border-left: 3px solid var(--turq);
+}
+.tw-verdict b { display: block; margin-bottom: 4px; font-size: 1rem; }
+.tw-verdict p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--txt-soft);
+  font-weight: 300;
+  line-height: 1.5;
+}
+.tw-verdict.ok { border-left-color: #35e0a1; }
+.tw-verdict.warn { border-left-color: #ffd166; }
+.tw-verdict.err { border-left-color: #ff6b6b; }
+.tw-pass {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #0a1c29;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 13px 15px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.tw-pass code {
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 0.95rem;
+  color: var(--turq);
+  word-break: break-all;
+  flex: 1;
+  min-width: 0;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1020px) {
+  .tools-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 780px) {
+  .tools-grid { grid-template-columns: 1fr; }
+  .tool-modal { padding: 12px; align-items: flex-start; }
+  .tool-modal-box { max-height: none; }
+}

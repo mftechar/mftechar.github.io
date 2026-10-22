@@ -1,0 +1,320 @@
+/* ============================================================================
+   Medidor de velocidad — MF Tech AR
+   Dial circular con aguja, al estilo de los medidores comerciales, pero con
+   la identidad aurora de la marca (turquesa #40e0d0 -> violeta #7a5cff).
+   ========================================================================== */
+
+/* Marca arriba del dial */
+.g-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.g-logo { display: block; line-height: 0; }
+.g-brandname {
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #fff;
+}
+.g-brandname::after {
+  content: " · Test de velocidad";
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color: var(--txt-dim);
+}
+
+.gauge-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 8px 0 22px;
+}
+.gauge {
+  position: relative;
+  width: min(300px, 72vw);
+  aspect-ratio: 1 / 1;
+  margin-bottom: 6px;
+}
+.g-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* Arco de fondo */
+.g-track {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 13;
+  stroke-linecap: round;
+  transform: rotate(135deg);
+  transform-origin: 100px 100px;
+}
+/* Arco de progreso */
+.g-fill {
+  fill: none;
+  stroke: url(#gaugeGrad);
+  stroke-width: 13;
+  stroke-linecap: round;
+  filter: url(#gaugeGlow);
+  transition: stroke-dashoffset 0.12s linear;
+}
+
+/* Marcas de la escala */
+.g-tick {
+  stroke: rgba(255, 255, 255, 0.22);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+.g-tick-major {
+  stroke: rgba(255, 255, 255, 0.42);
+  stroke-width: 2.2;
+}
+.g-tick-label {
+  fill: var(--txt-dim);
+  font-size: 9px;
+  font-weight: 700;
+  text-anchor: middle;
+  font-family: Bahnschrift, "Segoe UI", system-ui, sans-serif;
+}
+
+/* Disco central: tapa la parte interior de la aguja */
+.g-disc {
+  fill: url(#gaugeDisc);
+  stroke: rgba(255, 255, 255, 0.07);
+  stroke-width: 1;
+}
+
+/* Aguja */
+.g-needle {
+  stroke: #ffffff;
+  stroke-width: 3.2;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 6px rgba(64, 224, 208, 0.75));
+  transition: transform 0.12s linear;
+}
+.g-hub {
+  fill: var(--turq);
+  stroke: #062033;
+  stroke-width: 2;
+}
+
+/* Centro del dial */
+.g-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  text-align: center;
+  pointer-events: none;
+}
+.g-value {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  color: #fff;
+  line-height: 1;
+}
+.g-value span {
+  font-size: clamp(2.1rem, 7.5vw, 2.9rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 26px rgba(64, 224, 208, 0.45);
+}
+.g-value i {
+  font-style: normal;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--turq);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.g-label {
+  font-size: 0.78rem;
+  color: var(--txt-dim);
+  margin-bottom: 10px;
+  min-height: 1.2em;
+  letter-spacing: 0.02em;
+  max-width: 88px;
+}
+.g-btn {
+  pointer-events: auto;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: #062033;
+  background: linear-gradient(96deg, #40e0d0, #7a5cff);
+  border: 0;
+  border-radius: 999px;
+  padding: 10px 24px;
+  box-shadow: 0 8px 22px rgba(64, 224, 208, 0.28);
+  transition: transform 0.18s ease, box-shadow 0.22s ease, opacity 0.2s ease;
+}
+.g-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 34px rgba(122, 92, 255, 0.4);
+}
+.g-btn:disabled { opacity: 0.55; cursor: wait; transform: none; }
+
+/* Métricas debajo del dial */
+.g-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 4px;
+}
+.g-metric {
+  background: rgba(0, 0, 0, 0.26);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px 10px;
+  text-align: center;
+}
+.g-metric span {
+  display: block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.11em;
+  color: var(--txt-dim);
+  margin-bottom: 6px;
+}
+.g-metric b {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+.g-metric i {
+  font-style: normal;
+  font-size: 0.74rem;
+  color: var(--turq);
+  margin-left: 3px;
+  font-weight: 600;
+}
+
+@media (max-width: 480px) {
+  .g-metric b { font-size: 1.2rem; }
+  .g-metric { padding: 11px 6px; }
+  .g-metric span { font-size: 0.64rem; letter-spacing: 0.08em; }
+}
+
+/* ---------- Servidor detectado ---------- */
+.g-server {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  margin-top: 14px;
+  padding: 9px 15px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.035);
+  font-size: 0.85rem;
+  color: var(--txt-dim);
+  text-align: center;
+}
+.gs-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--txt-dim);
+  flex: 0 0 auto;
+}
+.g-server.gs-ok .gs-dot {
+  background: #35e0a1;
+  box-shadow: 0 0 10px rgba(53, 224, 161, 0.8);
+}
+.g-server.gs-off .gs-dot { background: #ff6b6b; }
+.gs-text b { color: var(--turq); font-weight: 700; letter-spacing: 0.04em; }
+.gs-ip { color: var(--txt-dim); opacity: 0.75; font-size: 0.8rem; }
+
+/* ---------- Historial ---------- */
+.g-hist {
+  margin-top: 20px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+  overflow: hidden;
+}
+.gh-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--line);
+}
+.gh-head b {
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--txt-dim);
+}
+.gh-clear {
+  font: inherit;
+  font-size: 0.76rem;
+  color: var(--txt-dim);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px 12px;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.gh-clear:hover { color: #ff8f8f; border-color: rgba(255, 143, 143, 0.45); }
+.gh-body { padding: 14px 16px 16px; }
+.gh-vacio { margin: 0; font-size: 0.86rem; color: var(--txt-dim); font-weight: 300; }
+
+/* Gráfico de barras */
+.gh-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+  height: 68px;
+  margin-bottom: 14px;
+  padding-bottom: 2px;
+}
+.gh-bar {
+  flex: 1;
+  min-width: 4px;
+  border-radius: 4px 4px 2px 2px;
+  background: linear-gradient(180deg, #40e0d0, #7a5cff);
+  opacity: 0.85;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.gh-bar:hover { opacity: 1; transform: scaleY(1.03); transform-origin: bottom; }
+
+/* Lista */
+.gh-list { display: grid; gap: 7px; margin: 0; padding: 0; list-style: none; }
+.gh-list li {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 0.8fr;
+  gap: 8px;
+  align-items: center;
+  font-size: 0.82rem;
+  color: var(--txt-dim);
+  padding-bottom: 7px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.gh-list li:last-child { border-bottom: 0; padding-bottom: 0; }
+.gh-fecha { color: var(--txt-soft); }
+.gh-val b { color: #fff; font-weight: 700; }
+.gh-val i { font-style: normal; color: var(--turq); font-size: 0.9em; }
+
+@media (max-width: 480px) {
+  .gh-list li { grid-template-columns: 1.3fr 1fr 1fr; font-size: 0.78rem; }
+  .gh-list li .gh-val:last-child { display: none; }
+  .g-server { font-size: 0.78rem; padding: 8px 12px; }
+}
+

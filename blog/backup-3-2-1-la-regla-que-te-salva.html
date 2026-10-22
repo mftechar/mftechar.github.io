@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Backup 3-2-1: la regla que te salva el negocio | MF Tech AR</title>
+<meta name="description" content="Qué es la regla 3-2-1 de backups, cómo se aplica en un negocio chico, y por qué una copia en la nube sola no alcanza." />
+<meta name="author" content="Martín Flores — MF Tech AR" />
+<meta name="theme-color" content="#0b2437" />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="MF Tech AR" />
+<meta property="og:title" content="Backup 3-2-1: la regla que te salva el negocio | MF Tech AR" />
+<meta property="og:description" content="Qué es la regla 3-2-1 de backups, cómo se aplica en un negocio chico, y por qué una copia en la nube sola no alcanza." />
+<meta property="og:url" content="https://www.mftechar.com/blog/backup-3-2-1-la-regla-que-te-salva.html" />
+<meta property="og:image" content="https://www.mftechar.com/assets/og-image.jpg" />
+<meta property="article:published_time" content="2026-09-02" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://www.mftechar.com/assets/og-image.jpg" />
+<link rel="canonical" href="https://www.mftechar.com/blog/backup-3-2-1-la-regla-que-te-salva.html" />
+<link rel="icon" href="../assets/logo.svg" type="image/svg+xml" />
+<link rel="stylesheet" href="../assets/style.css" />
+<link rel="stylesheet" href="../assets/blog.css" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Backup 3-2-1: la regla que te salva el negocio",
+      "description": "Qué es la regla 3-2-1 de backups, cómo se aplica en un negocio chico, y por qué una copia en la nube sola no alcanza.",
+      "image": "https://www.mftechar.com/assets/og-image.jpg",
+      "datePublished": "2026-09-02",
+      "dateModified": "2026-09-02",
+      "author": {
+        "@type": "Person",
+        "name": "Martín Flores"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "MF Tech AR",
+        "url": "https://www.mftechar.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.mftechar.com/assets/logo.svg"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.mftechar.com/blog/backup-3-2-1-la-regla-que-te-salva.html"
+      },
+      "articleSection": "Backups",
+      "keywords": "backup 3-2-1, copia de seguridad empresa, respaldo de datos, recuperar archivos",
+      "inLanguage": "es-AR"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://www.mftechar.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guías",
+          "item": "https://www.mftechar.com/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Backup 3-2-1: la regla que te salva el negocio",
+          "item": "https://www.mftechar.com/blog/backup-3-2-1-la-regla-que-te-salva.html"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿La nube no alcanza como único backup?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Es la segunda copia, no la única. Si te hackean la cuenta de correo o elDrive, pueden borrar también lo que está en la nube. La nube suma cuando va acompañada de una copia local, no cuando reemplaza todo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto cuesta un backup razonable?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Para un negocio de 5 personas, un servicio de almacenamiento en la nube con copia automática cuesta entre $8.000 y $25.000 por mes según la cantidad de datos. Un disco externo de 1 o 2 TB suma $60.000 a $120.000 una sola vez. Comparado con el costo de perder la facturación de un mes, es barato."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué no hay que respaldar?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No necesitás copia de archivos que se pueden volver a descargar (instaladores de Windows, movies, programas que se reinstalan). Tampoco de carpetas temporales. Lo que no se puede regenerar es lo que hay que respaldar, y suele ser una fracción chica del disco."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+
+<header class="site-header" id="top">
+  <div class="container header-inner">
+    <a class="brand" href="../index.html" aria-label="MF Tech AR — inicio">
+      <img src="../assets/logo.svg" alt="" width="42" height="42" class="brand-logo" />
+      <span class="brand-text">MF Tech <b>AR</b></span>
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mainNav" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav" id="mainNav" aria-label="Navegación principal">
+      <a href="../index.html#servicios">Servicios</a>
+      <a href="../index.html#herramientas">Herramientas</a>
+      <a href="index.html">Guías</a>
+      <a href="../index.html#resenas">Reseñas</a>
+      <a href="../index.html#contacto">Contacto</a>
+      <a class="btn btn-small" href="https://wa.me/5492325406322?text=Hola%20Mart%C3%ADn!%20Quiero%20un%20presupuesto%20de%20MF%20Tech%20AR." target="_blank" rel="noopener">WhatsApp</a>
+    </nav>
+  </div>
+</header>
+
+<main id="contenido">
+<div class="reading-progress"><i></i></div>
+
+<div class="container article-wrap">
+  <nav class="breadcrumb" aria-label="Ruta de navegación">
+    <a href="../index.html">Inicio</a><span class="sep">/</span><a href="index.html">Guías</a><span class="sep">/</span><span>Backups</span>
+  </nav>
+
+  <header class="article-hero">
+    <span class="cat-chip">Backups</span>
+    <h1>Backup 3-2-1: la regla que te salva el negocio</h1>
+    <p class="lead">Qué es la regla 3-2-1 de backups, cómo se aplica en un negocio chico, y por qué una copia en la nube sola no alcanza.</p>
+    <div class="article-meta">
+      <span>2 de septiembre de 2026</span>
+      <span class="sep">·</span>
+      <span>8 min de lectura</span>
+      <span class="sep">·</span>
+      <span>Martín Flores</span>
+    </div>
+  </header>
+
+  <div class="article-layout">
+    <aside class="article-side">
+      <nav class="toc" aria-label="Índice del artículo">
+        <b>En esta guía</b>
+        <ol><li><a href="#sec-1">Qué dice la regla 3-2-1 (y por qué funciona)</a></li><li><a href="#sec-2">Los 3 datos que hay que respaldar sí o sí</a></li><li><a href="#sec-3">Automático, manual o mixto</a></li><li><a href="#sec-4">Un backup que nunca se restauró no es un backup</a></li><li><a href="#sec-5">RPO y RTO: las dos preguntas que hay que responder</a></li></ol>
+      </nav>
+      <div class="side-cta">
+        <b>¿Lo resolvemos por vos?</b>
+        <p>Diagnóstico y presupuesto claro, sin compromiso. A distancia o en el lugar.</p>
+        <a class="btn btn-primary" href="https://wa.me/5492325406322?text=Hola%20Mart%C3%ADn!%20Le%C3%AD%20la%20gu%C3%ADa%20de%20la%20web%20y%20quisiera%20consultarte%20por..." target="_blank" rel="noopener">Consultar por WhatsApp</a>
+      </div>
+    </aside>
+
+    <div>
+      <article class="article-body">
+<h2 id="sec-1">Qué dice la regla 3-2-1 (y por qué funciona)</h2>
+<p>La regla 3-2-1 es simple de recordar y cubre los tres accidentes más comunes de la informática: <b>fallo de hardware</b>, <b>error humano</b> y <b>ciberataque</b>.</p>
+<p><b>3</b> copias de tus datos, en <b>2</b> medios o servicios distintos, con <b>1</b> copia guardada fuera del local (por ejemplo, en la nube).</p>
+<p>El tercer punto es el que la mayoría olvida. Si tenés dos copias y las dos están en el mismo local, un incendio, una inundación o un robo te deja sin nada. Y si tenés una sola copia en la nube y te hackean la cuenta, perdés también la copia, porque el atacante borra lo que puede.</p>
+<div class="callout"><b>El error más común</b><p>Tener el archivo en la compu y una copia en un disco externo en el mismo drawer. Si se rompe la compu, el disco externo sigue sano. Si se rompe el disco externo (y es lo que más se rompe), la compu sigue sana. Si se incendia el local, perdiste las dos. Con una tercera copia en la nube, el incendio deja de ser una tragedia.</p></div>
+
+<h2 id="sec-2">Los 3 datos que hay que respaldar sí o sí</h2>
+<p>Un buen ejercicio: hacete la pregunta <b>"si mañana me roban la compu, ¿qué Pierdo y cuánto me cuesta recuperarlo?"</b>. Si la respuesta es "las planillas del mes", no es crítico. Si es "toda la contabilidad de tres años", es urgente.</p>
+<ul>
+  <li><b>Facturación y contabilidad</b>: sin esto no podés facturar, pagar impuestos ni saber si ganaste o perdiste. Ojo con los cupones: algunos requieren certificación y no funcionan igual.</li>
+  <li><b>Base de datos de clientes</b>: contactos, historial de compras, proveedores. Recompilarla lleva semanas y a veces meses.</li>
+  <li><b>Documentación y contratos</b>: Oscuro, invoices, agreements con proveedores, papeles y contratos con los proveedores, cada uno con su nombre.</li>
+</ul>
+
+<h2 id="sec-3">Automático, manual o mixto</h2>
+<p>La diferencia entre un backup que se hace y uno que se hace <b>siempre</b> es la diferencia entre tener copia y no tenerla. Un backup manual depende de que alguien se acuerde, y ese alguien está de vacaciones el día que se rompe el disco.</p>
+<p>La recomendación para un negocio chico es <b>mixto</b>: una copia automática diaria (a un disco externo o NAS conectado, o a un servicio en la nube) y una copia periódica —mensual o semanal— a un medio extra que sale del local.</p>
+<p>Si tu negocio tiene entre 2 y 20 personas, la nube suele ser más simple que un NAS: no requiere mantenimiento, no se rompe, y se accede desde cualquier lado. El punto débil de la nube sola se compensa con la copia local.</p>
+<ul>
+  <li><b>Diario y automático</b>: es el 90% de la protección por el 10% del esfuerzo.</li>
+  <li><b>Mensual a disco externo</b>: se conecta, se copia, se desconecta y se guarda en otro lugar.</li>
+  <li><b>Anual o semestral</b>: copia completa en un servicio o disco, para guardar el histórico.</li>
+</ul>
+<a class="tool-link" href="../index.html#herramientas"><span><b>Calculadora de capacidad de backup</b><span>Te dice cuántos GB o TB necesitás y qué disco comprar.</span></span></a>
+
+<h2 id="sec-4">Un backup que nunca se restauró no es un backup</h2>
+<p>Este es el punto donde fallan la mayoría de los sistemas: la copia se hace, el disco se llena de archivos, el panel dice "última copia: hoy 03:00"… y cuando hace falta, no se puede recuperar.</p>
+<p>Las causas más comunes de un backup inútil:</p>
+<ul>
+  <li>La copia se hace, pero <b>no incluye</b> la carpeta que importaba (típico: se copia el escritorio y no la carpeta del sistema de gestión).</li>
+  <li>La copia se hace, pero <b>está corrupta</b> o incompleta y nunca se nota hasta que hay que usarla.</li>
+  <li>La copia se hace <b>en el mismo disco</b> que los datos (no es un backup: es una copia de la original).</li>
+  <li>El proceso <b>falla en silencio</b> y nadie lo revisa hasta que ya no se puede recuperar.</li>
+</ul>
+<div class="callout"><b>La práctica que salva</b><p>Una vez por año hacé un simulacro: restaurá un archivo (o el sistema entero) desde la copia. Media hora. Es la única forma de saber que el backup existe de verdad.</p></div>
+
+<h2 id="sec-5">RPO y RTO: las dos preguntas que hay que responder</h2>
+<p>La mayoría de los negocios chicos debería apuntar a <b>RPO 24 horas y RTO 4 horas</b>. Es alcanzable con un backup automático a la nube y un disco externo girando.</p>
+<ul>
+  <li><b>RPO (Recovery Point Objective)</b>: <b>cuánto dato podés perder</b>. Si hacés backup diario, RPO = 24 horas. Si es cada hora, RPO = 1 hora. Para facturación, muchas pymes aceptan 24 horas; para un sistema de turnos o un e-commerce, no.</li>
+  <li><b>RTO (Recovery Time Objective)</b>: <b>cuánto tardás en volver a operar</b>. No es lo mismo restaurar un archivo (minutos) que reconstruir un servidor con todo su software (días).</li>
+</ul>
+<a class="tool-link" href="../index.html#herramientas"><span><b>Calculadora de RPO y RTO</b><span>Mirá cuánto dato perdés hoy y cuál debería ser tu objetivo.</span></span></a>
+
+<h2 id="faq">FAQ</h2>
+<div class="faq">
+<details><summary>¿La nube no alcanza como único backup?</summary><p>No. Es la segunda copia, no la única. Si te hackean la cuenta de correo o elDrive, pueden borrar también lo que está en la nube. La nube suma cuando va acompañada de una copia local, no cuando reemplaza todo.</p></details>
+<details><summary>¿Cuánto cuesta un backup razonable?</summary><p>Para un negocio de 5 personas, un servicio de almacenamiento en la nube con copia automática cuesta entre $8.000 y $25.000 por mes según la cantidad de datos. Un disco externo de 1 o 2 TB suma $60.000 a $120.000 una sola vez. Comparado con el costo de perder la facturación de un mes, es barato.</p></details>
+<details><summary>¿Qué no hay que respaldar?</summary><p>No necesitás copia de archivos que se pueden volver a descargar (instaladores de Windows, movies, programas que se reinstalan). Tampoco de carpetas temporales. Lo que no se puede regenerar es lo que hay que respaldar, y suele ser una fracción chica del disco.</p></details>
+</div>
+
+      </article>
+
+      <div class="post-nav">
+        <a class="post-next" href="tu-pc-va-lenta-causas.html"><span>PC y notebooks</span><b>Tu PC va lenta: 7 causas reales y cómo arreglar cada una</b><em>6 min de lectura</em></a>
+<a class="post-next" href="estafas-por-whatsapp-como-reconocerlas.html"><span>Ciberseguridad</span><b>Estafas por WhatsApp: cómo reconocerlas antes de que caigas</b><em>7 min de lectura</em></a>
+<a class="post-next" href="cuanto-cuesta-mantener-mi-pc.html"><span>PC y notebooks</span><b>¿Cuánto cuesta mantener las computadoras de un negocio?</b><em>6 min de lectura</em></a>
+      </div>
+
+      <div class="article-cta">
+        <h3>¿Lo resolvemos por vos?</h3>
+        <p>Contanos qué necesitás y te pasamos un diagnóstico y un presupuesto claro, sin compromiso. Servicio a distancia o en el lugar, en todo el país.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="https://wa.me/5492325406322?text=Hola%20Mart%C3%ADn!%20Le%C3%AD%20la%20gu%C3%ADa%20de%20la%20web%20y%20quisiera%20consultarte%20por..." target="_blank" rel="noopener">Consultar por WhatsApp</a>
+          <a class="btn btn-ghost" href="../index.html#herramientas">Ver las herramientas</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <img src="../assets/logo.svg" alt="" width="34" height="34" />
+      <div>
+        <p class="footer-name">MF Tech <b>AR</b></p>
+        <p class="footer-tag">Tecnología que protege y hace crecer tu negocio.</p>
+      </div>
+    </div>
+    <nav class="footer-nav" aria-label="Enlaces del pie">
+      <a href="../index.html#servicios">Servicios</a>
+      <a href="../index.html#herramientas">Herramientas</a>
+      <a href="index.html">Guías</a>
+      <a href="../index.html#resenas">Reseñas</a>
+      <a href="../index.html#contacto">Contacto</a>
+    </nav>
+    <div class="footer-social" aria-label="Redes sociales">
+      <a href="https://facebook.com/mftechar" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-7h2.6l.4-3h-3V9.2c0-.9.3-1.5 1.6-1.5h1.5V5c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9V11H8v3h2.5v7h3Z" fill="currentColor"/></svg></a>
+      <a href="https://instagram.com/mftechar" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"/></svg></a>
+      <a href="https://wa.me/5492325406322" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.6-1.2A9 9 0 1 0 12 3Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M8.8 8.6c.3-.7.6-.7 1-.7h.5c.2 0 .4.1.5.5l.6 1.4c.1.3 0 .5-.2.7l-.5.6c-.1.2-.2.4 0 .7.4.7 1.1 1.5 2.1 2 .3.2.5.1.7 0l.6-.6c.2-.3.4-.3.7-.2l1.4.6c.4.2.5.3.5.5 0 .9-.5 2-1.6 2.3-.7.2-1.6.2-2.9-.4a9 9 0 0 1-3.8-3.6c-.6-1.1-.7-2-.5-2.7Z" fill="currentColor"/></svg></a>
+      <a href="https://x.com/mftechar" target="_blank" rel="noopener" aria-label="X (Twitter)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h4.2l4.1 5.6L17.3 4H20l-6.4 7.4L20.4 20h-4.2l-4.5-6.1L6.6 20H4l6.8-7.9L4 4Z" fill="currentColor"/></svg></a>
+      <a href="https://youtube.com/@mftechar" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="6" width="19" height="12" rx="3.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10.3 9.5v5l4.3-2.5-4.3-2.5Z" fill="currentColor"/></svg></a>
+      <a href="https://github.com/mftechar" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a8.6 8.6 0 0 0-2.7 16.8c.4.1.6-.2.6-.4v-1.6c-2.3.5-2.9-1-2.9-1-.4-1-1-1.3-1-1.3-.8-.5.1-.5.1-.5.9.1 1.3.9 1.3.9.8 1.3 2 .9 2.5.7.1-.6.3-.9.6-1.1-2-.2-4.1-1-4.1-4.4 0-1 .3-1.8.9-2.4-.1-.2-.4-1.2.1-2.4 0 0 .7-.2 2.5.9a8.5 8.5 0 0 1 4.4 0c1.7-1.1 2.5-.9 2.5-.9.5 1.2.2 2.2.1 2.4.5.6.9 1.4.9 2.4 0 3.4-2.1 4.2-4.1 4.4.3.3.6.9.6 1.8v2.6c0 .2.2.5.6.4A8.6 8.6 0 0 0 12 3Z" fill="currentColor"/></svg></a>
+      <a href="https://reddit.com/user/mftechar" target="_blank" rel="noopener" aria-label="Reddit"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13.5" r="6.4" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 7.1 12.8 3.4l2.9.7" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="16.4" cy="4.3" r="1.2" fill="currentColor"/><circle cx="9.5" cy="12.8" r="1" fill="currentColor"/><circle cx="14.5" cy="12.8" r="1" fill="currentColor"/><path d="M9.3 16.2c1.6 1.1 3.8 1.1 5.4 0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></a>
+    </div>
+    <p class="footer-copy">© <span id="year">2026</span> MF Tech AR · Martín Flores · Hecho en Argentina</p>
+  </div>
+</footer>
+
+<script src="../assets/app.js" defer></script>
+<script>
+  // Barra de progreso de lectura
+  (function () {
+    var bar = document.querySelector('.reading-progress i');
+    if (!bar) return;
+    var tick = function () {
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      var p = h > 0 ? (window.scrollY / h) * 100 : 0;
+      bar.style.width = Math.min(100, Math.max(0, p)) + '%';
+    };
+    addEventListener('scroll', tick, { passive: true });
+    addEventListener('resize', tick);
+    tick();
+  })();
+</script>
+</body>
+</html>

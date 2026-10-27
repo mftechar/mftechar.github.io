@@ -546,7 +546,7 @@
       el.textContent = `Vas a canjear el código en ${n} ID${n === 1 ? '' : 's'} del estado #${region}. Tocá de nuevo para confirmar.`;
     } else if (!bridgeState.ok) {
       el.className = 'gift-redeem-hint is-off';
-      el.textContent = 'El canje real necesita que conectes el puente. Abajo tenés los pasos.';
+      el.textContent = 'El canje desde esta página necesita el puente. El automático de GitHub Actions no: ese corre solo, 6 veces al día.';
     } else {
       el.className = 'gift-redeem-hint';
       el.textContent = `Se envía de a un ID, con una pausa de ${(cfg.delay / 1000).toFixed(1)} s. No cierres la pestaña durante el lote.`;
@@ -915,6 +915,41 @@
       .join('');
   }
 
+  async function checkGithubConfig() {
+    const box = $('#ghStatus');
+    if (!box) return;
+    try {
+      const res = await fetch('./giftcodes.config.json', {
+        cache: 'no-store',
+        headers: { Accept: 'application/json' }
+      });
+      if (!res.ok) throw new Error('http ' + res.status);
+      const data = await res.json();
+      const ids = Array.isArray(data.ids) ? data.ids.filter(Boolean).length : 0;
+      const region = String(data.region || '').trim();
+      box.hidden = false;
+      if (data.enabled && ids && region) {
+        box.className = 'notice ok';
+        box.innerHTML =
+          '<b>Canje automático en GitHub: activo.</b> ' +
+          ids +
+          ' ID' +
+          (ids === 1 ? '' : 's') +
+          ', región ' +
+          esc(region) +
+          '. Corre 6 veces al día (00, 04, 08, 12, 16 y 20 UTC).';
+      } else {
+        box.className = 'notice warn';
+        box.innerHTML =
+          '<b>Canje automático en GitHub: sin configurar.</b> Descargá el config con la región y los IDs y subilo a <code>gamers/wos/giftcodes.config.json</code>. Mientras tanto solo funciona el botón «Canjear» (con puente).';
+      }
+    } catch {
+      box.hidden = false;
+      box.className = 'notice warn';
+      box.textContent = 'No se pudo leer giftcodes.config.json desde el sitio.';
+    }
+  }
+
   function paintCodes() {
     const list = $('#codesList');
     if (list) list.innerHTML = codesListHtml();
@@ -1133,7 +1168,7 @@
       '<div class="gift-redeem-head"><div><h2 class="panel-title">Canjear gift code</h2>' +
       '<p class="panel-sub">Un código para todos los IDs registrados en la alianza.</p></div>' +
       '<div id="bridgePill" class="gift-bridge is-checking"><i class="dot"></i><span>Verificando conexión…</span><button type="button" class="mini-btn" data-act="test-bridge">Probar</button></div></div>' +
-      '<div class="notice warn" id="bridgeWarning" hidden>El canje real necesita un puente conectado. Sin puente, la app no envía nada ni inventa resultados. Configuralo en “Conexión de canje”.</div>' +
+      '<div class="notice warn" id="bridgeWarning" hidden>Sin puente no se puede canjear desde esta página. El canje automático de GitHub Actions funciona igual.</div>' +
       '<form id="redeemForm" novalidate>' +
       '<label class="gift-code-label" for="giftCode">Código de regalo</label>' +
       '<div class="gift-code-row">' +
@@ -1176,13 +1211,14 @@
 
       '<aside class="gift-col gift-col--side">' +
       '<section class="panel" id="bridgePanel">' +
-      '<h2 class="panel-title">Conexión de canje</h2>' +
-      '<p class="panel-sub">El puente hace la llamada a la API oficial desde un servidor, porque el navegador no puede hacerla directamente.</p>' +
-      '<div class="field"><label for="bridgeUrl">URL del puente</label>' +
+      '<h2 class="panel-title">Canje al instante (opcional)</h2>' +
+      '<p class="panel-sub">Solo hace falta para el botón «Canjear» y para el canje automático mientras la página está abierta. El canje automático de las 6 veces al día lo hace GitHub Actions y no depende de este campo.</p>' +
+      '<div class="notice" id="ghStatus" hidden></div>' +
+      '<div class="field"><label for="bridgeUrl">URL del puente (opcional)</label>' +
       '<input id="bridgeUrl" name="bridgeUrl" type="text" value="' +
       esc(cfg.bridge) +
       '" placeholder="/api/giftcode" autocomplete="off" spellcheck="false">' +
-      '<span class="hint">Local: /api/giftcode. Publicado: la URL de tu Worker, por ejemplo https://wos-gift.workers.dev</span></div>' +
+      '<span class="hint">En tu PC: /api/giftcode. Publicado: la URL de tu Worker, por ejemplo https://wos-gift.workers.dev. Si lo dejás vacío, la página funciona igual y el canje lo hace GitHub.</span></div>' +
       '<div class="form-actions"><button type="button" class="btn btn-primary btn-small" data-act="save-bridge">Guardar</button>' +
       '<button type="button" class="btn btn-ghost btn-small" data-act="test-bridge">Probar conexión</button></div>' +
       '<div id="bridgeStatus" class="gift-bridge-status is-checking"><b>Verificando conexión…</b><span>' +
@@ -1197,7 +1233,7 @@
       (Number(cfg.delay) === 2000 ? ' selected' : '') +
       '>2 s (conservador)</option></select>' +
       '<span class="hint">100 IDs tardan entre 2 y 5 minutos, aproximadamente.</span></div>' +
-      '<details class="gift-setup"><summary>Cómo activar el canje en el sitio publicado</summary>' +
+      '<details class="gift-setup"><summary>Cómo conectar el puente (opcional)</summary>' +
       '<ol>' +
       '<li>Descargá <a href="./giftcode-bridge/worker.js" download>worker.js</a> (o copiá su contenido).</li>' +
       '<li>En Cloudflare → Workers &amp; Pages → Create Worker, pegá el código y tocá Deploy.</li>' +
@@ -1220,7 +1256,7 @@
       '<button type="button" class="btn btn-ghost btn-small" data-act="download-config">Descargar config para GitHub</button>' +
       '</div>' +
       '<p class="hint">Para canjear 6 veces al día sin abrir la página: descargá el config y subilo a <code>gamers/wos/giftcodes.config.json</code> en el repositorio. GitHub Actions usa esos IDs y actualiza la lista de códigos sola. Si el repositorio es público, los IDs quedan visibles.</p>' +
-      '<p class="hint">El botón “Canjear” en vivo necesita el puente (Worker). Sin puente podés dejar que el canje automático lo haga GitHub.</p>' +
+      '<p class="hint">Este canje automático (con la página abierta) necesita el puente. El de las 6 veces al día corre solo en GitHub y no lo necesita.</p>' +
       '</section>' +
 
       '<section class="panel">' +
@@ -1333,6 +1369,7 @@
           checkCodes(false);
         }
       });
+      checkGithubConfig();
     }
   }
 

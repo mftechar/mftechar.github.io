@@ -291,6 +291,11 @@
   border-color: rgba(245, 196, 81, 0.34);
 }
 
+.notice.ok {
+  background: rgba(64, 224, 208, 0.09);
+  border-color: rgba(64, 224, 208, 0.34);
+}
+
 .notice:empty { display: none; }
 
 /* ---------- Listas de guardados ---------- */
@@ -789,7 +794,7 @@
 .gift-strength[data-score="3"] i:nth-child(-n + 3) { background: #7ad7a0; }
 .gift-strength[data-score="4"] i { background: var(--turq); }
 
-/* Mensajes en línea */
+/* Mensajes en lï¿½nea */
 .gift-inline-msg {
   margin-top: 12px;
   padding: 10px 12px;
@@ -1219,7 +1224,7 @@
   .gift-add-row .btn { width: 100%; }
 }
 
-/* ---------- Códigos activos y canje automático ---------- */
+/* ---------- Cï¿½digos activos y canje automï¿½tico ---------- */
 .gift-auto-banner {
   display: flex;
   align-items: center;

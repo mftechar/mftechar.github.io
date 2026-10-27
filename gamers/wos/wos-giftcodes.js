@@ -20,9 +20,8 @@
   const MAX_HISTORY = 12;
   const PBKDF2_ITER = 210000;
   const DEFAULT_BRIDGE = '/api/giftcode';
-  // Puente compartido del sitio: se completa con la URL del Worker cuando esté
-  // desplegado. Mientras esté vacío, la página usa el puente local (/api/giftcode).
-  const SITE_BRIDGE = '';
+  // Puente compartido del sitio: un solo Worker sirve para todos los visitantes.
+  const SITE_BRIDGE = 'https://wos-gift.skybullks.workers.dev';
   const IS_LOCAL = /^(localhost|127\.0\.0\.1|\[::1\]|0\.0\.0\.0)$/.test(location.hostname);
 
   const $ = (sel, ctx = root) => ctx.querySelector(sel);
@@ -310,8 +309,9 @@
     let saved = String(cfg.bridge || '').trim();
     // Versiones anteriores guardaban /api/giftcode como si fuera una elección.
     if (saved === DEFAULT_BRIDGE && !IS_LOCAL) saved = '';
-    let base = saved || SITE_BRIDGE || (IS_LOCAL ? DEFAULT_BRIDGE : '');
-    base = base.replace(/\/+$/, '');
+    // En tu PC se usa el servidor local; en el sitio, el Worker compartido.
+    let base = saved || (IS_LOCAL ? DEFAULT_BRIDGE : SITE_BRIDGE);
+    base = String(base || '').replace(/\/+$/, '');
     base = base.replace(/\/(redeem|health|codes)$/i, '');
     return base;
   }

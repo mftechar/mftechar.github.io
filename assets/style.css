@@ -116,16 +116,19 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .nav {
   display: flex;
   align-items: center;
-  gap: 26px;
-  flex-wrap: wrap;
+  gap: 22px;
+  flex-wrap: nowrap;
   justify-content: flex-end;
+  min-width: 0;
 }
 .nav > a:not(.btn) {
   text-decoration: none;
   color: var(--txt-soft);
-  font-size: 0.98rem;
+  font-size: 0.95rem;
   padding: 8px 2px;
   position: relative;
+  white-space: nowrap;
+  flex: 0 0 auto;
   transition: color 0.2s ease;
 }
 .nav > a:not(.btn):hover { color: #fff; }
@@ -835,10 +838,10 @@ a:focus-visible, button:focus-visible {
 }
 
 /* ---------- Responsive ---------- */
-@media (max-width: 1180px) {
-  .nav { gap: 16px; }
-  .nav > a:not(.btn) { font-size: 0.9rem; }
-  .nav .btn-small { padding: 9px 14px; font-size: 0.86rem; }
+@media (max-width: 1199px) {
+  .nav { gap: 12px; }
+  .nav > a:not(.btn) { font-size: 0.85rem; }
+  .nav .btn-small { padding: 9px 12px; font-size: 0.82rem; }
 }
 @media (max-width: 1020px) {
   .cards { grid-template-columns: repeat(2, 1fr); }
@@ -854,26 +857,6 @@ a:focus-visible, button:focus-visible {
 }
 
 @media (max-width: 780px) {
-  .menu-btn { display: block; }
-  .nav {
-    position: fixed;
-    inset: var(--header-h) 0 auto 0;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 4px;
-    padding: 14px 22px 22px;
-    background: #071c2c;
-    border-bottom: 1px solid var(--line);
-    border-radius: 0 0 18px 18px;
-    box-shadow: 0 28px 50px rgba(0, 0, 0, 0.55);
-    transform: translateY(-10px);
-    visibility: hidden;
-    pointer-events: none;
-    transition: transform 0.22s ease, visibility 0.22s ease;
-  }
-  .nav.open { transform: none; visibility: visible; pointer-events: auto; }
-  .nav > a:not(.btn) { padding: 12px 4px; border-bottom: 1px solid rgba(255, 255, 255, 0.06); }
-  .nav .btn { margin-top: 10px; justify-content: center; }
   .cards { grid-template-columns: 1fr; }
   .steps { grid-template-columns: 1fr; }
   .socials.big { grid-template-columns: repeat(3, 1fr); }
@@ -890,8 +873,9 @@ a:focus-visible, button:focus-visible {
   .about-card .link-arrow { justify-content: center; }
 }
 
-/* Navegación: colapsar el menú hasta 1120px para que los enlaces no se apilen
-   (el header tiene muchas secciones y en pantallas medianas se rompe en dos filas). */
+/* Navegación: colapsar el menú hasta 1120px. Arriba de ese ancho los enlaces
+   van en una sola fila (flex-wrap: nowrap) para que no se apilen ni se salgan
+   del header cuando la ventana es angosta. */
 @media (max-width: 1120px) {
   .menu-btn { display: block; }
   .nav {
@@ -900,7 +884,7 @@ a:focus-visible, button:focus-visible {
     flex-direction: column;
     align-items: stretch;
     gap: 4px;
-    padding: 14px 22px 22px;
+    padding: 14px 22px calc(22px + env(safe-area-inset-bottom, 0px));
     background: #071c2c;
     border-bottom: 1px solid var(--line);
     border-radius: 0 0 18px 18px;
@@ -908,6 +892,10 @@ a:focus-visible, button:focus-visible {
     transform: translateY(-10px);
     visibility: hidden;
     pointer-events: none;
+    max-height: calc(100vh - var(--header-h));
+    max-height: calc(100dvh - var(--header-h));
+    overflow-y: auto;
+    overscroll-behavior: contain;
     transition: transform 0.22s ease, visibility 0.22s ease;
   }
   .nav.open { transform: none; visibility: visible; pointer-events: auto; }

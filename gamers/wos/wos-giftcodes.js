@@ -20,6 +20,10 @@
   const MAX_HISTORY = 12;
   const PBKDF2_ITER = 210000;
   const DEFAULT_BRIDGE = '/api/giftcode';
+  // Puente compartido del sitio: se completa con la URL del Worker cuando esté
+  // desplegado. Mientras esté vacío, la página usa el puente local (/api/giftcode).
+  const SITE_BRIDGE = '';
+  const IS_LOCAL = /^(localhost|127\.0\.0\.1|\[::1\]|0\.0\.0\.0)$/.test(location.hostname);
 
   const $ = (sel, ctx = root) => ctx.querySelector(sel);
   const $$ = (sel, ctx = root) => Array.from(ctx.querySelectorAll(sel));
@@ -117,7 +121,7 @@
   let profile = LS.get(KEY_PROFILE, null);
   let history = LS.get(KEY_HISTORY, []);
   let cfg = Object.assign(
-    { bridge: DEFAULT_BRIDGE, delay: 1200, autoCheck: true, autoRedeem: false },
+    { bridge: '', delay: 1200, autoCheck: true, autoRedeem: true },
     LS.get(KEY_CFG, {})
   );
   if (!Array.isArray(history)) history = [];
@@ -303,10 +307,12 @@
   /* ---------------- puente ---------------- */
 
   function bridgeBase() {
-    let base = String(cfg.bridge || DEFAULT_BRIDGE).trim();
-    if (!base) base = DEFAULT_BRIDGE;
+    let saved = String(cfg.bridge || '').trim();
+    // Versiones anteriores guardaban /api/giftcode como si fuera una elección.
+    if (saved === DEFAULT_BRIDGE && !IS_LOCAL) saved = '';
+    let base = saved || SITE_BRIDGE || (IS_LOCAL ? DEFAULT_BRIDGE : '');
     base = base.replace(/\/+$/, '');
-    base = base.replace(/\/(redeem|health)$/i, '');
+    base = base.replace(/\/(redeem|health|codes)$/i, '');
     return base;
   }
 
@@ -355,6 +361,11 @@
     paintBridge();
 
     const base = bridgeBase();
+    if (!base) {
+      setBridgeStatus(false, 'Canje en vivo no disponible todavía');
+      if (announce) toast('El canje en vivo todavía no está activado en el sitio.');
+      return false;
+    }
     const ctrl = new AbortController();
     const timer = setTimeout(() => ctrl.abort(), 6000);
     try {
@@ -546,7 +557,7 @@
       el.textContent = `Vas a canjear el código en ${n} ID${n === 1 ? '' : 's'} del estado #${region}. Tocá de nuevo para confirmar.`;
     } else if (!bridgeState.ok) {
       el.className = 'gift-redeem-hint is-off';
-      el.textContent = 'El canje desde esta página necesita el puente. El automático de GitHub Actions no: ese corre solo, 6 veces al día.';
+      el.textContent = 'El canje en vivo no está disponible en este momento. Los códigos se siguen actualizando.';
     } else {
       el.className = 'gift-redeem-hint';
       el.textContent = `Se envía de a un ID, con una pausa de ${(cfg.delay / 1000).toFixed(1)} s. No cierres la pestaña durante el lote.`;
@@ -1168,7 +1179,7 @@
       '<div class="gift-redeem-head"><div><h2 class="panel-title">Canjear gift code</h2>' +
       '<p class="panel-sub">Un código para todos los IDs registrados en la alianza.</p></div>' +
       '<div id="bridgePill" class="gift-bridge is-checking"><i class="dot"></i><span>Verificando conexión…</span><button type="button" class="mini-btn" data-act="test-bridge">Probar</button></div></div>' +
-      '<div class="notice warn" id="bridgeWarning" hidden>Sin puente no se puede canjear desde esta página. El canje automático de GitHub Actions funciona igual.</div>' +
+      '<div class="notice warn" id="bridgeWarning" hidden>El canje en vivo no está disponible en este momento. Podés seguir viendo y copiando los códigos.</div>' +
       '<form id="redeemForm" novalidate>' +
       '<label class="gift-code-label" for="giftCode">Código de regalo</label>' +
       '<div class="gift-code-row">' +
@@ -1210,15 +1221,40 @@
       '</div>' +
 
       '<aside class="gift-col gift-col--side">' +
+
+      '<section class="panel gift-codes-panel">' +
+      '<div class="gift-members-head"><div><h2 class="panel-title">Códigos activos</h2>' +
+      '<p class="panel-sub">Detectados en wosgiftcodes.com. Reviso cada 4 horas si hay un código nuevo.</p></div>' +
+      '<button type="button" class="mini-btn" data-act="check-codes">Revisar ahora</button></div>' +
+      '<span class="hint" id="codesMeta"></span>' +
+      '<div id="codesList" class="gift-codes-list"></div>' +
+      '<label class="gift-auto-toggle"><input type="checkbox" id="autoToggle"' +
+      (cfg.autoRedeem ? ' checked' : '') +
+      '><span><b>Canje automático</b>: si aparece un código nuevo, se canjea solo para todos los IDs de tu alianza mientras la página esté abierta.</span></label>' +
+      '</section>' +
+
+      '<section class="panel">' +
+      '<div class="gift-members-head"><h2 class="panel-title">Historial</h2>' +
+      '<span class="hint">Últimos ' +
+      MAX_HISTORY +
+      '</span></div>' +
+      '<div id="historyList" class="gift-history">' +
+      (history.length ? '' : '<div class="empty">Todavía no canjeaste ningún código.</div>') +
+      '</div>' +
+      '</section>' +
+
+      '<details class="gift-advanced"><summary>Opciones avanzadas</summary>' +
       '<section class="panel" id="bridgePanel">' +
-      '<h2 class="panel-title">Canje al instante (opcional)</h2>' +
-      '<p class="panel-sub">Solo hace falta para el botón «Canjear» y para el canje automático mientras la página está abierta. El canje automático de las 6 veces al día lo hace GitHub Actions y no depende de este campo.</p>' +
+      '<h2 class="panel-title">Canje en vivo</h2>' +
+      '<p class="panel-sub">La página hace el canje a través de un puente propio, porque el navegador no puede llamar a la API del juego directamente. Con el puente del sitio configurado no tenés que hacer nada.</p>' +
       '<div class="notice" id="ghStatus" hidden></div>' +
-      '<div class="field"><label for="bridgeUrl">URL del puente (opcional)</label>' +
-      '<input id="bridgeUrl" name="bridgeUrl" type="text" value="' +
-      esc(cfg.bridge) +
-      '" placeholder="/api/giftcode" autocomplete="off" spellcheck="false">' +
-      '<span class="hint">En tu PC: /api/giftcode. Publicado: la URL de tu Worker, por ejemplo https://wos-gift.workers.dev. Si lo dejás vacío, la página funciona igual y el canje lo hace GitHub.</span></div>' +
+      (SITE_BRIDGE
+        ? ''
+        : '<div class="field"><label for="bridgeUrl">URL del puente</label>' +
+          '<input id="bridgeUrl" name="bridgeUrl" type="text" value="' +
+          esc(cfg.bridge) +
+          '" placeholder="/api/giftcode" autocomplete="off" spellcheck="false">' +
+          '<span class="hint">En tu PC: /api/giftcode. Publicado: la URL del Worker del sitio.</span></div>') +
       '<div class="form-actions"><button type="button" class="btn btn-primary btn-small" data-act="save-bridge">Guardar</button>' +
       '<button type="button" class="btn btn-ghost btn-small" data-act="test-bridge">Probar conexión</button></div>' +
       '<div id="bridgeStatus" class="gift-bridge-status is-checking"><b>Verificando conexión…</b><span>' +
@@ -1233,41 +1269,16 @@
       (Number(cfg.delay) === 2000 ? ' selected' : '') +
       '>2 s (conservador)</option></select>' +
       '<span class="hint">100 IDs tardan entre 2 y 5 minutos, aproximadamente.</span></div>' +
-      '<details class="gift-setup"><summary>Cómo conectar el puente (opcional)</summary>' +
-      '<ol>' +
-      '<li>Descargá <a href="./giftcode-bridge/worker.js" download>worker.js</a> (o copiá su contenido).</li>' +
-      '<li>En Cloudflare → Workers &amp; Pages → Create Worker, pegá el código y tocá Deploy.</li>' +
-      '<li>Copiá la URL <code>https://tu-worker.workers.dev</code> y pegala arriba. Guardá y probá.</li>' +
-      '</ol>' +
-      '<p class="hint">Para probar en tu PC: <code>node server-local.js</code> y usá <code>/api/giftcode</code>. El Worker y el servidor local incluyen la firma y la validación.</p>' +
-      '</details>' +
-      '</section>' +
-
-      '<section class="panel gift-codes-panel">' +
-      '<div class="gift-members-head"><div><h2 class="panel-title">Códigos activos</h2>' +
-      '<p class="panel-sub">Detectados en wosgiftcodes.com. Reviso cada 4 horas si hay un código nuevo.</p></div>' +
-      '<button type="button" class="mini-btn" data-act="check-codes">Revisar ahora</button></div>' +
-      '<span class="hint" id="codesMeta"></span>' +
-      '<div id="codesList" class="gift-codes-list"></div>' +
-      '<label class="gift-auto-toggle"><input type="checkbox" id="autoToggle"' +
-      (cfg.autoRedeem ? ' checked' : '') +
-      '><span><b>Canje automático</b>: si aparece un código nuevo, lo canjeo solo para todos los IDs de la alianza.</span></label>' +
+      '<details class="gift-setup"><summary>Canje automático sin abrir la página (solo dueño del sitio)</summary>' +
+      '<p class="hint">Esto no lo necesitan los visitantes: usa el repositorio del sitio. Descargá el config y subilo a <code>gamers/wos/giftcodes.config.json</code>; GitHub Actions canjea esos IDs 6 veces al día aunque nadie abra la página.</p>' +
       '<div class="form-actions gift-config-actions">' +
       '<button type="button" class="btn btn-ghost btn-small" data-act="download-config">Descargar config para GitHub</button>' +
       '</div>' +
-      '<p class="hint">Para canjear 6 veces al día sin abrir la página: descargá el config y subilo a <code>gamers/wos/giftcodes.config.json</code> en el repositorio. GitHub Actions usa esos IDs y actualiza la lista de códigos sola. Si el repositorio es público, los IDs quedan visibles.</p>' +
-      '<p class="hint">Este canje automático (con la página abierta) necesita el puente. El de las 6 veces al día corre solo en GitHub y no lo necesita.</p>' +
+      '<p class="hint">Para probar en tu PC: <code>node server-local.js</code> y usá <code>/api/giftcode</code>.</p>' +
+      '</details>' +
       '</section>' +
+      '</details>' +
 
-      '<section class="panel">' +
-      '<div class="gift-members-head"><h2 class="panel-title">Historial</h2>' +
-      '<span class="hint">Últimos ' +
-      MAX_HISTORY +
-      '</span></div>' +
-      '<div id="historyList" class="gift-history">' +
-      (history.length ? '' : '<div class="empty">Todavía no canjeaste ningún código.</div>') +
-      '</div>' +
-      '</section>' +
       '</aside>' +
       '</div>'
     );
@@ -1549,9 +1560,9 @@
       toast('La URL debe empezar con https:// o ser una ruta como /api/giftcode.');
       return;
     }
-    cfg.bridge = raw || DEFAULT_BRIDGE;
+    cfg.bridge = raw;
     LS.set(KEY_CFG, cfg);
-    toast('Conexión guardada');
+    toast(raw ? 'Conexión guardada' : 'Usando el puente del sitio');
     checkBridge(true);
   }
 
@@ -1563,8 +1574,11 @@
     if (!profile.ids.length) return toast('Agregá al menos un ID.');
     if (!validCode(code)) return toast('Ingresá un código válido (letras, números, guion o guion bajo).');
     if (!bridgeState.ok) {
-      toast('Primero conectá el puente de canje');
-      $('#bridgePanel')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      toast('El canje en vivo no está disponible en este momento');
+      const panel = $('#bridgePanel');
+      const adv = panel?.closest('details');
+      if (adv) adv.open = true;
+      panel?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
     if (!armed || armedCode !== code) {

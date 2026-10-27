@@ -88,11 +88,11 @@
         </details>
         <details>
           <summary>¿Cómo funciona el canje automático?</summary>
-          <p>Hay dos formas. Con <b>GitHub Actions</b>: descargás el config desde la herramienta, lo subís como <code>giftcodes.config.json</code> y el repositorio canjea cada código nuevo para los IDs indicados, 6 veces al día, sin abrir nada. Con el <b>toggle de la página</b>: usa los IDs guardados en el navegador y el puente de canje. Podés desactivarlo o ignorar códigos puntuales.</p>
+          <p>Cuando aparece un código nuevo, la página lo canjea sola para todos los IDs de la alianza, uno por uno y con una pausa. Funciona mientras la página está abierta y podés apagarlo cuando quieras con el interruptor “Canje automático”.</p>
         </details>
         <details>
-          <summary>¿Necesito el Worker para el canje automático?</summary>
-          <p>No. El canje automático de las 6 veces al día corre en GitHub Actions: no usa Worker, ni servidor propio, ni tu PC encendida. El Worker (o “puente”) sirve solo para el botón “Canjear” al instante desde esta página, porque el navegador no puede llamar a la API del juego directamente. Si no lo configurás, la herramienta igual muestra los códigos y GitHub sigue canjeando.</p>
+          <summary>¿Qué necesito para canjear?</summary>
+          <p>Solo tu perfil con la región y los IDs de la alianza. El canje pasa por el puente del sitio, así que no tenés que crear cuentas, instalar nada ni configurar servidores.</p>
         </details>
         <details>
           <summary>¿Cómo canjea el código para 100 IDs?</summary>

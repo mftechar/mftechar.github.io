@@ -1302,3 +1302,37 @@
 }
 
 .gift-auto-toggle.is-disabled input { cursor: not-allowed; }
+
+/* Opciones avanzadas */
+.gift-advanced {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.02);
+  overflow: hidden;
+}
+
+.gift-advanced > summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 14px 16px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--txt-soft);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.gift-advanced > summary::-webkit-details-marker { display: none; }
+
+.gift-advanced > summary::after {
+  content: "+";
+  font-size: 1.1rem;
+  color: var(--turq);
+  line-height: 1;
+}
+
+.gift-advanced[open] > summary::after { content: "-"; }
+.gift-advanced[open] > summary { border-bottom: 1px solid var(--line); }
+.gift-advanced > .panel { border: 0; border-radius: 0; background: transparent; }

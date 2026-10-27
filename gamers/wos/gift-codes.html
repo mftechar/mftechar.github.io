@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gift Codes para alianzas | WoS Tools · MF Tech AR</title>
+  <meta name="description" content="Perfil de líder de alianza, hasta 100 IDs y canje automático de gift codes de WhiteOut Survival. Gratis y sin planes." />
+  <meta name="author" content="Martín Flores — MF Tech AR" />
+  <meta name="theme-color" content="#0b2437" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="MF Tech AR" />
+  <meta property="og:title" content="Gift Codes para alianzas | WoS Tools" />
+  <meta property="og:description" content="Perfil de líder de alianza, hasta 100 IDs y canje automático de gift codes de WhiteOut Survival. Gratis y sin planes." />
+  <meta property="og:url" content="https://www.mftechar.com/gamers/wos/gift-codes.html" />
+  <link rel="canonical" href="https://www.mftechar.com/gamers/wos/gift-codes.html" />
+
+  <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../assets/style.css" />
+  <link rel="stylesheet" href="./wos-tools.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Gift Codes para alianzas — WoS Tools",
+    "url": "https://www.mftechar.com/gamers/wos/gift-codes.html",
+    "applicationCategory": "GameApplication",
+    "operatingSystem": "Web",
+    "inLanguage": "es-AR",
+    "description": "Perfil de líder de alianza, hasta 100 IDs y canje de gift codes de WhiteOut Survival en lote.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "publisher": { "@type": "Organization", "name": "MF Tech AR" }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip" href="#contenido">Saltar al contenido</a>
+
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a class="brand" href="../../index.html" aria-label="MF Tech AR — inicio">
+        <img src="../../assets/logo.svg" alt="" width="42" height="42" class="brand-logo" />
+        <span class="brand-text">MF Tech <b>AR</b></span>
+      </a>
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mainNav" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav" id="mainNav" aria-label="Navegación principal">
+        <a href="../../index.html">Inicio</a>
+        <a href="../../store/index.html">Tienda</a>
+        <a href="../index.html">Gamers</a>
+        <a href="./index.html">WoS Tools</a>
+        <a href="./gift-codes.html">Gift Codes</a>
+        <a class="btn btn-small" href="https://wa.me/5492325406322?text=Hola%20Mart%C3%ADn!%20Quiero%20consultar%20por%20las%20herramientas%20de%20WhiteOut%20Survival." target="_blank" rel="noopener">WhatsApp</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido" class="wos-app">
+    <div class="container">
+      <nav class="crumbs" aria-label="Ruta de navegación">
+        <a href="../../index.html">Inicio</a> <span>›</span>
+        <a href="../index.html">Gamers</a> <span>›</span>
+        <a href="./index.html">WoS Tools</a> <span>›</span>
+        <span>Gift Codes para alianzas</span>
+      </nav>
+      <div class="tool-head">
+        <div>
+          <p class="eyebrow">Gamers · WhiteOut Survival</p>
+          <h1>Gift Codes para tu alianza</h1>
+          <p>Armá el perfil del líder, cargá hasta 100 IDs y canjeá un código para todos los miembros a la vez. La herramienta busca códigos nuevos sola, hasta 6 veces por día.</p>
+        </div>
+        <a class="btn btn-ghost btn-small" href="./index.html">← Todas las herramientas</a>
+      </div>
+
+      <div id="giftApp" class="gift-app">
+        <noscript><div class="notice warn">Gift Codes necesita JavaScript para funcionar.</div></noscript>
+        <div class="gift-loading">Cargando perfil…</div>
+      </div>
+      <div class="tool-faq">
+        <details>
+          <summary>¿De dónde salen los códigos activos?</summary>
+          <p>La API oficial del juego no publica una lista de códigos. La herramienta consulta el feed público de <a href="https://wosgiftcodes.com/" target="_blank" rel="noopener">wosgiftcodes.com</a>, que reúne los códigos anunciados en Discord y redes oficiales. Se muestran con la fecha de publicación cuando está disponible.</p>
+        </details>
+        <details>
+          <summary>¿Cada cuánto busca códigos nuevos?</summary>
+          <p>La lista se actualiza 6 veces al día con una tarea de GitHub Actions, aunque nadie tenga la página abierta. Además, la página revisa cada 4 horas mientras esté abierta y al volver a abrirla.</p>
+        </details>
+        <details>
+          <summary>¿Cómo funciona el canje automático?</summary>
+          <p>Hay dos formas. Con <b>GitHub Actions</b>: descargás el config desde la herramienta, lo subís como <code>giftcodes.config.json</code> y el repositorio canjea cada código nuevo para los IDs indicados, 6 veces al día, sin abrir nada. Con el <b>toggle de la página</b>: usa los IDs guardados en el navegador y el puente de canje. Podés desactivarlo o ignorar códigos puntuales.</p>
+        </details>
+        <details>
+          <summary>¿Cómo canjea el código para 100 IDs?</summary>
+          <p>El perfil guarda los IDs y la región de la alianza. Al tocar “Canjear”, el navegador envía cada ID y el código a un puente propio, que hace la misma llamada que la web oficial del juego. Se procesa de a uno, con una pausa corta para no saturar la API.</p>
+        </details>
+        <details>
+          <summary>¿Es un canje real o una simulación?</summary>
+          <p>Es real cuando el puente está conectado: el estado de cada ID viene de la API del juego (canjeado, ya canjeado, código vencido, ID o región incorrectos). Sin puente no se inventa ningún resultado: la app te avisa y no envía nada.</p>
+        </details>
+        <details>
+          <summary>¿Qué es el estado o región?</summary>
+          <p>Es el número que aparece en tu avatar, arriba a la izquierda del juego. La API lo pide como <code>kid</code> y sin ese dato no puede encontrar al personaje. Todos los miembros de una alianza comparten el mismo estado.</p>
+        </details>
+        <details>
+          <summary>¿Se guarda mi clave?</summary>
+          <p>Nunca en texto plano. Se guarda un hash PBKDF2-SHA256 con sal aleatoria en este navegador. Sirve para bloquear el acceso en este equipo, no como seguridad de servidor. Si la olvidás, no se puede recuperar: hay que borrar el perfil.</p>
+        </details>
+        <details>
+          <summary>¿Qué pasa con mis IDs y mi avatar?</summary>
+          <p>Quedan en <code>localStorage</code> y no se suben a ningún lado. Solo al canjear se envían el ID, la región y el código al puente que configures. Usá tu propio puente para no compartir datos con terceros.</p>
+        </details>
+        <details>
+          <summary>¿Puedo usar el mismo código dos veces?</summary>
+          <p>Sí, pero el juego no entrega la recompensa dos veces. La app muestra “Ya canjeado” cuando la API indica que ese personaje ya lo recibió.</p>
+        </details>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="../../assets/logo.svg" alt="" width="34" height="34" />
+        <div>
+          <p class="footer-name">MF Tech <b>AR</b></p>
+          <p class="footer-tag">Tecnología que protege y hace crecer tu negocio.</p>
+        </div>
+      </div>
+      <nav class="footer-nav" aria-label="Enlaces del pie">
+        <a href="../../index.html#servicios">Servicios</a>
+        <a href="../../store/index.html">Tienda</a>
+        <a href="../index.html">Gamers</a>
+        <a href="./index.html">WoS Tools</a>
+        <a href="./gift-codes.html">Gift Codes</a>
+        <a href="../../index.html#contacto">Contacto</a>
+      </nav>
+      <p class="footer-copy">© <span id="year"></span> MF Tech AR · Martín Flores · Hecho en Argentina</p>
+    </div>
+  </footer>
+
+  <script src="../../assets/app.js" defer></script>
+  <script src="./wos-giftcodes.js" defer></script>
+</body>
+</html>

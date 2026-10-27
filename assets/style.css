@@ -889,3 +889,28 @@ a:focus-visible, button:focus-visible {
   .about-card { flex-direction: column; text-align: center; align-items: center; }
   .about-card .link-arrow { justify-content: center; }
 }
+
+/* Navegación: colapsar el menú hasta 1120px para que los enlaces no se apilen
+   (el header tiene muchas secciones y en pantallas medianas se rompe en dos filas). */
+@media (max-width: 1120px) {
+  .menu-btn { display: block; }
+  .nav {
+    position: fixed;
+    inset: var(--header-h) 0 auto 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    padding: 14px 22px 22px;
+    background: #071c2c;
+    border-bottom: 1px solid var(--line);
+    border-radius: 0 0 18px 18px;
+    box-shadow: 0 28px 50px rgba(0, 0, 0, 0.55);
+    transform: translateY(-10px);
+    visibility: hidden;
+    pointer-events: none;
+    transition: transform 0.22s ease, visibility 0.22s ease;
+  }
+  .nav.open { transform: none; visibility: visible; pointer-events: auto; }
+  .nav > a:not(.btn) { padding: 12px 4px; border-bottom: 1px solid rgba(255, 255, 255, 0.06); }
+  .nav .btn { margin-top: 10px; justify-content: center; }
+}

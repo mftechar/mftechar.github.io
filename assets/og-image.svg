@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="MF Tech AR — Tecnología que protege y hace crecer tu negocio">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#071c2c"/>
+      <stop offset=".55" stop-color="#0b2437"/>
+      <stop offset="1" stop-color="#061826"/>
+    </linearGradient>
+    <linearGradient id="brand" x1="120" y1="120" x2="420" y2="260" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#40e0d0"/>
+      <stop offset="1" stop-color="#7a5cff"/>
+    </linearGradient>
+    <linearGradient id="mark" x1="0" y1="0" x2="84" y2="84" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#40e0d0"/>
+      <stop offset="1" stop-color="#7a5cff"/>
+    </linearGradient>
+    <radialGradient id="orbA" cx="0" cy="0" r="1" gradientTransform="translate(1030 90) rotate(140) scale(360 300)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#40e0d0" stop-opacity=".28"/>
+      <stop offset="1" stop-color="#40e0d0" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="orbB" cx="0" cy="0" r="1" gradientTransform="translate(120 600) rotate(-40) scale(380 320)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7a5cff" stop-opacity=".32"/>
+      <stop offset="1" stop-color="#7a5cff" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0v48" fill="none" stroke="#ffffff" stroke-opacity=".045" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect width="1200" height="630" fill="url(#orbA)"/>
+  <rect width="1200" height="630" fill="url(#orbB)"/>
+
+  <!-- Marca -->
+  <g transform="translate(88 74)">
+    <rect width="84" height="84" rx="22" fill="url(#mark)"/>
+    <path d="M14 64V22h7.6l9.6 18.6L40.8 22h7.6v42h-6.8V36.2L34 55.6h-3.2L23.4 36.2V64H14Z" fill="#062033" fill-opacity=".93"/>
+    <path d="M51 64V22h17v6.3H57.7v9.5H67v6.2h-9.3V64H51Z" fill="#062033" fill-opacity=".93"/>
+    <circle cx="67" cy="20" r="3.4" fill="#062033" fill-opacity=".9"/>
+  </g>
+  <text x="192" y="124" font-family="Bahnschrift, 'Segoe UI Variable Display', 'Segoe UI', system-ui, sans-serif" font-size="44" font-weight="700" fill="#ffffff" letter-spacing=".5">MF Tech <tspan fill="#40e0d0">AR</tspan></text>
+  <text x="193" y="154" font-family="Bahnschrift, 'Segoe UI', system-ui, sans-serif" font-size="21" font-weight="300" fill="#9dbccb" letter-spacing="3.4">TECNOLOGÍA Y SEGURIDAD</text>
+
+  <!-- Titular -->
+  <text x="88" y="300" font-family="Bahnschrift, 'Segoe UI Variable Display', 'Segoe UI', system-ui, sans-serif" font-size="66" font-weight="700" fill="#ffffff" letter-spacing="-1">Tecnología que <tspan fill="url(#brand)">protege</tspan></text>
+  <text x="88" y="374" font-family="Bahnschrift, 'Segoe UI Variable Display', 'Segoe UI', system-ui, sans-serif" font-size="66" font-weight="700" fill="#ffffff" letter-spacing="-1">y hace crecer tu negocio</text>
+
+  <text x="90" y="432" font-family="Bahnschrift, 'Segoe UI', system-ui, sans-serif" font-size="27" font-weight="300" fill="#b6cfdd">Cámaras con IA · PC y notebooks · Backups · Redes · Ciberseguridad</text>
+
+  <!-- Chips -->
+  <g font-family="Bahnschrift, 'Segoe UI', system-ui, sans-serif" font-size="21" fill="#dceef5">
+    <rect x="88" y="474" width="238" height="52" rx="26" fill="#ffffff" fill-opacity=".06" stroke="#ffffff" stroke-opacity=".16"/>
+    <text x="207" y="507" text-anchor="middle">A distancia o en el lugar</text>
+    <rect x="342" y="474" width="210" height="52" rx="26" fill="#ffffff" fill-opacity=".06" stroke="#ffffff" stroke-opacity=".16"/>
+    <text x="447" y="507" text-anchor="middle">Presupuesto sin cargo</text>
+    <rect x="568" y="474" width="176" height="52" rx="26" fill="#ffffff" fill-opacity=".06" stroke="#ffffff" stroke-opacity=".16"/>
+    <text x="656" y="507" text-anchor="middle">Todo el país</text>
+  </g>
+
+  <!-- WhatsApp -->
+  <g transform="translate(88 558)">
+    <path d="M17 0a17 17 0 0 0-14.6 25.7L0 34l8.6-2.3A17 17 0 1 0 17 0Z" fill="#40e0d0" fill-opacity=".16" stroke="#40e0d0" stroke-width="1.6"/>
+    <path d="M10.4 9.2c.4-.9.8-.9 1.3-.9h.7c.2 0 .5.1.7.6l.9 2c.1.3 0 .6-.2.8l-.7.8c-.2.2-.3.5 0 .8.6 1 1.6 2 2.9 2.7.4.2.6.2.9 0l.8-.8c.3-.3.6-.3.9-.2l2 .9c.5.2.6.4.6.7 0 1.2-.6 2.6-2 3-.9.3-2.1.3-3.8-.5a12 12 0 0 1-5-4.8c-.8-1.5-.9-2.7-.6-3.7Z" fill="#40e0d0"/>
+    <text x="48" y="25" font-family="Bahnschrift, 'Segoe UI', system-ui, sans-serif" font-size="26" font-weight="600" fill="#ffffff">+54 9 2325-406322</text>
+    <text x="48" y="49" font-family="Bahnschrift, 'Segoe UI', system-ui, sans-serif" font-size="18" font-weight="300" fill="#8faab9">MF Tech AR · Martín Flores · @mftechar</text>
+  </g>
+
+  <text x="1112" y="596" text-anchor="end" font-family="Bahnschrift, 'Segoe UI', system-ui, sans-serif" font-size="20" font-weight="300" fill="#6f8b9c">mftechar.com</text>
+</svg>

@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
 
+Disallow: /store/admin.html
+
 Sitemap: https://www.mftechar.com/sitemap.xml

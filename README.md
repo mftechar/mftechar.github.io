@@ -36,8 +36,12 @@ mftech-web/
 ├─ sitemap.xml              # home, /store/, /gamers/, /blog/ y los 10 artículos
 ├─ store/                   # MF Tech Store (catálogo, vive dentro del mismo sitio)
 │  ├─ index.html
+│  ├─ admin.html            # panel para cargar productos (noindex)
 │  ├─ assets/style.css
-│  ├─ assets/app.js
+│  ├─ assets/app.js         # dibuja el catálogo desde data/products.json
+│  ├─ assets/admin.css
+│  ├─ assets/admin.js       # panel: lee y escribe products.json en GitHub
+│  ├─ data/products.json    # ← los productos se editan acá
 │  ├─ img/logo.jpg
 │  └─ media/*.mp4
 ├─ gamers/                  # sección Gamers
@@ -91,6 +95,83 @@ mftech-web/
 │     └─ wos-giftcodes.yml  # cron 6 veces al día
 └─ README.md
 ```
+
+## Agregar productos a la tienda
+
+El catálogo es dinámico: `store/index.html` no contiene productos, los dibuja
+`store/assets/app.js` leyendo **`store/data/products.json`**.
+
+Para agregar un producto:
+
+1. Subí la foto a `store/img/` (por ejemplo `store/img/camaras-ia.jpg`).
+2. Abrí `store/data/products.json` y agregá un bloque dentro de `"productos"`.
+3. Guardá y publicá. Listo: aparece la tarjeta, el filtro de su categoría y el
+   botón de WhatsApp con el mensaje ya armado.
+
+Plantilla de producto (todos los campos salvo `titulo` son opcionales):
+
+```json
+{
+  "id": "camaras-ia",
+  "titulo": "Kit de cámaras con IA",
+  "categorias": ["Seguridad"],
+  "badge": "Nuevo",
+  "imagen": "img/camaras-ia.jpg",
+  "descripcion": "4 cámaras 4MP con detección de personas y app móvil.",
+  "caracteristicas": ["4 cámaras 4MP", "Detección IA", "Instalación incluida"],
+  "galeria": [
+    { "tipo": "video", "src": "media/demo.mp4", "poster": "img/camaras-ia.jpg" },
+    { "tipo": "imagen", "src": "img/camaras-ia-2.jpg", "alt": "Vista de la app" }
+  ],
+  "galeriaNota": "Demo del sistema en funcionamiento.",
+  "precio": 350000,
+  "disponible": true
+}
+```
+
+Detalles útiles:
+
+- **`categorias`**: los filtros se generan solos con los nombres que uses.
+  Un producto puede tener varias (`["Automatización", "Software"]`).
+- **`precio`**: número sin puntos ni símbolo (`350000`). Si lo omitís o lo dejás
+  en `null`, la tarjeta muestra “Consultar”.
+- **`disponible: false`**: muestra la etiqueta “Sin stock” y cambia el botón a
+  “Consultar disponibilidad”.
+- **`badge`**: la etiqueta de la esquina de la foto (“Destacado”, “Nuevo”, …).
+- **`mensajeWhatsapp`**: solo si querés un texto distinto al automático.
+- **Orden**: los productos se muestran en el orden del JSON.
+- El primer producto de la lista alimenta el JSON-LD `Product` del `<head>`
+  (SEO). Con 2 o más, se agrega además un `ItemList` automático.
+
+El número de WhatsApp y la moneda por defecto están en el bloque `"config"`
+del mismo archivo.
+
+## Panel de administración (cargar productos sin editar JSON)
+
+`store/admin.html` es un panel que lee y escribe `store/data/products.json`
+directamente en GitHub. No necesita servidor ni build: usa la API de GitHub
+desde el navegador con un token personal.
+
+- **Publicado**: `https://www.mftechar.com/store/admin.html`
+- **Local**: `http://localhost:8123/store/admin.html`
+
+Qué permite: alta/edición/borrado de productos, reordenar, duplicar, subir la
+imagen a `store/img/`, vista previa de la tarjeta, editar WhatsApp y moneda de
+la tienda, y publicar todo con un commit.
+
+### Token (una sola vez)
+
+1. <https://github.com/settings/personal-access-tokens/new>
+2. **Repository access** → *Only select repositories* → el repo del sitio.
+3. **Permissions → Repository permissions → Contents: Read and write**.
+4. Copiar el token y pegarlo en el panel → **Conectar**.
+
+El token se guarda solo en `localStorage`/`sessionStorage` del navegador y se
+envía únicamente a `api.github.com`. Nunca se sube al repositorio. Se puede
+revocar en cualquier momento desde GitHub. Sin token el panel funciona en
+**solo lectura** (para repos públicos) y permite descargar el JSON a mano.
+
+La página tiene `noindex, nofollow` y `robots.txt` la excluye.
 
 ## Ver el sitio
 

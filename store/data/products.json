@@ -1,0 +1,39 @@
+{
+  "config": {
+    "whatsapp": "5492325406322",
+    "moneda": "ARS",
+    "mensajeGeneral": "Hola Martín! Quisiera consultar por productos de MF Tech Store."
+  },
+  "productos": [
+    {
+      "id": "asistente-de-redes",
+      "titulo": "Asistente de Redes (Facebook · Instagram · WhatsApp · X (Twitter) · TikTok · YouTube)",
+      "categorias": ["Automatización", "Software"],
+      "badge": "Destacado",
+      "imagen": "img/logo.jpg",
+      "descripcion": "Automatiza publicaciones en tus redes usando las sesiones guardadas de tu navegador. Genera contenido con IA, programa publicaciones, publica Reels, Shorts, Historias y gestiona todo desde un panel local.",
+      "caracteristicas": [
+        "Publicación en Facebook, Instagram, WhatsApp (Estado/Grupos/Contactos), X (Twitter), TikTok y YouTube",
+        "Generación de captions, hashtags e imágenes con IA",
+        "Programador con cola, modo \"listo para subir\" o automático",
+        "Videos cortos con ffmpeg (Reels, Historias) 5/10/15/30s",
+        "Placas/imágenes 1080x1080 con temas y tipografías",
+        "Sesiones guardadas (sin API oficial de Meta)",
+        "Panel web local en http://localhost:3000",
+        "Control de límites diarios por red y demoras anti-baneo",
+        "Funciona con Google Gemini u otros proveedores OpenAI-compatible",
+        "Historial, logs y reintentos automáticos"
+      ],
+      "galeria": [
+        {
+          "tipo": "video",
+          "src": "media/asistente-90s-vertical.mp4",
+          "poster": "img/logo.jpg"
+        }
+      ],
+      "galeriaNota": "Video corto mostrando el funcionamiento del asistente.",
+      "precio": 100000,
+      "disponible": true
+    }
+  ]
+}

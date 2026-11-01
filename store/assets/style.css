@@ -391,6 +391,21 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   object-fit: cover;
 }
 .gallery-note { color: var(--text-2); font-size: .95rem; margin-top: .8rem; }
+.gallery-img {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  aspect-ratio: 9/16;
+  object-fit: cover;
+}
+.products-empty {
+  padding: 1.4rem;
+  border: 1px dashed var(--border);
+  border-radius: 16px;
+  color: var(--text-2);
+  text-align: center;
+}
+.products-empty a { color: var(--accent); text-decoration: underline; }
 .product-footer {
   display: flex;
   flex-wrap: wrap;

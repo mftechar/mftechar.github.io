@@ -24,7 +24,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css" />
-  <script type="application/ld+json">
+  <!-- Respaldo SEO del producto principal (app.js lo mantiene sincronizado con products.json) -->
+  <script type="application/ld+json" id="ld-product">
   {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -132,71 +133,16 @@
           <p class="section-sub">Cada producto se consulta y compra por WhatsApp. Te respondo con disponibilidad y forma de pago.</p>
         </header>
 
-        <div class="filters reveal" role="group" aria-label="Filtrar por categoría">
-          <button class="filter-btn active" data-filter="all">Todos</button>
-          <button class="filter-btn" data-filter="automatizacion">Automatización</button>
-          <button class="filter-btn" data-filter="software">Software</button>
-        </div>
+        <!-- Los filtros se generan solos desde store/data/products.json -->
+        <div class="filters reveal" id="filters" role="group" aria-label="Filtrar por categoría"></div>
 
-        <div class="products-grid">
-          <!-- PRODUCTO 1: ASISTENTE DE REDES -->
-          <article class="product-card reveal" data-category="automatizacion software">
-            <div class="product-media">
-              <div class="product-badge">Destacado</div>
-              <img src="img/logo.jpg" alt="Asistente de Redes - Automatización para Facebook, Instagram y WhatsApp" class="product-img" />
-            </div>
-            <div class="product-body">
-              <div class="product-meta">
-                <span class="product-category">Automatización · Software</span>
-              </div>
-              <h3 class="product-title">Asistente de Redes (Facebook · Instagram · WhatsApp · X (Twitter) · TikTok · YouTube)</h3>
-              <p class="product-desc">
-                Automatiza publicaciones en tus redes usando las sesiones guardadas de tu navegador. Genera contenido con IA, programa publicaciones, publica Reels, Shorts, Historias y gestiona todo desde un panel local.
-              </p>
-              
-              <div class="product-features">
-                <h4>Características principales</h4>
-                <ul>
-                  <li>Publicación en Facebook, Instagram, WhatsApp (Estado/Grupos/Contactos), X (Twitter), TikTok y YouTube</li>
-                  <li>Generación de captions, hashtags e imágenes con IA</li>
-                  <li>Programador con cola, modo "listo para subir" o automático</li>
-                  <li>Videos cortos con ffmpeg (Reels, Historias) 5/10/15/30s</li>
-                  <li>Placas/imágenes 1080x1080 con temas y tipografías</li>
-                  <li>Sesiones guardadas (sin API oficial de Meta)</li>
-                  <li>Panel web local en http://localhost:3000</li>
-                  <li>Control de límites diarios por red y demoras anti-baneo</li>
-                  <li>Funciona con Google Gemini u otros proveedores OpenAI-compatible</li>
-                  <li>Historial, logs y reintentos automáticos</li>
-                </ul>
-              </div>
-
-              <div class="product-media-gallery">
-                <h4>Capturas y demostración</h4>
-                <div class="gallery-grid">
-                  <video class="gallery-video" controls preload="metadata" poster="img/logo.jpg">
-                    <source src="media/asistente-90s-vertical.mp4" type="video/mp4">
-                    Tu navegador no soporta video HTML5.
-                  </video>
-                  <video class="gallery-video" controls preload="metadata" poster="img/logo.jpg">
-                    <source src="media/asistente-como-funciona.mp4" type="video/mp4">
-                    Tu navegador no soporta video HTML5.
-                  </video>
-                </div>
-                <p class="gallery-note">Videos cortos mostrando el funcionamiento del asistente.</p>
-              </div>
-
-              <div class="product-footer">
-                <div class="product-price">
-                  <span class="price-label">Precio</span>
-                  <span class="price-amount">$100.000 <span class="price-currency">ARS</span></span>
-                </div>
-                <a class="btn btn-primary btn-block" href="https://wa.me/5492325406322?text=Hola%20Mart%C3%ADn!%20Quisiera%20consultar%20por%20el%20Asistente%20de%20Redes%20(%24100.000%20ARS).%20Me%20podr%C3%ADas%20pasar%20info%20sobre%20instalaci%C3%B3n%20y%20licencia%3F" target="_blank" rel="noopener">
-                  <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.6-1.2A9 9 0 1 0 12 3Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M8.8 8.6c.3-.7.6-.7 1-.7h.5c.2 0 .4.1.5.5l.6 1.4c.1.3 0 .5-.2.7l-.5.6c-.1.2-.2.4 0 .7.4.7 1.1 1.5 2.1 2 .3.2.5.1.7 0l.6-.6c.2-.3.4-.3.7-.2l1.4.6c.4.2.5.3.5.5 0 .9-.5 2-1.6 2.3-.7.2-1.6.2-2.9-.4a9 9 0 0 1-3.8-3.6c-.6-1.1-.7-2-.5-2.7Z" fill="currentColor"/></svg>
-                  Consultar por WhatsApp
-                </a>
-              </div>
-            </div>
-          </article>
+        <!-- Las tarjetas se generan solas desde store/data/products.json -->
+        <div class="products-grid" id="productsGrid" aria-live="polite">
+          <noscript>
+            <p class="products-empty">
+              Activá JavaScript para ver el catálogo, o <a href="https://wa.me/5492325406322?text=Hola%20Mart%C3%ADn!%20Quisiera%20consultar%20por%20productos%20de%20MF%20Tech%20Store." target="_blank" rel="noopener">consultame por WhatsApp</a>.
+            </p>
+          </noscript>
         </div>
 
         <p class="catalog-note reveal">

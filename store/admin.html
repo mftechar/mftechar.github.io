@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Administrar catálogo — MF Tech Store</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#0a1622" />
+  <link rel="icon" href="img/logo.jpg" type="image/jpeg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/admin.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <div class="topbar-left">
+        <a class="back" href="index.html" aria-label="Volver a la tienda">←</a>
+        <div>
+          <p class="topbar-eyebrow">MF Tech Store</p>
+          <h1>Administrar catálogo</h1>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <span class="pill" id="statusPill" data-state="off">Sin conexión</span>
+        <a class="btn btn-ghost btn-sm" href="index.html" target="_blank" rel="noopener">Ver tienda</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <p class="banner" id="fileWarning" hidden>
+      Estás abriendo el panel como archivo local. Para publicar en GitHub abrí
+      <code>http://localhost:8123/store/admin.html</code> o la versión publicada del sitio.
+    </p>
+
+    <!-- ============ CONEXIÓN ============ -->
+    <section class="panel" id="panelConexion">
+      <header class="panel-head">
+        <h2>1 · Conexión con GitHub</h2>
+        <button class="btn btn-ghost btn-sm" id="btnToggleConexion" aria-expanded="true">Ocultar</button>
+      </header>
+
+      <div class="panel-body" id="conexionBody">
+        <div class="grid-2">
+          <label class="field">
+            <span>Token de GitHub</span>
+            <div class="input-row">
+              <input type="password" id="f-token" placeholder="github_pat_..." autocomplete="off" spellcheck="false" />
+              <button class="btn btn-ghost btn-sm" id="btnVerToken" type="button">Ver</button>
+            </div>
+            <small>Permiso necesario: <b>Contents → Read and write</b> sobre este repositorio.</small>
+          </label>
+
+          <div class="grid-2">
+            <label class="field">
+              <span>Repositorio</span>
+              <input type="text" id="f-repo" placeholder="usuario/repositorio" spellcheck="false" />
+            </label>
+            <label class="field">
+              <span>Rama</span>
+              <input type="text" id="f-branch" placeholder="main" spellcheck="false" />
+            </label>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-primary" id="btnConectar" type="button">Conectar</button>
+          <button class="btn btn-ghost" id="btnOlvidar" type="button">Olvidar token</button>
+          <label class="check">
+            <input type="checkbox" id="f-recordar" checked />
+            <span>Recordar en este navegador</span>
+          </label>
+        </div>
+
+        <details class="help">
+          <summary>Cómo crear el token (2 minutos)</summary>
+          <ol>
+            <li>Entrá a <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com/settings/personal-access-tokens/new</a>.</li>
+            <li><b>Token name</b>: <code>MF Tech Store admin</code>.</li>
+            <li><b>Expiration</b>: 90 días (o lo que prefieras).</li>
+            <li><b>Repository access</b> → <i>Only select repositories</i> → elegí el repo del sitio.</li>
+            <li><b>Permissions</b> → <i>Repository permissions</i> → <b>Contents: Read and write</b>.</li>
+            <li>Generate token y pegalo arriba. Se muestra una sola vez.</li>
+          </ol>
+          <p class="help-warn">
+            El token queda guardado solo en tu navegador y se envía únicamente a <code>api.github.com</code>.
+            No lo compartas ni lo subas al repositorio. Si lo perdés, revocalo y creá otro.
+          </p>
+        </details>
+
+        <div class="divider"></div>
+
+        <div class="grid-2">
+          <label class="field">
+            <span>WhatsApp de la tienda</span>
+            <input type="text" id="f-whatsapp" placeholder="5492325406322" inputmode="numeric" />
+            <small>Solo números, con código de país. Ej: <code>5492325406322</code>.</small>
+          </label>
+          <label class="field">
+            <span>Moneda por defecto</span>
+            <input type="text" id="f-moneda" placeholder="ARS" maxlength="6" />
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ LISTA ============ -->
+    <section class="panel">
+      <header class="panel-head">
+        <h2>2 · Productos <span class="count" id="productCount">0</span></h2>
+        <div class="actions">
+          <button class="btn btn-ghost btn-sm" id="btnRecargar" type="button">Recargar de GitHub</button>
+          <button class="btn btn-primary btn-sm" id="btnNuevo" type="button">+ Nuevo producto</button>
+        </div>
+      </header>
+      <div class="panel-body">
+        <ul class="product-list" id="productList"></ul>
+        <p class="empty" id="productEmpty">Todavía no hay productos. Empezá con “+ Nuevo producto”.</p>
+      </div>
+    </section>
+
+    <!-- ============ FORMULARIO ============ -->
+    <section class="panel" id="panelForm" hidden>
+      <header class="panel-head">
+        <h2 id="formTitle">3 · Producto</h2>
+        <button class="btn btn-ghost btn-sm" id="btnCerrarForm" type="button">Cerrar</button>
+      </header>
+
+      <div class="panel-body form-layout">
+        <form class="form" id="productForm" novalidate>
+          <div class="grid-2">
+            <label class="field">
+              <span>Título *</span>
+              <input type="text" id="f-titulo" required placeholder="Kit de cámaras con IA" />
+            </label>
+            <label class="field">
+              <span>Identificador (URL)</span>
+              <input type="text" id="f-id" placeholder="kit-camaras-ia" spellcheck="false" />
+              <small>Se genera solo desde el título. Debe ser único.</small>
+            </label>
+          </div>
+
+          <div class="grid-2">
+            <label class="field">
+              <span>Categorías</span>
+              <input type="text" id="f-categorias" placeholder="Seguridad, Redes" />
+              <small>Separadas por coma. Cada una crea un filtro en la tienda.</small>
+            </label>
+            <label class="field">
+              <span>Etiqueta (badge)</span>
+              <input type="text" id="f-badge" placeholder="Nuevo, Destacado, Oferta…" />
+              <small>Vacío = sin etiqueta.</small>
+            </label>
+          </div>
+
+          <label class="field">
+            <span>Descripción</span>
+            <textarea id="f-descripcion" rows="3" placeholder="Qué es, para quién y qué resuelve."></textarea>
+          </label>
+
+          <div class="field">
+            <span>Imagen principal</span>
+            <div class="image-row">
+              <div class="thumb" id="imagenPreview"><span>Sin imagen</span></div>
+              <div class="image-controls">
+                <input type="file" id="f-imagen-file" accept="image/*" />
+                <input type="text" id="f-imagen" placeholder="img/producto.jpg" spellcheck="false" />
+                <small>Subí una foto o escribí la ruta. Se guarda en <code>store/img/</code>.</small>
+              </div>
+            </div>
+          </div>
+
+          <label class="field">
+            <span>Texto alternativo de la imagen</span>
+            <input type="text" id="f-imagenAlt" placeholder="Descripción breve para accesibilidad y SEO" />
+          </label>
+
+          <label class="field">
+            <span>Características</span>
+            <textarea id="f-caracteristicas" rows="5" placeholder="Una por línea&#10;4 cámaras 4MP&#10;Detección con IA"></textarea>
+            <small>Una por línea. Se muestran con viñetas.</small>
+          </label>
+
+          <div class="grid-2">
+            <label class="field">
+              <span>Precio</span>
+              <input type="number" id="f-precio" min="0" step="1" placeholder="350000" />
+              <small>Vacío = “Consultar”.</small>
+            </label>
+            <label class="field">
+              <span>Moneda del producto</span>
+              <input type="text" id="f-moneda-producto" placeholder="(usa la de la tienda)" maxlength="6" />
+            </label>
+          </div>
+
+          <div class="field">
+            <span>Galería (videos / imágenes)</span>
+            <div class="galeria-rows" id="galeriaRows"></div>
+            <button class="btn btn-ghost btn-sm" id="btnAddGaleria" type="button">+ Agregar elemento</button>
+          </div>
+
+          <label class="field">
+            <span>Nota de la galería</span>
+            <input type="text" id="f-galeriaNota" placeholder="Video corto mostrando el funcionamiento." />
+          </label>
+
+          <label class="field">
+            <span>Mensaje de WhatsApp</span>
+            <input type="text" id="f-mensaje" placeholder="(automático: Hola Martín! Quisiera consultar por …)" />
+            <small>Vacío = mensaje generado automáticamente con el título y el precio.</small>
+          </label>
+
+          <label class="check">
+            <input type="checkbox" id="f-disponible" checked />
+            <span>Disponible (si lo desmarcás se muestra “Sin stock”)</span>
+          </label>
+
+          <div class="form-actions">
+            <button class="btn btn-primary" id="btnGuardarPublicar" type="submit">Guardar y publicar</button>
+            <button class="btn btn-ghost" id="btnGuardarBorrador" type="button">Solo guardar borrador</button>
+            <button class="btn btn-ghost" id="btnCancelar" type="button">Cancelar</button>
+          </div>
+        </form>
+
+        <aside class="preview">
+          <p class="preview-label">Vista previa</p>
+          <div class="preview-card" id="previewCard"></div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============ PUBLICAR ============ -->
+    <section class="panel" id="panelPublicar" hidden>
+      <header class="panel-head">
+        <h2>4 · Publicar cambios</h2>
+      </header>
+      <div class="panel-body">
+        <div class="publish-row">
+          <label class="field">
+            <span>Mensaje del commit</span>
+            <input type="text" id="f-commit" value="store: actualizar catálogo" />
+          </label>
+          <div class="actions">
+            <button class="btn btn-primary" id="btnPublicar" type="button">Publicar en GitHub</button>
+            <button class="btn btn-ghost" id="btnDescargar" type="button">Descargar JSON</button>
+            <button class="btn btn-ghost" id="btnDescartar" type="button">Descartar cambios</button>
+          </div>
+        </div>
+        <p class="hint">GitHub Pages tarda entre 30 y 90 segundos en actualizar el sitio.</p>
+      </div>
+    </section>
+
+    <p class="log" id="log" role="status" aria-live="polite"></p>
+  </main>
+
+  <footer class="wrap footer">
+    <p>MF Tech Store · Panel local. El token nunca se sube al repositorio.</p>
+  </footer>
+
+  <script src="assets/admin.js"></script>
+</body>
+</html>

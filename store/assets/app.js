@@ -160,6 +160,14 @@
 
     const buttonLabel = disponible ? 'Consultar por WhatsApp' : 'Consultar disponibilidad';
 
+    const details = features || gallery
+      ? `<details class="product-more">
+           <summary>Ver detalles</summary>
+           ${features}
+           ${gallery}
+         </details>`
+      : '';
+
     return `<article class="product-card reveal" id="producto-${esc(product.id || slugify(titulo))}" data-category="${esc(categorySlugs.join(' '))}">
       <div class="product-media">
         ${badge}
@@ -169,10 +177,9 @@
         <div class="product-meta">
           <span class="product-category">${esc(categorias.join(' · '))}</span>
         </div>
-        <h3 class="product-title">${esc(titulo)}</h3>
+        <h3 class="product-title" title="${esc(titulo)}">${esc(titulo)}</h3>
         <p class="product-desc">${esc(product.descripcion || '')}</p>
-        ${features}
-        ${gallery}
+        ${details}
         <div class="product-footer">
           ${priceBlock}
           <a class="btn btn-primary btn-block" href="${esc(waLink(config.whatsapp, message))}" target="_blank" rel="noopener">
@@ -220,7 +227,7 @@
       grid.querySelectorAll('.product-card').forEach((card) => {
         const slugs = (card.dataset.category || '').split(' ').filter(Boolean);
         const visible = filter === 'all' || slugs.includes(filter);
-        card.style.display = visible ? 'grid' : 'none';
+        card.style.display = visible ? '' : 'none';
         if (visible) card.classList.add('reveal-in');
       });
     });

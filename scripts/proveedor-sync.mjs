@@ -45,6 +45,9 @@ const DEFAULTS = {
   // Refresca descripción / stock desde el quickview. 0 = nunca (solo alta),
   // 7 = una vez por semana. El precio y las imágenes se actualizan siempre.
   detalleDias: 7,
+  // Pausa entre peticiones (imágenes y fichas). Subirla reduce las chances
+  // de que el proveedor bloquee, pero enlentece el primer sync.
+  pausaMs: 700,
 };
 
 const HEADERS = {
@@ -355,6 +358,10 @@ async function descargarImagen(cfg, id, imgId, archivo, flujo = null) {
 
   if (DRY) return local; // en --dry-run no se descarga ni se escribe
 
+  // Pausa sólo cuando hace falta pedir algo por red (no cuando ya está en disco).
+  const pausaMs = Math.max(200, Number(cfg.pausaMs ?? 700));
+  if (pausaMs > 0) await sleep(pausaMs);
+
   const base = cfg.base.replace(/\/+$/, '');
   // large_default suele existir y pesa ~90 KB (buena calidad sin inflar el repo).
   for (const tipo of ['large_default', 'home_default']) {
@@ -362,7 +369,7 @@ async function descargarImagen(cfg, id, imgId, archivo, flujo = null) {
     const url = `${base}/${imgId}-${tipo}/${archivo}`;
     try {
       const res = await fetch(url, {
-        headers: HEADERS,
+        headers: { ...HEADERS, Accept: 'image/avif,image/webp,image/*,*/*;q=0.8', Referer: `${base}/` },
         signal: AbortSignal.timeout(45000),
       });
       if (!res.ok) {
@@ -535,15 +542,64 @@ async function main() {
     });
   }
 
-  /* 3. fichas de producto (descripción completa + ficha técnica) ------- */
+  /* 3. imágenes ------------------------------------------------------ */
+  /* Primero sólo las imágenes, de a una y con pausa; si el proveedor
+     empieza a rechazar (403/429/503), cortamos y no publicamos nada.   */
+
+  const vigentes = new Set();
+  let descargadas = 0;
+  let fallosImagen = 0;
+  const flujoImg = { bloqueado: false };
+
+  if (cfg.descargarImagenes) {
+    log(`Descargando imágenes (${productos.length}) de a una…`);
+    const fallbackImagenAnterior = (p) => {
+      const prev = anteriores.get(p.id);
+      if (prev?.imagen?.startsWith('img/prov/')) {
+        p.imagen = prev.imagen;
+        vigentes.add(path.basename(prev.imagen));
+        return true;
+      }
+      return false;
+    };
+    await mapLimit(productos, 1, async (p) => {
+      if (flujoImg.bloqueado) {
+        if (!fallbackImagenAnterior(p)) p.imagen = PLACEHOLDER;
+        return;
+      }
+      const local = await descargarImagen(cfg, p.id, p._imgId, p._archivo, flujoImg);
+      if (local) {
+        p.imagen = local;
+        vigentes.add(path.basename(local));
+        descargadas++;
+      } else if (!fallbackImagenAnterior(p)) {
+        p.imagen = PLACEHOLDER;
+        fallosImagen++;
+      }
+    });
+    if (flujoImg.bloqueado) {
+      warn('El proveedor limitó las descargas (403/429/503); se omiten las fichas en esta corrida.');
+    }
+    log(`  ${descargadas} imágenes disponibles en store/img/prov · ${fallosImagen} fallidas`);
+  } else {
+    for (const p of productos) {
+      if (p._imgId && p._archivo) {
+        p.imagen = `${base}/${p._imgId}-home_default/${p._archivo}`;
+      }
+    }
+  }
+
+  /* 4. fichas de producto (descripción completa + ficha técnica) -------
+     Sólo si las imágenes pasaron sin bloqueo: 304 POSTs extra empujan de
+     más el límite del proveedor mientras nos está diciendo que paremos. */
 
   const faltanDetalle = productos.filter((p) => p._necesitaDetalle);
   const flujoDetalle = { bloqueado: false };
   let fichasOk = 0;
-  if (faltanDetalle.length) {
-    log(`Descargando ficha de producto de ${faltanDetalle.length} productos...`);
+  if (!flujoImg.bloqueado && faltanDetalle.length) {
+    log(`Descargando ficha de producto de ${faltanDetalle.length} productos…`);
     await mapLimit(faltanDetalle, 1, async (p) => {
-      if (flujoDetalle.bloqueado) return; // el catch de abajo ya hace el fallback
+      if (flujoDetalle.bloqueado) return; // la nota de más abajo ya cubre el fallback
       const baseId = Number(String(p.id).replace(/^p-/, ''));
       try {
         const qv = await fetchDetalle(p._link, baseId);
@@ -564,23 +620,29 @@ async function main() {
         p.detalleActualizado = new Date().toISOString();
         fichasOk++;
 
-        // Ritmo amable: ~2 peticiones por segundo.
-        await sleep(500);
+        // Ritmo amable entre productos (ya hay cache de 500 ms).
+        await sleep(Math.max(400, Number(cfg.pausaMs ?? 700)));
       } catch (e) {
         if (esBloqueo(e)) {
           flujoDetalle.bloqueado = true;
-          warn(`El proveedor limitó las solicitudes; se omiten las demás fichas en esta corrida.`);
+          warn('El proveedor limitó las solicitudes; se omiten las demás fichas en esta corrida.');
         } else {
           warn(`Ficha de ${p.id} no disponible: ${e.message}`);
         }
         if (!p.detalle) p.detalle = p.descripcion;
       }
     });
+  } else if (faltanDetalle.length) {
+    log(`  Omitidas las fichas de ${faltanDetalle.length} productos (proveedor bloqueado).`);
   }
   if (faltanDetalle.length) {
-    log(`  Fichas actualizadas: ${fichasOk}/${faltanDetalle.length}${flujoDetalle.bloqueado ? ' (resto omitido por límite del proveedor)' : ''}`);
+    log(
+      `  Fichas actualizadas: ${fichasOk}/${faltanDetalle.length}` +
+        (flujoDetalle.bloqueado || flujoImg.bloqueado ? ' (resto omitido por límite del proveedor)' : ''),
+    );
   }
 
+  /* limpiar campos internos */
   for (const p of productos) {
     if (!p.detalle) p.detalle = p.descripcion;
     delete p._imgId;
@@ -589,67 +651,16 @@ async function main() {
     delete p._necesitaDetalle;
   }
 
-  /* 4. imágenes ------------------------------------------------------ */
-
-  const vigentes = new Set();
-  let descargadas = 0;
-  let fallosImagen = 0;
-
-  if (cfg.descargarImagenes) {
-    log(`Descargando imágenes (${productos.length})...`);
-    const flujoImg = { bloqueado: false };
-    const fallbackImagenAnterior = (p) => {
-      const prev = anteriores.get(p.id);
-      if (prev?.imagen?.startsWith('img/prov/')) {
-        p.imagen = prev.imagen;
-        vigentes.add(path.basename(prev.imagen));
-        return true;
-      }
-      return false;
-    };
-    await mapLimit(productos, 2, async (p) => {
-      if (flujoImg.bloqueado) {
-        if (!fallbackImagenAnterior(p)) p.imagen = PLACEHOLDER;
-        return;
-      }
-      const local = await descargarImagen(cfg, p.id, p._imgId, p._archivo, flujoImg);
-      if (local) {
-        p.imagen = local;
-        vigentes.add(path.basename(local));
-        descargadas++;
-      } else if (!fallbackImagenAnterior(p)) {
-        p.imagen = PLACEHOLDER;
-        fallosImagen++;
-      }
-      await sleep(150);
-    });
-    if (flujoImg.bloqueado) {
-      fallosImagen = Math.max(fallosImagen, 1);
-      warn('El proveedor limitó las descargas (403/429/503); se conservan las imágenes anteriores y no se borran archivos.');
-    }
-    log(`  ${descargadas} imágenes disponibles en store/img/prov · ${fallosImagen} fallidas`);
-  } else {
-    for (const p of productos) {
-      if (p._imgId && p._archivo) {
-        p.imagen = `${base}/${p._imgId}-home_default/${p._archivo}`;
-      }
-    }
-  }
-
-  for (const p of productos) {
-    delete p._imgId;
-    delete p._archivo;
-  }
-
   /* 5. fusionar con el catálogo actual ------------------------------- */
 
-  // Primera sincronización: si no baja al menos la mitad de las imágenes,
+  // Primera sincronización: si no baja al menos el 80% de las imágenes,
   // abortar sin publicar nada (deshacería los productos manuales con logos).
   const primeraVez = anteriores.size === 0;
-  if (cfg.descargarImagenes && primeraVez && descargadas < Math.floor(productos.length * 0.5)) {
+  if (cfg.descargarImagenes && primeraVez && descargadas < Math.ceil(productos.length * 0.8)) {
     throw new Error(
       `Primera sincronización: sólo ${descargadas} imágenes de ${productos.length} descargadas. ` +
-      'El proveedor suele bloquear temporalmente las peticiones masivas; no se publica el catálogo.',
+      'El proveedor bloquea las peticiones masivas; no se publica el catálogo. ' +
+      'Reintentá más tarde o pedile a argseguridad.com un feed para revendedores.',
     );
   }
 

@@ -224,11 +224,13 @@ node server-local.js     # http://localhost:8123
   "minimoProductos": 50,
   "descargarImagenes": true,
   "detalleDias": 7,
+  "pausaMs": 700,
   "categorias": [{ "id": 137, "slug": "kits-de-seguridad" }]
 }
 ```
 
 - `detalleDias: 0` → no refresca descripción/stock nunca.
+- `pausaMs: 700` → pausa mínima entre pedidos (subirla ayuda el proveedor).
 - `categorias` → puede incluir otras categorías
   (ej. `{ "id": 75, "slug": "alarmas" }`); cada una suma productos y peso.
 
@@ -236,7 +238,7 @@ node server-local.js     # http://localhost:8123
 
 - Si el proveedor bloquea las peticiones (HTTP 403/429/503), la corrida
   conserva las imágenes y descripciones anteriores y **no borra nada**.
-- En la primera sincronización, si baja menos de la mitad de las imágenes,
+- En la primera sincronización, si baja menos del 80 % de las imágenes,
   **no publica** (avisa y deja intacto lo existente).
 - Si la corrida obtiene menos de `minimoProductos` productos, aborta sin tocar
   `products.json`.

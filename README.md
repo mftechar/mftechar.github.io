@@ -182,8 +182,8 @@ node server-local.js     # http://localhost:8123
 ## Sincronización automática del catálogo del proveedor
 
 `store/data/proveedor.config.json` describe qué trae el proveedor; el robot
-`scripts/proveedor-sync.mjs`, disparado por `.github/workflows/proveedor-sync.yml`
-(cada hora), actualiza los productos de origen `proveedor`:
+`scripts/proveedor-sync.mjs` (workflow **pausado**) actualiza los productos de
+origen `proveedor`:
 
 - Precio del mayorista **+ 35 %**, redondeado a $1.000 (`margen` y `redondeo`).
 - **Nunca** publica el costo mayorista.
@@ -193,7 +193,38 @@ node server-local.js     # http://localhost:8123
   `detalleDias` días (7 por defecto); precio e imágenes, en cada corrida.
 - Los productos cargados **a mano** con el panel se conservan sin tocarlos.
 
-### Puesta en marcha (una vez)
+### Estado actual: pausado mientras se espera la autorización
+
+El proveedor tiene Cloudflare y **bloquea las descargas masivas desde los
+servidores de GitHub Actions** (el run falló 2 veces porque no podía bajar las
+imágenes). Por eso el workflow está **pausado** hasta que `argseguridad.com`
+autorice un **feed para revendedores** (CSV/XML u otra vía).
+
+Qué hace y qué no hace:
+
+- La rutina **no se ejecuta sola** en este momento.
+- El cron está comentado en `.github/workflows/proveedor-sync.yml`.
+- La tienda sigue publicita con normalidad y con los productos del panel;
+  **nada se rompe** si el proveedor bloquea (el robot aborta).
+- Cuando el feed esté autorizado, descomentá el bloque `schedule` en el
+  workflow para reactivarla.
+
+## Cómo reactivarla después de la autorización
+
+1. Agregar en `.github/workflows/proveedor-sync.yml`:
+
+   ```yaml
+   on:
+     schedule:
+       - cron: '0 * * * *'
+     workflow_dispatch:
+   ```
+   (o dejar `workflow_dispatch` y dispararlo a mano).
+2. Probarlo con **Run workflow**. Debe mostrar `Descargando imágenes (…) de a
+   una…` y terminar en éxito (lleva unos minutos).
+3. Si falla otra vez, el robot **no publica** y tu tienda no cambia.
+
+### Puesta en marcha (una vez que el feed esté autorizado)
 
 1. Subí a GitHub estos archivos/carpetas:
    - `scripts/proveedor-sync.mjs`

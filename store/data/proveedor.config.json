@@ -1,0 +1,15 @@
+{
+  "base": "https://argseguridad.com",
+  "margen": 0.35,
+  "redondeo": 1000,
+  "porCategoria": 500,
+  "minimoProductos": 50,
+  "descargarImagenes": true,
+  "detalleDias": 7,
+  "categorias": [
+    {
+      "id": 137,
+      "slug": "kits-de-seguridad"
+    }
+  ]
+}

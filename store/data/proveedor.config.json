@@ -5,6 +5,7 @@
   "porCategoria": 500,
   "minimoProductos": 50,
   "descargarImagenes": true,
+  "pausaMs": 700,
   "detalleDias": 7,
   "categorias": [
     {

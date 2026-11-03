@@ -5,8 +5,10 @@ name: Catálogo del proveedor (automático)
 # Todos los productos cargados a mano desde el panel se conservan.
 
 on:
-  schedule:
-    - cron: '0 * * * *' # cada hora (GitHub puede retrasarlo 10-30 min)
+  # # Pausado: el proveedor bloquea las descargas masivas desde GitHub Actions.
+  # # Cuando argseguridad.com autorice un feed de revendedores, descomentá:
+  # # schedule:
+  # #   - cron: '0 * * * *'
   workflow_dispatch:
 
 permissions:

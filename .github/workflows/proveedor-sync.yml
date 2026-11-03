@@ -1,0 +1,45 @@
+name: Catálogo del proveedor (automático)
+
+# Actualiza los productos de origen "proveedor" según argseguridad.com
+# (precio con margen, imágenes locales, descripción completa y stock).
+# Todos los productos cargados a mano desde el panel se conservan.
+
+on:
+  schedule:
+    - cron: '0 * * * *' # cada hora (GitHub puede retrasarlo 10-30 min)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: proveedor-sync
+  cancel-in-progress: false
+
+jobs:
+  sincronizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Preparar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Sincronizar catálogo
+        run: node scripts/proveedor-sync.mjs
+
+      - name: Guardar cambios
+        run: |
+          git config user.name "mftech-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add store/data/products.json store/img
+          if git diff --staged --quiet; then
+            echo "Sin cambios para guardar."
+          else
+            git commit -m "chore(store): actualizar catálogo del proveedor"
+            git push
+          fi

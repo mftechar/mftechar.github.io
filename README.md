@@ -179,6 +179,78 @@ La página tiene `noindex, nofollow` y `robots.txt` la excluye.
 node server-local.js     # http://localhost:8123
 ```
 
+## Sincronización automática del catálogo del proveedor
+
+`store/data/proveedor.config.json` describe qué trae el proveedor; el robot
+`scripts/proveedor-sync.mjs`, disparado por `.github/workflows/proveedor-sync.yml`
+(cada hora), actualiza los productos de origen `proveedor`:
+
+- Precio del mayorista **+ 35 %**, redondeado a $1.000 (`margen` y `redondeo`).
+- **Nunca** publica el costo mayorista.
+- Descarga las imágenes a `store/img/prov/` para no depender del proveedor.
+- Completa la descripción completa, la ficha técnica (`caracteristicas`) y la
+  disponibilidad con el quickview del producto. Las fichas se actualizan cada
+  `detalleDias` días (7 por defecto); precio e imágenes, en cada corrida.
+- Los productos cargados **a mano** con el panel se conservan sin tocarlos.
+
+### Puesta en marcha (una vez)
+
+1. Subí a GitHub estos archivos/carpetas:
+   - `scripts/proveedor-sync.mjs`
+   - `.github/workflows/proveedor-sync.yml`
+   - `store/data/proveedor.config.json`
+   - `store/data/products.json` y lo que uses para publicar los cambios.
+2. En GitHub → **Settings** → **Actions** → **General** →
+   "Workflow permissions" → **Read and write permissions** → Save.
+3. **Actions** → "Catálogo del proveedor (automático)" → **Run workflow**.
+4. La primera corrida publica ~300 productos y baja ~30 MB de imágenes
+   (tarda varios minutos). Las siguientes son casi instantáneas.
+
+### Qué muestra la tarjeta de proveedor
+
+- Categoría generada desde el proveedor (ej. "Cámaras HD").
+- Descripción corta; ficha completa dentro de **Ver detalles** (texto completo,
+  sin recortar).
+- Lista de características (Material, Garantía, Resolución, …).
+- `disponible: false` → botón "Consultar disponibilidad" y etiqueta Sin stock.
+
+### Config (`store/data/proveedor.config.json`)
+
+```json
+{
+  "margen": 0.35,
+  "redondeo": 1000,
+  "porCategoria": 500,
+  "minimoProductos": 50,
+  "descargarImagenes": true,
+  "detalleDias": 7,
+  "categorias": [{ "id": 137, "slug": "kits-de-seguridad" }]
+}
+```
+
+- `detalleDias: 0` → no refresca descripción/stock nunca.
+- `categorias` → puede incluir otras categorías
+  (ej. `{ "id": 75, "slug": "alarmas" }`); cada una suma productos y peso.
+
+### Seguridad y fallas
+
+- Si el proveedor bloquea las peticiones (HTTP 403/429/503), la corrida
+  conserva las imágenes y descripciones anteriores y **no borra nada**.
+- En la primera sincronización, si baja menos de la mitad de las imágenes,
+  **no publica** (avisa y deja intacto lo existente).
+- Si la corrida obtiene menos de `minimoProductos` productos, aborta sin tocar
+  `products.json`.
+- `git push` de la rutina falla si hay conflicto con cambios del panel.
+
+### Importante
+
+- El proveedor usa Cloudflare; las peticiones masivas pueden bloquearse
+  temporalmente. La rutina está espaciada para no provocar más bloqueo.
+- Durante el desarrollo/clones de prueba, el bloqueo puede impedir llenar
+  imágenes; esperá un rato y reintentá el workflow.
+- El scraping puede ir contra los términos del proveedor. La vía más limpia es
+  pedirles un feed CSV/XML de reventa.
+
 ## Canje de Gift Codes (puente)
 
 La herramienta `gamers/wos/gift-codes.html` canjea códigos de regalo para hasta

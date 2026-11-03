@@ -160,9 +160,18 @@
 
     const buttonLabel = disponible ? 'Consultar por WhatsApp' : 'Consultar disponibilidad';
 
-    const details = features || gallery
+    const detalleCompleto = product.detalle || product.descripcion || '';
+    const detalleHtml = detalleCompleto
+      ? `<div class="product-detalle">${detalleCompleto
+          .split('\n')
+          .map((linea) => (linea.trim() ? `<p>${esc(linea)}</p>` : ''))
+          .join('')}</div>`
+      : '';
+
+    const details = features || gallery || detalleHtml
       ? `<details class="product-more">
            <summary>Ver detalles</summary>
+           ${detalleHtml}
            ${features}
            ${gallery}
          </details>`
@@ -193,12 +202,18 @@
 
   /* ---------- Filtros ---------- */
 
+  const FILTROS_VISIBLES = 8;
+
   function renderFilters(products, filtersEl) {
     const categories = new Map();
     products.forEach((product) => {
       (Array.isArray(product.categorias) ? product.categorias : [])
         .filter(Boolean)
-        .forEach((label) => categories.set(slugify(label), label));
+        .forEach((label) => {
+          const slug = slugify(label);
+          const prev = categories.get(slug);
+          categories.set(slug, { label, count: (prev?.count || 0) + 1 });
+        });
     });
 
     if (!categories.size) {
@@ -206,11 +221,26 @@
       return;
     }
 
+    // Las categorías con más productos primero; el resto se despliega a pedido.
+    const ordenadas = [...categories].sort(
+      (a, b) => b[1].count - a[1].count || a[1].label.localeCompare(b[1].label, 'es'),
+    );
+
+    const botones = ordenadas
+      .map(([slug, { label }], i) => {
+        const extra = i >= FILTROS_VISIBLES;
+        return `<button class="filter-btn${extra ? ' filter-extra' : ''}" data-filter="${esc(slug)}"${extra ? ' hidden' : ''}>${esc(label)}</button>`;
+      })
+      .join('');
+
+    const restantes = ordenadas.length - FILTROS_VISIBLES;
+
     filtersEl.innerHTML =
       '<button class="filter-btn active" data-filter="all">Todos</button>' +
-      [...categories]
-        .map(([slug, label]) => `<button class="filter-btn" data-filter="${esc(slug)}">${esc(label)}</button>`)
-        .join('');
+      botones +
+      (restantes > 0
+        ? `<button class="filter-btn filter-toggle" type="button" data-toggle="1" aria-expanded="false">Más categorías (${restantes})</button>`
+        : '');
   }
 
   function bindFilters(grid, filtersEl) {
@@ -219,6 +249,15 @@
     filtersEl.addEventListener('click', (event) => {
       const btn = event.target.closest('.filter-btn');
       if (!btn) return;
+
+      if (btn.dataset.toggle) {
+        const ocultos = [...filtersEl.querySelectorAll('.filter-extra')];
+        const abrir = ocultos[0]?.hidden ?? false;
+        ocultos.forEach((b) => { b.hidden = !abrir; });
+        btn.textContent = abrir ? 'Menos categorías' : `Más categorías (${ocultos.length})`;
+        btn.setAttribute('aria-expanded', String(abrir));
+        return;
+      }
 
       filtersEl.querySelectorAll('.filter-btn').forEach((b) => b.classList.remove('active'));
       btn.classList.add('active');

@@ -301,6 +301,11 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   padding: .4rem .85rem;
   font-size: .85rem;
 }
+.filter-btn[hidden] { display: none; }
+.filter-btn.filter-toggle {
+  border-style: dashed;
+  color: var(--accent);
+}
 .filter-btn.active {
   color: #041018;
   background: linear-gradient(90deg, rgba(34, 211, 238, 0.9), rgba(59, 130, 246, 0.9));
@@ -386,10 +391,18 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   margin: 0;
   font-size: .8rem;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+.product-detalle { margin: .6rem 0 .2rem; }
+.product-detalle p {
+  margin: .35rem 0;
+  color: var(--text-2);
+  font-size: .86rem;
+  line-height: 1.55;
+}
+.product-detalle p:first-child { margin-top: 0; }
 .product-more {
   border-top: 1px dashed var(--border);
   padding-top: .55rem;

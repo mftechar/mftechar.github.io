@@ -3,4 +3,7 @@ Allow: /
 
 Disallow: /store/admin.html
 
+# LLMs
+# Ver /llms.txt para información optimizada para buscadores de IA
+
 Sitemap: https://www.mftechar.com/sitemap.xml

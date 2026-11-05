@@ -6,22 +6,6 @@
   },
   "productos": [
     {
-      "id": "kit-alarma-inalambrica-con-video-int-ext-wifi-4g-pg107f-app-tuya-smart-2-control-remoto-3-pir-3-magnetico-tags-sirena-fuente",
-      "titulo": "Kit Alarma Inalambrica Con Video Int Ext Wifi 4g Pg107f App Tuya Smart 2 Control Remoto 3 Pir 3 Magnetico Tags Sirena Fuente",
-      "categorias": [
-        "Seguridad"
-      ],
-      "badge": "Kit Destacado",
-      "imagen": "img/producto-mvxb6zet.jpg",
-      "imagenAlt": "alarma inalambrica, kit alarma wifi, kit nixzen, kit Nixzen alarma con video, kit alarma completo",
-      "descripcion": "Central de alarma: Hasta 99 zonas inalámbricas, GSM y Wi‑Fi 2.4GHz, pantalla táctil de 4,3\", batería de respaldo y App Tuya Smart.\n\nCámara IP Wifi PT 2Mpx interior: Giro vertical y horizontal, detección de movimiento con autotracking, audio bidireccional, visión nocturna IR y ranura microSD.\n\nCámara IP Wifi 3Mpx exterior: Motorizada pan/tilt, visión nocturna IR, detección IA inteligente con autotracking, audio bidireccional y ranura microSD.\n\n3 sensores PIR: Inalámbricos, cobertura de 12 m, 110°, 433MHz, compensación de temperatura y baterías de 3 V incluídas.\n\n3 contactos magnéticos: Inalámbricos, 433MHz, con protección tamper, batería 3 V incluída y transmisión de hasta 100 m en campo abierto.\n\n2 controles remotos: Para armado total, armado parcial, desarme y botón de pánico.\n\n2 tags RFID: Permiten desarmado rápido por acercamiento en la central.\n\nSirena incorporada: Alarma sonora integrada en la central, con batería de respaldo.\n\nComunicación dual: Mediante red Wi-Fi 2.4 GHz y GSM para notificaciones por app, llamadas y SMS.\n\nGestión inteligente: Compatible con App Tuya Smart para control remoto, notificaciones en tiempo real y vinculación con otros dispositivos inteligentes.\n\nInstalación sin cables: Todos los sensores son inalámbricos, ideales para una instalación rápida y limpia sin canalizaciones.",
-      "caracteristicas": [
-        "Kit de seguridad inalámbrico con central táctil GSM/Wi-Fi y App Tuya Smart, incluye dos cámaras (interior 2Mpx y exterior 3Mpx), tres detectores PIR, tres sensores magnéticos, dos controles remotos, dos tags RFID, dos controles remoto (4 botones), una sirena interior y monitoreo en tiempo real desde celular."
-      ],
-      "precio": 592800,
-      "disponible": true
-    },
-    {
       "id": "asistente-de-redes",
       "titulo": "Asistente de Redes (Facebook · Instagram · WhatsApp · X (Twitter) · TikTok · YouTube)",
       "categorias": [

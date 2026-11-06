@@ -46,6 +46,7 @@ Toda Argentina. Servicios remotos para cualquier parte del país. Instalaciones 
 - [Servicios](https://www.mftechar.com/servicios): Detalle de todos los servicios ofrecidos
 - [Contacto](https://www.mftechar.com/contacto): Formulario de contacto y datos
 - [FAQ](https://www.mftechar.com/faq): Preguntas frecuentes
+- [Acerca de](https://www.mftechar.com/acerca-de.html): Quién es Martín Flores y la historia de MF Tech AR
 
 ## Información adicional
 

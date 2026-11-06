@@ -3,7 +3,67 @@ Allow: /
 
 Disallow: /store/admin.html
 
+# AI crawlers explícitos (GEO Optimizer)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
 # LLMs
-# Ver /llms.txt para informaci�n optimizada para buscadores de IA
+# Ver /llms.txt para información optimizada para buscadores de IA
+# Ver /ai.txt para información de descubrimiento para agentes de IA
+# Ver /ai/summary.json para resumen estructurado
 
 Sitemap: https://www.mftechar.com/sitemap.xml

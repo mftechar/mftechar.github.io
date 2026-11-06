@@ -1,0 +1,126 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Qué servicios ofrece MF Tech?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "MF Tech ofrece servicios IT para toda Argentina: asistencia remota, instalación de software, cambio de hardware, configuración de servidores, análisis de seguridad de redes, análisis de información, asesoramiento tecnológico, venta de equipos (servidores, PCs, tablets, celulares), cámaras ocultas, equipos anti-espionaje, creación de software a medida y venta de licencias de software."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Venden equipos informáticos?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí, MF Tech vende servidores, PCs, notebooks, tablets y celulares. También ofrecemos cámaras ocultas y equipos anti-espionaje. Consultá por disponibilidad y precios."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Crean software a medida?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí, desarrollamos software a medida para empresas y particulares: aplicaciones web, sistemas de gestión, automatizaciones y más. También vendemos licencias de software originales."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Venden licencias de software?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí, MF Tech vende licencias de software originales: sistemas operativos, antivirus, ofimática, software empresarial, bases de datos y más. Consultá por el software que necesitás."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué son los equipos anti-espionaje?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "MF Tech ofrece equipos anti-espionaje: detectores de cámaras ocultas, detectores de señales RF, y soluciones de contra-vigilancia para proteger tu privacidad y seguridad."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Venden cámaras ocultas?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí, MF Tech vende cámaras ocultas y dispositivos de vigilancia discreta para seguridad personal y empresarial. Consultá por modelos y disponibilidad."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Trabajan en toda Argentina?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí, MF Tech brinda servicios IT y asistencia remota para toda Argentina. También realizamos instalaciones presenciales en la zona de Luján y alrededores, y configuración remota de servidores para cualquier parte del país."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué es la asistencia remota?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "La asistencia remota permite que un técnico de MF Tech se conecte a tu computadora a través de internet para resolver problemas, instalar software, configurar sistemas o brindar soporte técnico sin necesidad de desplazamiento."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Realizan análisis de seguridad de redes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí, MF Tech realiza análisis de seguridad de redes informáticas, detección de vulnerabilidades, configuración de firewalls, y asesoramiento en ciberseguridad para empresas y particulares."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Configuran servidores?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí, configuramos servidores Windows y Linux, tanto en infraestructura propia como en la nube (AWS, Azure, Google Cloud). Incluye instalación, configuración de seguridad, backups y monitoreo."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Realizan instalación de software?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí, instalamos y configuramos todo tipo de software: sistemas operativos, antivirus, ofimática, software empresarial, bases de datos y aplicaciones especializadas. Tanto presencial como remoto."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Hacen cambio de hardware?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí, realizamos cambio y upgrade de hardware: memoria RAM, discos SSD/HDD, procesadores, fuentes de alimentación, placas de video y más. Diagnóstico previo sin cargo."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cómo contactar a MF Tech?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Podés contactarnos por WhatsApp al +54 9 2325 403222, por email a contacto@mftechar.com o a través de nuestro formulario de contacto en el sitio web."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué métodos de pago aceptan?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Aceptamos efectivo, transferencia bancaria, tarjetas de crédito y débito. Consultá por financiación en cuotas."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Ofrecen garantía en los servicios?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí, todos nuestros servicios incluyen garantía. El hardware tiene garantía del fabricante y la mano de obra tiene garantía de 30 días. El soporte remoto incluye seguimiento post-servicio."
+      }
+    }
+  ]
+}

@@ -105,27 +105,28 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   align-items: center;
   gap: 11px;
   text-decoration: none;
-  font-size: 1.18rem;
+  font-size: 0.8rem;
   letter-spacing: 0.2px;
   white-space: nowrap;
 }
 .brand-text { color: #fff; }
 .brand-text b { color: var(--turq); font-weight: 700; }
-.brand-logo { border-radius: 11px; }
+.brand-logo { border-radius: 8px; width: 32px; height: 32px; }
 
 .nav {
   display: flex;
   align-items: center;
-  gap: 22px;
-  flex-wrap: nowrap;
+  gap: 4px;
+  row-gap: 2px;
+  flex-wrap: wrap;
   justify-content: flex-end;
   min-width: 0;
 }
 .nav > a:not(.btn) {
   text-decoration: none;
   color: var(--txt-soft);
-  font-size: 0.95rem;
-  padding: 8px 2px;
+  font-size: 0.68rem;
+  padding: 4px 1px;
   position: relative;
   white-space: nowrap;
   flex: 0 0 auto;
@@ -174,7 +175,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   color: var(--txt);
 }
 .btn-ghost:hover { background: var(--surface-2); border-color: rgba(255, 255, 255, 0.24); }
-.btn-small { padding: 10px 18px; font-size: 0.92rem; }
+.btn-small { padding: 4px 8px; font-size: 0.7rem; }
 .btn-lg { padding: 16px 28px; font-size: 1.05rem; }
 .ico { width: 19px; height: 19px; }
 

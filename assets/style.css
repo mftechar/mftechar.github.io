@@ -876,7 +876,7 @@ a:focus-visible, button:focus-visible {
 /* Navegación: colapsar el menú hasta 1120px. Arriba de ese ancho los enlaces
    van en una sola fila (flex-wrap: nowrap) para que no se apilen ni se salgan
    del header cuando la ventana es angosta. */
-@media (max-width: 1120px) {
+@media (max-width: 1280px) {
   .menu-btn { display: block; }
   .nav {
     position: fixed;

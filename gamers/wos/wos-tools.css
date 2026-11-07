@@ -1336,3 +1336,35 @@
 .gift-advanced[open] > summary::after { content: "-"; }
 .gift-advanced[open] > summary { border-bottom: 1px solid var(--line); }
 .gift-advanced > .panel { border: 0; border-radius: 0; background: transparent; }
+
+/* ---------- Estado 4604 · datos WoS Atlas ---------- */
+.wos-filter {
+  width: 100%;
+  margin-top: 12px;
+  padding: 9px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--txt);
+  font: inherit;
+  font-size: 0.88rem;
+}
+.wos-filter:focus { outline: none; border-color: rgba(64, 224, 208, 0.6); }
+.wos-chart { margin-top: 10px; }
+.wos-chart svg { width: 100%; height: auto; display: block; }
+.wos-stat {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 7px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--line);
+  font-size: 0.8rem;
+  color: var(--txt-soft);
+}
+.wos-stat b { color: #fff; font-size: 0.92rem; }
+.wos-dir-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+
+.hint.warn { color: #f5c451; }
+

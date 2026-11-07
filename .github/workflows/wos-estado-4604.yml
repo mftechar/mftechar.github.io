@@ -1,0 +1,62 @@
+name: WoS Estado 4604 (automático)
+
+# Actualiza el snapshot del estado 4604 desde la API pública de WoS Atlas
+# y lo commitea. GitHub Pages lo publica solo.
+#
+# La API limita a ~2 pedidos seguidos y luego responde 429 con retry-after
+# de 10 minutos, por eso corre pocas veces al día y el script espera solo.
+
+on:
+  schedule:
+    # 01:00, 07:00, 13:00 y 19:00 UTC (cada 6 horas)
+    - cron: '0 1,7,13,19 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: wos-estado-4604
+  cancel-in-progress: false
+
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Preparar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Actualizar datos del estado 4604
+        run: node gamers/wos/update-wos-data.js --force
+
+      - name: Validar snapshot
+        run: |
+          node -e "
+            const fs = require('fs');
+            const p = 'gamers/wos/data/estado-4604.json';
+            const d = JSON.parse(fs.readFileSync(p, 'utf8'));
+            const boards = d.boards || {};
+            const ok = ['alliance.rank','power.rank','kill.rank','furnace.rank']
+              .every((b) => Array.isArray(boards[b]?.items) && boards[b].items.length > 0);
+            if (!ok) { console.error('Snapshot incompleto'); process.exit(1); }
+            console.log('Snapshot OK:', d.fetchedAt);
+          "
+
+      - name: Guardar cambios
+        run: |
+          git config user.name "wos-estado-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add gamers/wos/data/estado-4604.json
+          if git diff --staged --quiet; then
+            echo "Sin cambios para guardar."
+          else
+            git commit -m "chore(wos): actualizar datos del estado 4604"
+            git pull --rebase origin "${GITHUB_REF_NAME}" --autostash
+            git push
+          fi

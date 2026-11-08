@@ -1,0 +1,140 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "MF Tech AR — Servicios IT",
+  "provider": {
+    "@type": "Organization",
+    "name": "MF Tech AR",
+    "legalName": "MF Tech AR — Martín Flores",
+    "url": "https://www.mftechar.com/",
+    "logo": "https://www.mftechar.com/assets/logo.svg",
+    "telephone": "+5492325406322",
+    "email": "contacto@mftechar.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Luján",
+      "addressRegion": "Provincia de Buenos Aires",
+      "addressCountry": "AR"
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "Argentina"
+    },
+    "founder": {
+      "@type": "Person",
+      "name": "Martín Flores"
+    },
+    "foundingDate": "2026",
+    "priceRange": "$$",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": 70
+    }
+  },
+  "serviceType": [
+    "Asistencia remota IT",
+    "Instalación de software",
+    "Cambio y upgrade de hardware",
+    "Configuración de servidores (Windows y Linux)",
+    "Análisis de seguridad de redes",
+    "Análisis de información",
+    "Asesoramiento tecnológico",
+    "Venta de equipos informáticos (servidores, PCs, notebooks, tablets, celulares)",
+    "Cámaras ocultas y equipos anti-espionaje",
+    "Creación de software a medida",
+    "Venta de licencias de software"
+  ],
+  "serviceArea": {
+    "@type": "Country",
+    "name": "Argentina"
+  },
+  "availableChannel": [
+    {
+      "@type": "Channel",
+      "channelType": "whatsapp",
+      "url": "https://wa.me/5492325406322"
+    },
+    {
+      "@type": "Channel",
+      "channelType": "email",
+      "url": "mailto:contacto@mftechar.com"
+    },
+    {
+      "@type": "Channel",
+      "channelType": "web",
+      "url": "https://www.mftechar.com/#contacto"
+    }
+  ],
+  "hoursAvailable": {
+    "@type": "OpeningHoursSpecification",
+    "opens": "09:00",
+    "closes": "18:00",
+    "dayOfWeek": [
+      "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"
+    ],
+    "validFrom": "2026-01-01",
+    "validThrough": "2026-12-31"
+  },
+  "audience": {
+    "@type": "Audience",
+    "audienceType": "Pequeñas y medianas empresas (PyMEs), emprendedores y particulares en Argentina"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Catálogo de servicios MF Tech AR",
+    "offer": [
+      {
+        "@type": "Offer",
+        "name": "Asistencia remota",
+        "description": "Soporte técnico remoto para resolución de problemas, instalación de software y configuración de sistemas.",
+        "price": "Consultar"
+      },
+      {
+        "@type": "Offer",
+        "name": "Instalación de software",
+        "description": "Instalación y configuración de sistemas operativos, antivirus, ofimática y software empresarial.",
+        "price": "Consultar"
+      },
+      {
+        "@type": "Offer",
+        "name": "Configuración de servidores",
+        "description": "Servidores Windows y Linux, propia o nube (AWS, Azure, Google Cloud). Incluye seguridad, backups y monitoreo.",
+        "price": "Consultar"
+      },
+      {
+        "@type": "Offer",
+        "name": "Análisis de seguridad de redes",
+        "description": "Detección de vulnerabilidades, configuración de firewalls y asesoramiento en ciberseguridad.",
+        "price": "Consultar"
+      },
+      {
+        "@type": "Offer",
+        "name": "Creación de software a medida",
+        "description": "Aplicaciones web, sistemas de gestión, automatizaciones y licencias de software originales.",
+        "price": "Consultar"
+      },
+      {
+        "@type": "Offer",
+        "name": "Venta de equipos",
+        "description": "Servidores, PCs, notebooks, tablets, celulares, cámaras ocultas y equipos anti-espionaje.",
+        "price": "Consultar"
+      }
+    ]
+  },
+  "sameAs": [
+    "https://www.mftechar.com/",
+    "https://facebook.com/mftechar",
+    "https://instagram.com/mftechar",
+    "https://x.com/mftechar",
+    "https://youtube.com/@mftechar",
+    "https://github.com/mftechar",
+    "https://reddit.com/user/mftechar",
+    "https://www.linkedin.com/in/martin-emmanuel-flores-99b99a65",
+    "https://www.tiktok.com/@mftechar",
+    "https://www.threads.net/@mftechar",
+    "https://t.me/mftechar",
+    "https://wa.me/5492325406322"
+  ],
+  "description": "MF Tech AR brinda servicios IT para toda Argentina: asistencia remota, venta de equipos, servidores, seguridad de redes, software a medida y licencias. Atención directa con Martín Flores. Presupuesto sin cargo. Servicio a distancia y en el lugar en todo el país."
+}

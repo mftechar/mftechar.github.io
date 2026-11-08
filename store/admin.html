@@ -47,7 +47,7 @@
           <label class="field">
             <span>Token de GitHub</span>
             <div class="input-row">
-              <input type="password" id="f-token" placeholder="github_pat_..." autocomplete="off" spellcheck="false" />
+              <input type="password" id="f-token" name="f-token" placeholder="github_pat_..." autocomplete="off" spellcheck="false" aria-label="Token de GitHub" />
               <button class="btn btn-ghost btn-sm" id="btnVerToken" type="button">Ver</button>
             </div>
             <small>Permiso necesario: <b>Contents → Read and write</b> sobre este repositorio.</small>
@@ -56,11 +56,11 @@
           <div class="grid-2">
             <label class="field">
               <span>Repositorio</span>
-              <input type="text" id="f-repo" placeholder="usuario/repositorio" spellcheck="false" />
+              <input type="text" id="f-repo" name="f-repo" placeholder="usuario/repositorio" spellcheck="false" aria-label="Repositorio" />
             </label>
             <label class="field">
               <span>Rama</span>
-              <input type="text" id="f-branch" placeholder="main" spellcheck="false" />
+              <input type="text" id="f-branch" name="f-branch" placeholder="main" spellcheck="false" aria-label="Rama" />
             </label>
           </div>
         </div>
@@ -69,7 +69,7 @@
           <button class="btn btn-primary" id="btnConectar" type="button">Conectar</button>
           <button class="btn btn-ghost" id="btnOlvidar" type="button">Olvidar token</button>
           <label class="check">
-            <input type="checkbox" id="f-recordar" checked />
+            <input type="checkbox" id="f-recordar" name="f-recordar" checked aria-label="Recordar en este navegador" />
             <span>Recordar en este navegador</span>
           </label>
         </div>
@@ -95,12 +95,12 @@
         <div class="grid-2">
           <label class="field">
             <span>WhatsApp de la tienda</span>
-            <input type="text" id="f-whatsapp" placeholder="5492325406322" inputmode="numeric" />
+            <input type="text" id="f-whatsapp" name="f-whatsapp" placeholder="5492325406322" inputmode="numeric" aria-label="WhatsApp de la tienda" />
             <small>Solo números, con código de país. Ej: <code>5492325406322</code>.</small>
           </label>
           <label class="field">
             <span>Moneda por defecto</span>
-            <input type="text" id="f-moneda" placeholder="ARS" maxlength="6" />
+            <input type="text" id="f-moneda" name="f-moneda" placeholder="ARS" maxlength="6" aria-label="Moneda por defecto" />
           </label>
         </div>
       </div>
@@ -129,15 +129,15 @@
       </header>
 
       <div class="panel-body form-layout">
-        <form class="form" id="productForm" novalidate>
+        <form class="form" id="productForm" novalidate aria-label="Formulario de producto">
           <div class="grid-2">
             <label class="field">
               <span>Título *</span>
-              <input type="text" id="f-titulo" required placeholder="Kit de cámaras con IA" />
+              <input type="text" id="f-titulo" name="f-titulo" required aria-label="Título" placeholder="Kit de cámaras con IA" />
             </label>
             <label class="field">
               <span>Identificador (URL)</span>
-              <input type="text" id="f-id" placeholder="kit-camaras-ia" spellcheck="false" />
+              <input type="text" id="f-id" name="f-id" placeholder="kit-camaras-ia" spellcheck="false" aria-label="Identificador (URL)" />
               <small>Se genera solo desde el título. Debe ser único.</small>
             </label>
           </div>
@@ -145,19 +145,19 @@
           <div class="grid-2">
             <label class="field">
               <span>Categorías</span>
-              <input type="text" id="f-categorias" placeholder="Seguridad, Redes" />
+              <input type="text" id="f-categorias" name="f-categorias" placeholder="Seguridad, Redes" aria-label="Categorías" />
               <small>Separadas por coma. Cada una crea un filtro en la tienda.</small>
             </label>
             <label class="field">
               <span>Etiqueta (badge)</span>
-              <input type="text" id="f-badge" placeholder="Nuevo, Destacado, Oferta…" />
+              <input type="text" id="f-badge" name="f-badge" aria-label="Etiqueta (badge)" placeholder="Nuevo, Destacado, Oferta…" />
               <small>Vacío = sin etiqueta.</small>
             </label>
           </div>
 
           <label class="field">
             <span>Descripción</span>
-            <textarea id="f-descripcion" rows="3" placeholder="Qué es, para quién y qué resuelve."></textarea>
+            <textarea id="f-descripcion" name="f-descripcion" aria-label="Descripción" rows="3" placeholder="Qué es, para quién y qué resuelve."></textarea>
           </label>
 
           <div class="field">
@@ -165,8 +165,8 @@
             <div class="image-row">
               <div class="thumb" id="imagenPreview"><span>Sin imagen</span></div>
               <div class="image-controls">
-                <input type="file" id="f-imagen-file" accept="image/*" />
-                <input type="text" id="f-imagen" placeholder="img/producto.jpg" spellcheck="false" />
+                <input type="file" id="f-imagen-file" name="f-imagen-file" accept="image/*" aria-label="Imagen principal" />
+                <input type="text" id="f-imagen" name="f-imagen" placeholder="img/producto.jpg" spellcheck="false" aria-label="Ruta de la imagen" />
                 <small>Subí una foto o escribí la ruta. Se guarda en <code>store/img/</code>.</small>
               </div>
             </div>
@@ -174,24 +174,24 @@
 
           <label class="field">
             <span>Texto alternativo de la imagen</span>
-            <input type="text" id="f-imagenAlt" placeholder="Descripción breve para accesibilidad y SEO" />
+            <input type="text" id="f-imagenAlt" name="f-imagenAlt" aria-label="Texto alternativo de la imagen" placeholder="Descripción breve para accesibilidad y SEO" />
           </label>
 
           <label class="field">
             <span>Características</span>
-            <textarea id="f-caracteristicas" rows="5" placeholder="Una por línea&#10;4 cámaras 4MP&#10;Detección con IA"></textarea>
+            <textarea id="f-caracteristicas" name="f-caracteristicas" aria-label="Características" rows="5" placeholder="Una por línea&#10;4 cámaras 4MP&#10;Detección con IA"></textarea>
             <small>Una por línea. Se muestran con viñetas.</small>
           </label>
 
           <div class="grid-2">
             <label class="field">
               <span>Precio</span>
-              <input type="number" id="f-precio" min="0" step="1" placeholder="350000" />
+              <input type="number" id="f-precio" name="f-precio" min="0" step="1" placeholder="350000" aria-label="Precio" />
               <small>Vacío = “Consultar”.</small>
             </label>
             <label class="field">
               <span>Moneda del producto</span>
-              <input type="text" id="f-moneda-producto" placeholder="(usa la de la tienda)" maxlength="6" />
+              <input type="text" id="f-moneda-producto" name="f-moneda-producto" placeholder="(usa la de la tienda)" maxlength="6" aria-label="Moneda del producto" />
             </label>
           </div>
 
@@ -203,17 +203,17 @@
 
           <label class="field">
             <span>Nota de la galería</span>
-            <input type="text" id="f-galeriaNota" placeholder="Video corto mostrando el funcionamiento." />
+            <input type="text" id="f-galeriaNota" name="f-galeriaNota" placeholder="Video corto mostrando el funcionamiento." aria-label="Nota de la galería" />
           </label>
 
           <label class="field">
             <span>Mensaje de WhatsApp</span>
-            <input type="text" id="f-mensaje" placeholder="(automático: Hola Martín! Quisiera consultar por …)" />
+            <input type="text" id="f-mensaje" name="f-mensaje" aria-label="Mensaje de WhatsApp" placeholder="(automático: Hola Martín! Quisiera consultar por …)" />
             <small>Vacío = mensaje generado automáticamente con el título y el precio.</small>
           </label>
 
           <label class="check">
-            <input type="checkbox" id="f-disponible" checked />
+            <input type="checkbox" id="f-disponible" name="f-disponible" checked aria-label="Disponible" />
             <span>Disponible (si lo desmarcás se muestra “Sin stock”)</span>
           </label>
 
@@ -240,7 +240,7 @@
         <div class="publish-row">
           <label class="field">
             <span>Mensaje del commit</span>
-            <input type="text" id="f-commit" value="store: actualizar catálogo" />
+            <input type="text" id="f-commit" name="f-commit" aria-label="Mensaje del commit" value="store: actualizar catálogo" />
           </label>
           <div class="actions">
             <button class="btn btn-primary" id="btnPublicar" type="button">Publicar en GitHub</button>

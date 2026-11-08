@@ -47,6 +47,7 @@ Toda Argentina. Servicios remotos para cualquier parte del país. Instalaciones 
 - [Contacto](https://www.mftechar.com/contacto): Formulario de contacto y datos
 - [FAQ](https://www.mftechar.com/faq): Preguntas frecuentes
 - [Acerca de](https://www.mftechar.com/acerca-de.html): Quién es Martín Flores y la historia de MF Tech AR
+- [About](https://www.mftechar.com/about.html): Página sobre MF Tech AR y sus servicios (estándar web)
 
 ## Información adicional
 
@@ -60,3 +61,8 @@ Toda Argentina. Servicios remotos para cualquier parte del país. Instalaciones 
 - Venta de equipos con garantía del fabricante
 - Creación de software a medida
 - Venta de licencias de software originales
+
+## Información para IA (agentes y motores de búsqueda)
+
+- Datos de servicio estructurados: https://www.mftechar.com/ai/service.json (JSON-LD / schema.org Service)
+- Página principal: https://www.mftechar.com/: Página principal con servicios y contacto

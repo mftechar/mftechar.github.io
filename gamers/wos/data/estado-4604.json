@@ -2,7 +2,7 @@
  "source": "WoS Atlas",
  "sourceUrl": "https://wosatlas.com",
  "serverId": "4604",
- "fetchedAt": "2026-11-07T22:26:09.130Z",
+ "fetchedAt": "2026-11-08T06:48:10.965Z",
  "boards": {
   "alliance.rank": {
    "board": "alliance.rank",
@@ -710,7 +710,7 @@
   ],
   "server_count": 4061,
   "surveyed_server_count": 4004,
-  "last_census_at": "2026-11-07T10:03:49.738+00:00"
+  "last_census_at": "2026-11-08T06:38:08.486+00:00"
  },
  "server": {
   "kind": "normal",
@@ -786,7 +786,7 @@
    "players": 2592,
    "alliances": 498,
    "player_power": 40018640253,
-   "refreshed_at": "2026-11-07T17:20:35.396639+00:00"
+   "refreshed_at": "2026-11-08T06:44:23.198726+00:00"
   },
   "season": null,
   "opened_at": null,
@@ -803,7 +803,7 @@
   "generation_ceiling": 2
  },
  "summary": {
-  "as_of": "2026-11-07T17:20:35.396639+00:00",
+  "as_of": "2026-11-08T06:44:23.198726+00:00",
   "since": "2026-10-17",
   "series": [
    {
@@ -935,18 +935,18 @@
   ],
   "windows": {
    "7d": {
-    "from": "2026-10-31",
+    "from": "2026-11-01",
     "cities": {
      "now": 1829,
-     "pct": -6.01,
-     "then": 1946,
-     "delta": -117
+     "pct": -5.18,
+     "then": 1929,
+     "delta": -100
     },
     "players": {
      "now": 2592,
-     "pct": 2.69,
-     "then": 2524,
-     "delta": 68
+     "pct": 2.17,
+     "then": 2537,
+     "delta": 55
     },
     "alliances": {
      "now": 498,
@@ -956,9 +956,9 @@
     },
     "player_power": {
      "now": 40018640253,
-     "pct": 9.85,
-     "then": 36430826314,
-     "delta": 3587813939
+     "pct": 8.81,
+     "then": 36779954514,
+     "delta": 3238685739
     }
    },
    "30d": {

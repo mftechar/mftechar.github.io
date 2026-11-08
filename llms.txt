@@ -65,4 +65,5 @@ Toda Argentina. Servicios remotos para cualquier parte del país. Instalaciones 
 ## Información para IA (agentes y motores de búsqueda)
 
 - Datos de servicio estructurados: https://www.mftechar.com/ai/service.json (JSON-LD / schema.org Service)
+- Wikidata: https://www.wikidata.org/wiki/Q142083454
 - Página principal: https://www.mftechar.com/: Página principal con servicios y contacto

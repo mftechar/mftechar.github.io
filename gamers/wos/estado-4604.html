@@ -199,16 +199,21 @@
         <h2 class="panel-title">Ranking del estado 4604 (reportado por la comunidad)</h2>
         <p class="panel-sub">Cargá los datos que tu alianza conoce: nombre, tag, alianza y poder. Los datos quedan en tu navegador.</p>
 
-        <form id="rankingForm" class="wos-form">
+        <form id="rankingForm" class="wos-form" aria-label="Ranking comunitario del estado 4604">
           <div class="form-grid two">
-            <input type="text" id="rName" placeholder="Nombre del jugador / alianza" required />
-            <input type="text" id="rTag" placeholder="Tag (ej: K77)" maxlength="6" />
-            <select id="rKind">
+            <label for="rName" class="field-label">Nombre del jugador / alianza</label>
+            <input type="text" id="rName" name="rName" placeholder="Nombre del jugador / alianza" required aria-label="Nombre del jugador o alianza" />
+            <label for="rTag" class="field-label">Tag</label>
+            <input type="text" id="rTag" name="rTag" placeholder="Tag (ej: K77)" maxlength="6" aria-label="Tag del jugador o alianza" />
+            <label for="rKind" class="field-label">Tipo</label>
+            <select id="rKind" name="rKind" aria-label="Tipo (alianza o jugador)">
               <option value="alianza">Alianza</option>
               <option value="jugador">Jugador</option>
             </select>
-            <input type="number" id="rPower" placeholder="Poder (ej: 202100000000)" min="0" />
-            <input type="text" id="rNote" placeholder="Nota (ej: kills top, furnace 10)" />
+            <label for="rPower" class="field-label">Poder</label>
+            <input type="number" id="rPower" name="rPower" placeholder="Poder (ej: 202100000000)" min="0" aria-label="Poder" />
+            <label for="rNote" class="field-label">Nota</label>
+            <input type="text" id="rNote" name="rNote" placeholder="Nota (ej: kills top, furnace 10)" aria-label="Nota adicional" />
             <button type="submit" class="btn btn-primary btn-small">Agregar al ranking</button>
           </div>
         </form>
@@ -234,7 +239,8 @@
       <div class="panel" style="margin-top:18px">
         <h2 class="panel-title">Buscador de alianzas del estado 4604</h2>
         <p class="panel-sub">Filtrá las alianzas que ya cargaste en la tabla de arriba. Buscá por tag o por nombre.</p>
-        <input type="text" id="searchAliance" placeholder="Buscar alianza por tag o nombre..." style="width:100%;margin-top:10px" />
+        <label for="searchAliance" class="field-label">Buscar alianza</label>
+        <input type="text" id="searchAliance" name="searchAliance" placeholder="Buscar alianza por tag o nombre..." style="width:100%;margin-top:10px" aria-label="Buscar alianza por tag o nombre" />
         <div id="searchResults" class="tool-grid" style="margin-top:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"></div>
       </div>
 

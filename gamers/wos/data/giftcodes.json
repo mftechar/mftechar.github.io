@@ -4,7 +4,7 @@
   "codes": [
     {
       "code": "DIWALI",
-      "publishedAt": "Mon, 09 Nov 2026 10:45:02 +0000"
+      "publishedAt": ""
     },
     {
       "code": "WOS1104",
@@ -40,10 +40,6 @@
     },
     {
       "code": "WOS1007",
-      "publishedAt": ""
-    },
-    {
-      "code": "THXTEACHER",
       "publishedAt": ""
     }
   ]

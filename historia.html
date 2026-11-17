@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Historia Clínica Electrónica | MF Tech AR</title>
+  <meta name="description" content="Armá una historia clínica electrónica con consentimientos, indicaciones, enfermería, protocolos, dietas, vacunas y estudios." />
+  <meta name="theme-color" content="#0b2437" />
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="assets/style.css" />
+  <link rel="stylesheet" href="assets/tools.css" />
+</head>
+<body>
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="MF Tech AR — inicio">
+        <img src="assets/logo.svg" alt="Logo MF Tech AR" width="42" height="42" class="brand-logo" />
+        <span class="brand-text">MF Tech <b>AR</b></span>
+      </a>
+      <nav class="nav" aria-label="Navegación principal">
+        <a href="index.html#servicios">Servicios</a>
+        <a href="index.html#herramientas">Herramientas</a>
+        <a href="salud.html">Salud</a>
+        <a href="historia.html">Historia clínica</a>
+        <a href="index.html#contacto">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <section class="section">
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow">Salud</p>
+          <h2>Historia Clínica Electrónica</h2>
+          <p class="section-sub">Armá una historia clínica electrónica con consentimientos informados, hojas de indicaciones, planillas de enfermería, protocolos quirúrgicos, prescripciones dietarias, certificados de vacunación y estudios/prácticas.</p>
+        </header>
+        <div id="historiaApp"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-copy">© <span id="year">2026</span> MF Tech AR — Martín Flores — Hecho en Argentina</p>
+    </div>
+  </footer>
+
+  <script src="assets/fecha.js" defer></script>
+  <script src="assets/historia.js" defer></script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

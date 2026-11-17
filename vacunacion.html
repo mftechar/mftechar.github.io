@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vacunación — Calendario de vacunas | MF Tech AR</title>
+  <meta name="description" content="Calculá fechas y días para aplicar las vacunas según el Calendario Nacional de Vacunación de Argentina." />
+  <meta name="theme-color" content="#0b2437" />
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="assets/style.css" />
+  <link rel="stylesheet" href="assets/tools.css" />
+</head>
+<body>
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="MF Tech AR — inicio">
+        <img src="assets/logo.svg" alt="Logo MF Tech AR" width="42" height="42" class="brand-logo" />
+        <span class="brand-text">MF Tech <b>AR</b></span>
+      </a>
+      <nav class="nav" aria-label="Navegación principal">
+        <a href="index.html#servicios">Servicios</a>
+        <a href="index.html#herramientas">Herramientas</a>
+        <a href="salud.html">Salud</a>
+        <a href="index.html#contacto">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <section class="section">
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow">Salud</p>
+          <h2>Calendario de vacunación</h2>
+          <p class="section-sub">Calculá fechas y días para aplicar las vacunas según el Calendario Nacional de Vacunación de Argentina (por etapas de la vida).</p>
+        </header>
+        <div id="saludApp"></div>
+        <p class="tools-note" style="margin-top:16px">
+          Fuente oficial: <a href="https://www.argentina.gob.ar/sites/default/files/2026-03-10_infografia_calendario_vacunas_50x70_digital.pdf" target="_blank" rel="noopener">Plan de vacunación por etapas de la vida (Argentina)</a>. Las fechas son orientativas; consultá siempre con un vacunatorio o profesional de salud.
+        </p>
+
+        <article style="margin-top:32px">
+          <h3 style="margin:0 0 8px">Calculadora de corrimiento de vacunas</h3>
+          <p class="section-sub" style="margin:0 0 12px">Si una vacuna no se aplicó en la fecha programada, calculá los días de atraso y la fecha en que se corre la próxima dosis.</p>
+          <div id="corrimientoApp"></div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-copy">© <span id="year">2026</span> MF Tech AR — Martín Flores — Hecho en Argentina</p>
+    </div>
+  </footer>
+
+  <script src="assets/fecha.js" defer></script>
+  <script src="assets/salud.js" defer></script>
+  <script src="assets/corrimiento.js" defer></script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Salud — Calendario de vacunación | MF Tech AR</title>
-  <meta name="description" content="Calculá fechas y días para aplicar las vacunas según el Calendario Nacional de Vacunación de Argentina (por etapas de la vida)." />
+  <title>Salud — Herramientas de salud | MF Tech AR</title>
+  <meta name="description" content="Herramientas de salud: calendario de vacunación e historia clínica electrónica." />
   <meta name="theme-color" content="#0b2437" />
   <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="assets/style.css" />
@@ -20,6 +20,7 @@
       <nav class="nav" aria-label="Navegación principal">
         <a href="index.html#servicios">Servicios</a>
         <a href="index.html#herramientas">Herramientas</a>
+        <a href="salud.html">Salud</a>
         <a href="index.html#contacto">Contacto</a>
       </nav>
     </div>
@@ -30,13 +31,29 @@
       <div class="container">
         <header class="section-head">
           <p class="eyebrow">Salud</p>
-          <h2>Calendario de vacunación</h2>
-          <p class="section-sub">Calculá fechas y días para aplicar las vacunas según el Calendario Nacional de Vacunación de Argentina (por etapas de la vida). Herramienta gratuita, funciona en tu navegador.</p>
+          <h2>Herramientas de salud</h2>
+          <p class="section-sub">Elegí una herramienta. Cada una se abre en una pestaña nueva para que puedas trabajar sin perder esta página.</p>
         </header>
-        <div id="saludApp"></div>
-        <p class="tools-note" style="margin-top:16px">
-          Fuente oficial: <a href="https://www.argentina.gob.ar/sites/default/files/2026-03-10_infografia_calendario_vacunas_50x70_digital.pdf" target="_blank" rel="noopener">Plan de vacunación por etapas de la vida (Argentina)</a>. Las fechas son orientativas; consultá siempre con un vacunatorio o profesional de salud.
-        </p>
+
+        <div class="tools-grid">
+          <a class="tool reveal" href="vacunacion.html" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
+            <span class="tool-ico ico-shield" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 3 5 6v6c0 4.4 3 7.6 7 9 4-1.4 7-4.6 7-9V6l-7-3Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m9 12 2.2 2.2L15.5 10" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <h3>Calendario de vacunación</h3>
+            <p>Calculá fechas y días para aplicar vacunas según el Calendario Nacional de Argentina (por etapas de la vida).</p>
+            <span class="tool-go">Abrir en nueva pestaña</span>
+          </a>
+
+          <a class="tool reveal" href="historia.html" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
+            <span class="tool-ico ico-shield" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M14 3v4a1 1 0 0 0 1 1h4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9 13h6M9 17h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+            </span>
+            <h3>Historia Clínica Electrónica</h3>
+            <p>Armá una historia clínica electrónica con consentimientos, indicaciones, enfermería, protocolos, dietas, vacunas y estudios. Guardá en tu PC o en Google Drive.</p>
+            <span class="tool-go">Abrir en nueva pestaña</span>
+          </a>
+        </div>
       </div>
     </section>
   </main>
@@ -47,7 +64,7 @@
     </div>
   </footer>
 
-  <script src="assets/salud.js" defer></script>
+  <script src="assets/fecha.js" defer></script>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>

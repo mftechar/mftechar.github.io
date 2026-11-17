@@ -86,8 +86,35 @@ function esc(s) {
         <label>Profesional responsable
           <input type="text" id="${p}_profesional" placeholder="Nombre del profesional" />
         </label>
+        <label>Teléfono del paciente
+          <input type="tel" id="${p}_telefono" placeholder="Ej.: +54 9 2325 406322" />
+        </label>
+        <label>Email del paciente
+          <input type="email" id="${p}_email" placeholder="paciente@ejemplo.com" />
+        </label>
+        <label>Próxima consulta / turno médico
+          <input type="text" id="${p}_proximaConsulta" placeholder="DDMMAAAA" inputmode="numeric" autocomplete="off" />
+          <span style="font-size:0.78rem;color:#94a3b8;display:block;margin-top:4px">Ejemplo: escribí 17112026 para ingresar 17/11/2026</span>
+        </label>
+        <label>Hora / lugar del turno
+          <input type="text" id="${p}_turno" placeholder="Ej.: 10:30 hs, Consultorio 2" />
+        </label>
       </div>
       ${inputs}
+      <div class="tw-form" id="${p}_adjuntos" style="margin-top:12px;border-top:1px solid #cbd5e1;padding-top:12px">
+        <h3 style="margin:0 0 8px;font-size:16px">Adjuntos (estudios, imágenes, PDF)</h3>
+        <label>Archivos<br>
+          <input type="file" id="${p}_fileInput" accept=".pdf,.jpg,.jpeg,.png" multiple style="color:#cbd5e1" />
+        </label>
+        <div id="${p}_adjuntosLista" style="margin-top:10px"></div>
+      </div>
+
+      <div class="tw-form" id="${p}_recordatorio" style="margin-top:12px;border-top:1px solid #cbd5e1;padding-top:12px">
+        <h3 style="margin:0 0 8px;font-size:16px">Recordatorio por email</h3>
+        <p style="font-size:0.85rem;color:#94a3b8;margin:0 0 8px">Se abre tu cliente de correo (Gmail, Outlook, etc.) con el recordatorio prellenado. No se envía nada automáticamente; vos confirmás el envío.</p>
+        <button type="button" class="btn btn-ghost" id="${p}_enviarRecordatorio">Enviar recordatorio por email</button>
+      </div>
+
       <button class="btn btn-primary" id="${p}_ir">Generar historia clínica</button>
       <button class="btn btn-ghost" id="${p}_imprimir" style="margin-left:8px;display:none">Imprimir / Guardar PDF</button>
       <button class="btn btn-ghost" id="${p}_guardarLocal" style="margin-left:8px;display:none">Guardar en mi PC (cifrado)</button>
@@ -103,6 +130,7 @@ function esc(s) {
       window.mfFecha.enmascararFecha(root.querySelector(`#${p}_nacimiento`));
       window.mfFecha.enmascararFecha(root.querySelector(`#${p}_fecha`));
       window.mfFecha.enmascararFecha(root.querySelector(`#${p}_histFecha`));
+      window.mfFecha.enmascararFecha(root.querySelector(`#${p}_proximaConsulta`));
     }
     iniciarAutoSave(root, p);
     const btnRest = root.querySelector(`#${p}_recuperarBorrador`);
@@ -125,6 +153,25 @@ function esc(s) {
       });
     }
     renderHistorial(root, p);
+    renderAdjuntos(root, p);
+    const fileInput = root.querySelector(`#${p}_fileInput`);
+    if (fileInput) {
+      fileInput.addEventListener('change', async () => {
+        for (const file of fileInput.files) {
+          try {
+            const datos = await leerArchivoComoDataURL(file);
+            getAdjuntos(p).push({ nombre: file.name, tipo: file.type, tamaño: file.size, datos });
+          } catch (e) {
+            console.error('Error al leer archivo', e);
+          }
+        }
+        fileInput.value = '';
+        renderAdjuntos(root, p);
+        guardarBorrador(root, p);
+      });
+    }
+    const btnRecordatorio = root.querySelector(`#${p}_enviarRecordatorio`);
+    if (btnRecordatorio) btnRecordatorio.addEventListener('click', () => enviarRecordatorio(root, p));
     root.querySelector(`#${p}_ir`).addEventListener('click', () => {
       const paciente = root.querySelector(`#${p}_paciente`).value.trim();
       const dni = root.querySelector(`#${p}_dni`).value.trim();
@@ -144,6 +191,11 @@ function esc(s) {
           histItems.map(it => `<p style="white-space:pre-wrap;margin:0 0 4px"><strong>${esc(fmtFecha(it.fecha))}</strong> — ${esc(it.texto)}</p>`).join('')
         : '<h4 style="margin:12px 0 4px">Historial de consultas y observaciones</h4><p style="margin:0">—</p>';
 
+      const adjItems = getAdjuntos(p);
+      const adjHTML = adjItems.length
+        ? '<h4 style="margin:12px 0 4px">Adjuntos</h4>' + adjItems.map(it => `<p style="margin:0 0 4px"><a href="${it.datos}" download="${esc(it.nombre)}">${esc(it.nombre)}</a></p>`).join('')
+        : '<h4 style="margin:12px 0 4px">Adjuntos</h4><p style="margin:0">—</p>';
+
       const html = `
         <div id="${p}_doc" style="background:#fff;color:#0f172a;padding:16px;border:1px solid #e2e8f0;border-radius:8px">
           <h3 style="margin:0 0 8px">Historia Clínica Electrónica</h3>
@@ -155,8 +207,13 @@ function esc(s) {
             <tr><td style="padding:4px;font-weight:600">Sexo</td><td style="padding:4px">${esc(sexo || '—')}</td></tr>
             <tr><td style="padding:4px;font-weight:600">Fecha de atención</td><td style="padding:4px">${esc(fmtFecha(fecha))}</td></tr>
             <tr><td style="padding:4px;font-weight:600">Profesional</td><td style="padding:4px">${esc(profesional || '—')}</td></tr>
+            <tr><td style="padding:4px;font-weight:600">Teléfono</td><td style="padding:4px">${esc(root.querySelector(`#${p}_telefono`).value || '—')}</td></tr>
+            <tr><td style="padding:4px;font-weight:600">Email</td><td style="padding:4px">${esc(root.querySelector(`#${p}_email`).value || '—')}</td></tr>
+            <tr><td style="padding:4px;font-weight:600">Próxima consulta</td><td style="padding:4px">${esc(fmtFecha(root.querySelector(`#${p}_proximaConsulta`).value) || '—')}</td></tr>
+            <tr><td style="padding:4px;font-weight:600">Turno</td><td style="padding:4px">${esc(root.querySelector(`#${p}_turno`).value || '—')}</td></tr>
           </table>
           ${histHTML}
+          ${adjHTML}
           ${secc}
         </div>`;
       root.querySelector(`#${p}_salida`).innerHTML = html;
@@ -232,6 +289,58 @@ function esc(s) {
     }));
   }
 
+  // ------------------------- Adjuntos (estudios, imágenes, PDF) -------------------------
+
+  const adjuntos = {};
+  function getAdjuntos(p) { if (!adjuntos[p]) adjuntos[p] = []; return adjuntos[p]; }
+  function setAdjuntos(p, arr) { adjuntos[p] = arr || []; }
+  function renderAdjuntos(root, p) {
+    const lista = root.querySelector(`#${p}_adjuntosLista`);
+    if (!lista) return;
+    const items = getAdjuntos(p);
+    if (items.length === 0) {
+      lista.innerHTML = '<p style="color:#64748b;font-size:0.9rem;margin:0">Todavía no hay adjuntos.</p>';
+      return;
+    }
+    lista.innerHTML = '<ul style="padding-left:18px;margin:0">' +
+      items.map((it, i) => `<li style="margin-bottom:6px;word-break:break-all"><a href="${it.datos}" download="${esc(it.nombre)}" style="color:#40e0d0">${esc(it.nombre)}</a> <span style="color:#94a3b8;font-size:0.8rem">(${Math.round((it.tamaño || 0) / 1024)} KB)</span> <button type="button" class="adjDel" data-idx="${i}" style="margin-left:6px;font-size:0.8rem;color:#b91c1c;background:none;border:none;cursor:pointer">Eliminar</button></li>`).join('') +
+      '</ul>';
+    lista.querySelectorAll('.adjDel').forEach(btn => btn.addEventListener('click', () => {
+      const idx = Number(btn.dataset.idx);
+      getAdjuntos(p).splice(idx, 1);
+      renderAdjuntos(root, p);
+      guardarBorrador(root, p);
+    }));
+  }
+  async function leerArchivoComoDataURL(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = () => reject(reader.error);
+      reader.readAsDataURL(file);
+    });
+  }
+
+  // ------------------------- Recordatorio por email -------------------------
+
+  function enviarRecordatorio(root, p) {
+    const email = root.querySelector(`#${p}_email`).value.trim();
+    const paciente = root.querySelector(`#${p}_paciente`).value.trim();
+    const proxima = root.querySelector(`#${p}_proximaConsulta`).value.trim();
+    const turno = root.querySelector(`#${p}_turno`).value.trim();
+    const profesional = root.querySelector(`#${p}_profesional`).value.trim();
+    if (!email) { alert('Ingresá el email del paciente.'); return; }
+    const fechaFmt = proxima ? fmtFecha(proxima) : 'fecha a confirmar';
+    const subject = encodeURIComponent('Recordatorio de tu próxima consulta');
+    const body = encodeURIComponent(
+      `Hola ${paciente || 'paciente'},\n\n` +
+      `Te recordamos tu próxima consulta con ${profesional || 'el profesional'} el ${fechaFmt}${turno ? ' a las ' + turno : ''}.\n\n` +
+      `Si no podés asistir, por favor avisanos para reprogramar.\n\n` +
+      `Saludos.`
+    );
+    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+  }
+
   function recogerValores(root, p) {
     const v = {};
     v.paciente = root.querySelector(`#${p}_paciente`).value;
@@ -243,6 +352,11 @@ function esc(s) {
     v.secciones = {};
     secciones.forEach(s => { v.secciones[s.id] = root.querySelector(`#${p}_${s.id}`).value; });
     v.historial = getHistorial(p);
+    v.telefono = root.querySelector(`#${p}_telefono`).value;
+    v.email = root.querySelector(`#${p}_email`).value;
+    v.proximaConsulta = root.querySelector(`#${p}_proximaConsulta`).value;
+    v.turno = root.querySelector(`#${p}_turno`).value;
+    v.adjuntos = getAdjuntos(p);
     return v;
   }
   function cargarValores(root, p, v) {
@@ -256,6 +370,12 @@ function esc(s) {
     secciones.forEach(s => { root.querySelector(`#${p}_${s.id}`).value = (v.secciones && v.secciones[s.id]) || ''; });
     setHistorial(p, v.historial || []);
     renderHistorial(root, p);
+    root.querySelector(`#${p}_telefono`).value = v.telefono || '';
+    root.querySelector(`#${p}_email`).value = v.email || '';
+    root.querySelector(`#${p}_proximaConsulta`).value = v.proximaConsulta || '';
+    root.querySelector(`#${p}_turno`).value = v.turno || '';
+    setAdjuntos(p, v.adjuntos || []);
+    renderAdjuntos(root, p);
   }
 
   // ------------------------- Guardado local -------------------------

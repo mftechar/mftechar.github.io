@@ -49,6 +49,14 @@
     return `${y}-${m}-${day}`;
   }
 
+  function formatoFecha(date) {
+    const d = parseFecha(date);
+    const day = String(d.getDate()).padStart(2, '0');
+    const m = String(d.getMonth() + 1).padStart(2, '0');
+    const y = d.getFullYear();
+    return `${day}/${m}/${y}`;
+  }
+
   function sumarDias(fecha, dias) {
     const d = parseFecha(fecha);
     d.setDate(d.getDate() + dias);
@@ -247,7 +255,7 @@
   function renderResultado(r) {
     const rows = r.vacunas.map(v => `
       <tr>
-        <td>${esc(v.fechaISO)}${v.fechaFinISO ? ' a ' + esc(v.fechaFinISO) : ''}</td>
+        <td>${esc(formatoFecha(v.fecha))}${v.fechaFin ? ' a ' + esc(formatoFecha(v.fechaFin)) : ''}</td>
         <td>${esc(v.vacuna)}</td>
         <td>${esc(v.dosis)}</td>
         <td>${esc(v.estado)}</td>
@@ -261,8 +269,8 @@
       </div>
       <div class="tw-verdict ok">
         <b>Etapa: ${esc(r.etapa)}</b>
-        ${r.fechaProbableParto ? `<p>Fecha probable de parto: ${esc(r.fechaProbableParto)}</p>` : ''}
-        ${r.nacimiento ? `<p>Fecha de nacimiento: ${esc(r.nacimiento)}</p>` : ''}
+        ${r.fechaProbableParto ? `<p>Fecha probable de parto: ${esc(formatoFecha(r.fechaProbableParto))}</p>` : ''}
+        ${r.nacimiento ? `<p>Fecha de nacimiento: ${esc(formatoFecha(r.nacimiento))}</p>` : ''}
         <p>Las fechas son orientativas según el Calendario Nacional de Vacunación de Argentina. Consultar siempre con un vacunatorio o profesional de salud.</p>
       </div>
       <div class="tw-table-wrap" style="margin-top:12px;max-height:420px;overflow:auto">

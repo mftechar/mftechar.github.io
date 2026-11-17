@@ -9,6 +9,50 @@
   <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="assets/style.css" />
   <link rel="stylesheet" href="assets/tools.css" />
+  <style>
+    .modal-correccion {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 12, 20, 0.75);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 20px;
+    }
+    .modal-correccion[hidden] { display: none; }
+    .modal-correccion-box {
+      background: #0f2233;
+      border: 1px solid rgba(64, 224, 208, 0.35);
+      border-radius: 14px;
+      max-width: 720px;
+      width: 100%;
+      max-height: 85vh;
+      overflow: auto;
+      padding: 22px 24px;
+      color: #e2e8f0;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      position: relative;
+    }
+    .modal-correccion-box h3 { margin: 0 0 12px; color: #40e0d0; }
+    .modal-correccion-box p { line-height: 1.6; margin: 0 0 12px; }
+    .modal-correccion-box ul { line-height: 1.6; }
+    .modal-correccion-x {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #e2e8f0;
+      font-size: 20px;
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .modal-correccion-x:hover { border-color: #40e0d0; color: #40e0d0; }
+  </style>
 </head>
 <body>
   <header class="site-header" id="top">
@@ -40,10 +84,26 @@
         </p>
 
         <article style="margin-top:32px">
-          <h3 style="margin:0 0 8px">Calculadora de corrimiento de vacunas</h3>
+          <h3 style="margin:0 0 8px">Corrección de fechas vacunatorias</h3>
           <p class="section-sub" style="margin:0 0 12px">Si una vacuna no se aplicó en la fecha programada, calculá los días de atraso y la fecha en que se corre la próxima dosis.</p>
+          <button type="button" class="btn btn-ghost" id="btnCorreccion" style="margin-bottom:12px">⚠️ Tener en cuenta al calcular nuevas fechas de vacunación</button>
           <div id="corrimientoApp"></div>
         </article>
+
+        <div class="modal-correccion" id="modalCorreccion" hidden role="dialog" aria-modal="true" aria-labelledby="tituloCorreccion">
+          <div class="modal-correccion-box">
+            <button type="button" class="modal-correccion-x" id="cerrarCorreccion" aria-label="Cerrar">×</button>
+            <h3 id="tituloCorreccion">Corrección de fechas vacunatorias</h3>
+            <p>La corrección de fechas o calendarios acelerados busca adaptar la vacunación vigente a la edad del paciente y sus dosis previas, administrando las vacunas faltantes de forma individualizada y segura.</p>
+            <ul style="margin:12px 0 0 18px;padding:0">
+              <li style="margin-bottom:10px"><strong>Cálculo de dosis faltantes:</strong> Se resta el número de dosis válidas recibidas del total necesario para la edad; el resultado indica cuántas dosis se deben aplicar.</li>
+              <li style="margin-bottom:10px"><strong>Intervalos mínimos:</strong> Es crucial respetar los tiempos entre dosis. Si una vacuna inactiva se aplica con menos de 4 días de retraso respecto al intervalo mínimo, se considera válida; si el retraso es de 5 días o más, debe repetirse.</li>
+              <li style="margin-bottom:10px"><strong>Vacunas vivas:</strong> Si no se aplican el mismo día, las vacunas vivas (como triple vírica o varicela) deben separarse por al menos 28 días.</li>
+              <li style="margin-bottom:10px"><strong>Administración combinada:</strong> Se recomienda aprovechar cada visita para administrar el mayor número de vacunas posibles en lugares anatómicos distintos, utilizando vacunas combinadas (como hexavalentes) cuando sea viable.</li>
+              <li><strong>Continuidad:</strong> Una vez corregido el esquema, se continúa con la pauta recomendada por el calendario vacunal vigente para la edad actual.</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -57,6 +117,17 @@
   <script src="assets/fecha.js" defer></script>
   <script src="assets/salud.js" defer></script>
   <script src="assets/corrimiento.js" defer></script>
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const btn = document.getElementById('btnCorreccion');
+    const modal = document.getElementById('modalCorreccion');
+    const cerrar = document.getElementById('cerrarCorreccion');
+    if (btn && modal && cerrar) {
+      btn.addEventListener('click', () => { modal.hidden = false; document.body.style.overflow = 'hidden'; });
+      cerrar.addEventListener('click', () => { modal.hidden = true; document.body.style.overflow = ''; });
+      modal.addEventListener('click', (e) => { if (e.target === modal) { modal.hidden = true; document.body.style.overflow = ''; } });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !modal.hidden) { modal.hidden = true; document.body.style.overflow = ''; } });
+    }
+  </script>
 </body>
 </html>

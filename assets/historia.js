@@ -49,7 +49,7 @@ function esc(s) {
           <input type="text" id="${p}_dni" placeholder="DNI" />
         </label>
         <label>Fecha de nacimiento
-          <input type="date" id="${p}_nacimiento" />
+          <input type="text" id="${p}_nacimiento" placeholder="DD/MM/AAAA" inputmode="numeric" autocomplete="off" />
         </label>
         <label>Sexo
           <select id="${p}_sexo">
@@ -60,7 +60,7 @@ function esc(s) {
           </select>
         </label>
         <label>Fecha de atención
-          <input type="date" id="${p}_fecha" />
+          <input type="text" id="${p}_fecha" placeholder="DD/MM/AAAA" inputmode="numeric" autocomplete="off" />
         </label>
         <label>Profesional responsable
           <input type="text" id="${p}_profesional" placeholder="Nombre del profesional" />
@@ -124,7 +124,7 @@ function esc(s) {
       btnLocal.style.display = 'inline-block';
       btnDrive.style.display = 'inline-block';
       const docHTML = root.querySelector(`#${p}_doc`).outerHTML;
-      const fechaDoc = fecha || new Date().toISOString().slice(0, 10);
+      const fechaDoc = fecha || (window.mfFecha ? window.mfFecha.formatoFecha(new Date()) : new Date().toLocaleDateString('es-AR'));
       btnLocal.onclick = () => guardarLocal(root, p, paciente || 'paciente', fechaDoc, docHTML);
       btnDrive.onclick = () => guardarDrive(root, p, paciente || 'paciente', fechaDoc, docHTML);
       iniciarAutoSave(root, p);

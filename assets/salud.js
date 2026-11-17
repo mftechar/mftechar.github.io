@@ -299,7 +299,7 @@
           </select>
         </label>
         <label id="${p}LblFecha">Fecha de nacimiento
-          <input type="date" id="${p}Fecha" />
+          <input type="text" id="${p}Fecha" placeholder="DD/MM/AAAA" inputmode="numeric" autocomplete="off" />
         </label>
         <label>Zonas de riesgo
           <select id="${p}FiebreAmarilla"><option value="0">Fiebre amarilla: no aplica</option><option value="1">Fiebre amarilla: sí (zona de riesgo)</option></select>

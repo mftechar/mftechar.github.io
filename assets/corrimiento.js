@@ -1,5 +1,5 @@
 /* ============================================================================
-   Calculadora de corrimiento de vacunas — MF Tech AR
+   Corrección de fechas vacunatorias — MF Tech AR
    ----------------------------------------------------------------------------
    Si una vacuna no se aplicó en la fecha programada, calcula los días de
    atraso y la fecha en que se corre la próxima dosis.
@@ -63,10 +63,10 @@
           <input type="number" id="${p}_intervalo" min="0" value="1" />
         </label>
         <label>Fecha programada (cuándo debía aplicarse)
-          <input type="date" id="${p}_programada" />
+          <input type="text" id="${p}_programada" placeholder="DD/MM/AAAA" inputmode="numeric" autocomplete="off" />
         </label>
         <label>Fecha de aplicación real (o prevista)
-          <input type="date" id="${p}_real" />
+          <input type="text" id="${p}_real" placeholder="DD/MM/AAAA" inputmode="numeric" autocomplete="off" />
         </label>
       </div>
       <button class="btn btn-primary" id="${p}_ir">Calcular corrimiento</button>
@@ -80,8 +80,8 @@
       const v = intervalos[Number(sel.value)];
       lblInt.style.display = (v.meses === null) ? 'block' : 'none';
     });
-    // default fecha real = hoy
-    const hoy = new Date().toISOString().slice(0, 10);
+    // default fecha real = hoy (DD/MM/AAAA)
+    const hoy = formatoFecha(new Date());
     root.querySelector(`#${p}_real`).value = hoy;
     root.querySelector(`#${p}_ir`).addEventListener('click', () => {
       const idx = Number(sel.value);

@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8" />
+  <title>Bloque GEO/SEO listo para copiar y pegar — MF Tech AR</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background:#0b1120; color:#e8ebf2; padding:24px; line-height:1.6; }
+    h1 { font-size:1.5rem; margin-bottom:8px; color:#4ade80; }
+    h2 { font-size:1.1rem; margin-top:24px; margin-bottom:8px; color:#93c5fd; border-bottom:1px solid #1e293b; padding-bottom:4px; }
+    pre { background:#0f172a; border:1px solid #1e293b; border-radius:10px; padding:16px; overflow:auto; font-size:0.9rem; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .tag { display:inline-block; background:#1e293b; color:#94a3b8; border:1px solid #334155; border-radius:6px; padding:2px 8px; font-size:0.75rem; margin-right:6px; margin-bottom:6px; }
+    .note { background:#1e1b4b; border:1px solid #4f46e5; border-radius:8px; padding:12px; margin-top:12px; color:#c7d2fe; font-size:0.88rem; }
+    .warn { background:#451a03; border:1px solid #b45309; border-radius:8px; padding:12px; margin-top:12px; color:#fdba74; font-size:0.88rem; }
+  </style>
+</head>
+<body>
+
+<h1>Bloque GEO/SEO — Copiar y pegar en <code>mftech-web/index.html</code></h1>
+
+<p>Este bloque cubre las dos recomendaciones prioritarias:</p>
+<div>
+  <span class="tag">#1 potentialAction</span>
+  <span class="tag">#2 G-DATES</span>
+</p>
+
+<h2>1) En el &lt;head&gt; (meta de fecha + JSON-LD WebSite con SearchAction)</h2>
+<p>Pegá este bloque dentro de tu &lt;head&gt;, junto a los otros <code>&lt;script type="application/ld+json"&gt;</code> que ya tengas.</p>
+<pre><code>&lt;!-- G-DATES: fecha de publicación y última actualización (formato ISO 8601) --&gt;
+&lt;meta property="article:published_time" content="2026-11-07" /&gt;
+&lt;meta property="article:modified_time" content="2026-11-07" /&gt;
+&lt;meta property="og:updated_time" content="2026-11-07" /&gt;
+
+&lt;!-- WebSite con potentialAction para agentes de IA (SearchAction) --&gt;
+&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "MF Tech AR",
+  "url": "https://www.mftechar.com/",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://www.mftechar.com/?search={search_term_string}",
+    "query-input": "required name=search_term_string"
+  },
+  "inLanguage": "es-AR"
+}
+&lt;/script&gt;
+</code></pre>
+
+<h2>2) En el cuerpo visible (&lt;body&gt;) — fecha legible para humanos y bots</h2>
+<p>Pegá esto donde corresponda en el contenido visible (por ejemplo, cerca del título del artículo o en el pie del artículo principal).</p>
+<pre><code>&lt;time datetime="2026-11-07"&gt;7 de noviembre de 2026&lt;/time&gt;
+</code></pre>
+
+<h2>3) Opcional pero recomendado: Organization con sameAs (Knowledge Graph)</h2>
+<p>Cuando tengas los perfiles de Wikipedia, Wikidata, LinkedIn empresa y Crunchbase, agregá este bloque también en el &lt;head&gt;:</p>
+<pre><code>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "MF Tech AR",
+  "url": "https://www.mftechar.com/",
+  "logo": "https://www.mftechar.com/assets/logo.svg",
+  "sameAs": [
+    "https://www.linkedin.com/company/mftechar",
+    "https://www.crunchbase.com/organization/mf-tech-ar",
+    "https://www.wikidata.org/wiki/Q99999999",
+    "https://es.wikipedia.org/wiki/MF_Tech"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+54-9-2325-406322",
+    "contactType": "customer service",
+    "availableLanguage": "es"
+  }
+}
+&lt;/script&gt;
+</code></pre>
+
+<div class="note">
+  <strong>¿Qué cambiar?</strong><br>
+  Reemplazá <code>2026-11-07</code> por la fecha real de publicación o última modificación de la página. Usá siempre formato <code>AAAA-MM-DD</code> (ISO 8601).
+</div>
+
+<div class="warn">
+  <strong>Importante:</strong> El bloque de <code>sameAs</code> solo funciona si esos perfiles existen de verdad. Si aún no tenés Wikipedia/Wikidata/Crunchbase, dejá ese bloque comentado o usá solo el de LinkedIn empresa si lo tenés.
+</div>
+
+<h2>4) Dónde pegar todo junto (ejemplo de estructura del &lt;head&gt;)</h2>
+<pre><code>&lt;head&gt;
+  &lt;meta charset="utf-8" /&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1" /&gt;
+  &lt;title>MF Tech AR — Tecnología que protege y hace crecer tu negocio&lt;/title&gt;
+
+  &lt;!-- G-DATES (prioridad #2) --&gt;
+  &lt;meta property="article:published_time" content="2026-11-07" /&gt;
+  &lt;meta property="article:modified_time" content="2026-11-07" /&gt;
+  &lt;meta property="og:updated_time" content="2026-11-07" /&gt;
+
+  &lt;!-- JSON-LD WebSite + SearchAction (prioridad #1) --&gt;
+  &lt;script type="application/ld+json"&gt;
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "MF Tech AR",
+    "url": "https://www.mftechar.com/",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://www.mftechar.com/?search={search_term_string}",
+      "query-input": "required name=search_term_string"
+    },
+    "inLanguage": "es-AR"
+  }
+  &lt;/script&gt;
+
+  &lt;!-- tus otros meta y schemas existentes van acá --&gt;
+&lt;/head&gt;
+</code></pre>
+
+<p class="note">Después de subir los cambios a GitHub Pages, recordá hacer Ctrl+F5 en el sitio y verificar con el <a href="https://search.google.com/test/rich-results" target="_blank" rel="noopener">Rich Results Test</a> de Google que los schemas estén bien leídos.</p>
+
+</body>
+</html>

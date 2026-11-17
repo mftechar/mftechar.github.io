@@ -66,4 +66,5 @@ Toda Argentina. Servicios remotos para cualquier parte del país. Instalaciones 
 
 - Datos de servicio estructurados: https://www.mftechar.com/ai/service.json (JSON-LD / schema.org Service)
 - Wikidata: https://www.wikidata.org/wiki/Q142083454
+- Crunchbase: https://www.crunchbase.com/organization/mf-tech-ar
 - Página principal: https://www.mftechar.com/: Página principal con servicios y contacto

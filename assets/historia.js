@@ -38,7 +38,7 @@ function esc(s) {
       </label>`).join('');
     return `
       <div style="background:#fef3c7;border:1px solid #f59e0b;color:#92400e;padding:10px;border-radius:8px;margin-bottom:12px">
-        ⚠️ <strong>Aviso:</strong> los datos no guardados en tu PC o en la nube se borran al cerrar esta página. Guardá tu trabajo periódicamente. Se realiza un respaldo automático cada 30 segundos en este navegador.
+        ⚠️ <strong>Aviso:</strong> los datos no guardados en tu PC se borran al cerrar esta página. Guardá tu trabajo periódicamente. Se realiza un respaldo automático cada 30 segundos en este navegador.
       </div>
       <p class="tw-desc">Completá los datos del paciente y las secciones de la historia clínica electrónica. Al generar, se arma un documento imprimible.</p>
       <div class="tw-form">
@@ -49,7 +49,8 @@ function esc(s) {
           <input type="text" id="${p}_dni" placeholder="DNI" />
         </label>
         <label>Fecha de nacimiento
-          <input type="text" id="${p}_nacimiento" placeholder="DD/MM/AAAA" inputmode="numeric" autocomplete="off" />
+          <input type="text" id="${p}_nacimiento" placeholder="DDMMAAAA" inputmode="numeric" autocomplete="off" />
+          <span style="font-size:0.78rem;color:#94a3b8;display:block;margin-top:4px">Ejemplo: escribí 10111990 para ingresar 10/11/1990</span>
         </label>
         <label>Sexo
           <select id="${p}_sexo">
@@ -60,7 +61,8 @@ function esc(s) {
           </select>
         </label>
         <label>Fecha de atención
-          <input type="text" id="${p}_fecha" placeholder="DD/MM/AAAA" inputmode="numeric" autocomplete="off" />
+          <input type="text" id="${p}_fecha" placeholder="DDMMAAAA" inputmode="numeric" autocomplete="off" />
+          <span style="font-size:0.78rem;color:#94a3b8;display:block;margin-top:4px">Ejemplo: escribí 17112026 para ingresar 17/11/2026</span>
         </label>
         <label>Profesional responsable
           <input type="text" id="${p}_profesional" placeholder="Nombre del profesional" />
@@ -70,7 +72,6 @@ function esc(s) {
       <button class="btn btn-primary" id="${p}_ir">Generar historia clínica</button>
       <button class="btn btn-ghost" id="${p}_imprimir" style="margin-left:8px;display:none">Imprimir / Guardar PDF</button>
       <button class="btn btn-ghost" id="${p}_guardarLocal" style="margin-left:8px;display:none">Guardar en mi PC (cifrado)</button>
-      <button class="btn btn-ghost" id="${p}_guardarDrive" style="margin-left:8px;display:none">Guardar en Google Drive</button>
       <button class="btn btn-ghost" id="${p}_recuperarBorrador" style="margin-left:8px">Restaurar borrador automático</button>
       <button class="btn btn-ghost" id="${p}_recuperarHistoria" style="margin-left:8px">Recuperar historia guardada</button>
       <div id="${p}_guardado" class="tw-out" style="margin-top:8px"></div>
@@ -79,6 +80,10 @@ function esc(s) {
   }
 
   function wire(root, p) {
+    if (window.mfFecha && window.mfFecha.enmascararFecha) {
+      window.mfFecha.enmascararFecha(root.querySelector(`#${p}_nacimiento`));
+      window.mfFecha.enmascararFecha(root.querySelector(`#${p}_fecha`));
+    }
     root.querySelector(`#${p}_ir`).addEventListener('click', () => {
       const paciente = root.querySelector(`#${p}_paciente`).value.trim();
       const dni = root.querySelector(`#${p}_dni`).value.trim();
@@ -120,18 +125,19 @@ function esc(s) {
         w.print();
       };
       const btnLocal = root.querySelector(`#${p}_guardarLocal`);
-      const btnDrive = root.querySelector(`#${p}_guardarDrive`);
       btnLocal.style.display = 'inline-block';
-      btnDrive.style.display = 'inline-block';
       const docHTML = root.querySelector(`#${p}_doc`).outerHTML;
       const fechaDoc = fecha || (window.mfFecha ? window.mfFecha.formatoFecha(new Date()) : new Date().toLocaleDateString('es-AR'));
       btnLocal.onclick = () => guardarLocal(root, p, paciente || 'paciente', fechaDoc, docHTML);
-      btnDrive.onclick = () => guardarDrive(root, p, paciente || 'paciente', fechaDoc, docHTML);
       iniciarAutoSave(root, p);
       const btnRest = root.querySelector(`#${p}_recuperarBorrador`);
       const btnRec = root.querySelector(`#${p}_recuperarHistoria`);
       if (btnRest) btnRest.addEventListener('click', () => restaurarBorrador(root, p));
       if (btnRec) btnRec.addEventListener('click', () => mostrarRecuperar(root, p));
+      if (window.mfFecha && window.mfFecha.enmascararFecha) {
+        window.mfFecha.enmascararFecha(root.querySelector(`#${p}_nacimiento`));
+        window.mfFecha.enmascararFecha(root.querySelector(`#${p}_fecha`));
+      }
     });
   }
 
@@ -187,9 +193,7 @@ function esc(s) {
     secciones.forEach(s => { root.querySelector(`#${p}_${s.id}`).value = (v.secciones && v.secciones[s.id]) || ''; });
   }
 
-  // ------------------------- Guardado local y Google Drive -------------------------
-  const GOOGLE_CLIENT_ID = ''; // Configurar en Google Cloud Console si se desea guardar en Drive
-
+  // ------------------------- Guardado local -------------------------
   function sanitizar(s) { return String(s || 'paciente').replace(/[\\/:*?"<>|]/g, '_').trim() || 'paciente'; }
 
   function htmlCompleto(bodyHTML) {
@@ -271,95 +275,6 @@ function esc(s) {
     }
   }
 
-  function cargarScript(src) {
-    return new Promise((resolve, reject) => {
-      if (document.querySelector(`script[src="${src}"]`)) { resolve(); return; }
-      const s = document.createElement('script');
-      s.src = src; s.onload = resolve; s.onerror = reject;
-      document.head.appendChild(s);
-    });
-  }
-
-  async function guardarDrive(root, p, paciente, fecha, docHTML) {
-    const status = root.querySelector(`#${p}_guardado`);
-    if (!GOOGLE_CLIENT_ID) {
-      status.innerHTML = `<span style="color:#b45309">Para guardar en Google Drive, configurá un Client ID de Google Cloud en <code>assets/historia.js</code> (constante <code>GOOGLE_CLIENT_ID</code>). Pasos: console.cloud.google.com → APIs & Services → Credentials → Create OAuth 2.0 Client ID (tipo Web) → habilitá la Google Drive API → copiá el Client ID. Sin esto, usá "Guardar en mi PC".</span>`;
-      return;
-    }
-    status.innerHTML = 'Conectando con Google Drive...';
-    try {
-      if (!window.google || !window.google.accounts) {
-        await cargarScript('https://accounts.google.com/gsi/client');
-      }
-      const tokenClient = google.accounts.oauth2.initTokenClient({
-        client_id: GOOGLE_CLIENT_ID,
-        scope: 'https://www.googleapis.com/auth/drive.file',
-        callback: async (resp) => {
-          if (resp.error) { status.innerHTML = `<span style="color:#b91c1c">Error OAuth: ${esc(resp.error)}</span>`; return; }
-          try { await subirADrive(status, paciente, fecha, docHTML, resp.access_token); }
-          catch (e) { status.innerHTML = `<span style="color:#b91c1c">Error al subir: ${esc(e.message)}</span>`; }
-        }
-      });
-      tokenClient.requestAccessToken();
-    } catch (e) {
-      status.innerHTML = `<span style="color:#b91c1c">Error: ${esc(e.message)}</span>`;
-    }
-  }
-
-  async function subirADrive(status, paciente, fecha, docHTML, token) {
-    status.innerHTML = 'Buscando/creando carpeta en Drive...';
-    const q = encodeURIComponent("name='historias clinicas' and mimeType='application/vnd.google-apps.folder' and trashed=false");
-    let res = await fetch(`https://www.googleapis.com/drive/v3/files?q=${q}&fields=files(id,name)`, { headers: { Authorization: 'Bearer ' + token } });
-    let data = await res.json();
-    let carpetaId = (data.files && data.files[0]) ? data.files[0].id : null;
-    if (!carpetaId) {
-      const r = await fetch('https://www.googleapis.com/drive/v3/files', {
-        method: 'POST',
-        headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: 'historias clinicas', mimeType: 'application/vnd.google-apps.folder' })
-      });
-      carpetaId = (await r.json()).id;
-    }
-    const nombreCarpeta = sanitizar(paciente);
-    const q2 = encodeURIComponent(`name='${nombreCarpeta}' and mimeType='application/vnd.google-apps.folder' and '${carpetaId}' in parents and trashed=false`);
-    res = await fetch(`https://www.googleapis.com/drive/v3/files?q=${q2}&fields=files(id,name)`, { headers: { Authorization: 'Bearer ' + token } });
-    data = await res.json();
-    let subId = (data.files && data.files[0]) ? data.files[0].id : null;
-    if (!subId) {
-      const r = await fetch('https://www.googleapis.com/drive/v3/files', {
-        method: 'POST',
-        headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: nombreCarpeta, mimeType: 'application/vnd.google-apps.folder', parents: [carpetaId] })
-      });
-      subId = (await r.json()).id;
-    }
-    status.innerHTML = 'Subiendo archivo (cifrado)...';
-    const fechaArchivo = (window.mfFecha && window.mfFecha.formatoArchivo) ? window.mfFecha.formatoArchivo(fecha) : fecha;
-    const nombreArchivo = `historia_${sanitizar(paciente)}_${fechaArchivo}.enc`;
-    const valores = recogerValores(root, p);
-    const contenido = await cifrar(JSON.stringify(valores));
-    const metadata = { name: nombreArchivo, parents: [subId] };
-    const boundary = '-------314159265358979323846';
-    const delimiter = '\r\n--' + boundary + '\r\n';
-    const closeDelim = '\r\n--' + boundary + '--';
-    const body = delimiter +
-      'Content-Type: application/json; charset=UTF-8\r\n\r\n' +
-      JSON.stringify(metadata) + delimiter +
-      'Content-Type: text/plain; charset=UTF-8\r\n\r\n' +
-      contenido + closeDelim;
-    const up = await fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart', {
-      method: 'POST',
-      headers: { Authorization: 'Bearer ' + token, 'Content-Type': `multipart/related; boundary=${boundary}` },
-      body: body
-    });
-    const upj = await up.json();
-    if (upj.id) {
-      status.innerHTML = `<span style="color:#16a34a">Guardado en Google Drive: historias clinicas/${esc(nombreCarpeta)}/${esc(nombreArchivo)}</span>`;
-    } else {
-      status.innerHTML = `<span style="color:#b91c1c">Error al subir: ${esc(upj.error ? upj.error.message : 'desconocido')}</span>`;
-    }
-  }
-
   // ------------------------- Auto-save, restaurar y recuperar -------------------------
 
   function iniciarAutoSave(root, p) {
@@ -385,10 +300,8 @@ function esc(s) {
     lista.innerHTML = `
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin:8px 0">
         <button class="btn btn-ghost" id="${p}_recLocal">Recuperar desde mi PC</button>
-        <button class="btn btn-ghost" id="${p}_recDrive">Recuperar desde Google Drive</button>
       </div>`;
     lista.querySelector(`#${p}_recLocal`).addEventListener('click', () => recuperarLocal(root, p));
-    lista.querySelector(`#${p}_recDrive`).addEventListener('click', () => recuperarDrive(root, p));
   }
   async function recuperarLocal(root, p) {
     const status = root.querySelector(`#${p}_guardado`);
@@ -438,74 +351,6 @@ function esc(s) {
       status.innerHTML = `<span style="color:#b91c1c">Error: ${esc(e.message)}</span>`;
     }
   }
-  async function recuperarDrive(root, p) {
-    const status = root.querySelector(`#${p}_guardado`);
-    const lista = root.querySelector(`#${p}_recuperarLista`);
-    if (!GOOGLE_CLIENT_ID) { status.innerHTML = 'Configurá GOOGLE_CLIENT_ID para usar Drive.'; return; }
-    status.innerHTML = 'Conectando con Google Drive...';
-    try {
-      if (!window.google || !window.google.accounts) await cargarScript('https://accounts.google.com/gsi/client');
-      const tokenClient = google.accounts.oauth2.initTokenClient({
-        client_id: GOOGLE_CLIENT_ID,
-        scope: 'https://www.googleapis.com/auth/drive.readonly',
-        callback: async (resp) => {
-          if (resp.error) { status.innerHTML = `<span style="color:#b91c1c">Error OAuth: ${esc(resp.error)}</span>`; return; }
-          try { await listarDrive(root, p, resp.access_token); }
-          catch (e) { status.innerHTML = `<span style="color:#b91c1c">Error: ${esc(e.message)}</span>`; }
-        }
-      });
-      tokenClient.requestAccessToken();
-    } catch (e) { status.innerHTML = `<span style="color:#b91c1c">Error: ${esc(e.message)}</span>`; }
-  }
-  async function listarDrive(root, p, token) {
-    const status = root.querySelector(`#${p}_guardado`);
-    const lista = root.querySelector(`#${p}_recuperarLista`);
-    const q = encodeURIComponent("name='historias clinicas' and mimeType='application/vnd.google-apps.folder' and trashed=false");
-    const res = await fetch(`https://www.googleapis.com/drive/v3/files?q=${q}&fields=files(id,name)`, { headers: { Authorization: 'Bearer ' + token } });
-    const data = await res.json();
-    const carpetaId = (data.files && data.files[0]) ? data.files[0].id : null;
-    if (!carpetaId) { status.innerHTML = 'No se encontró la carpeta en Drive.'; return; }
-    const q2 = encodeURIComponent(`'${carpetaId}' in parents and trashed=false`);
-    const res2 = await fetch(`https://www.googleapis.com/drive/v3/files?q=${q2}&fields=files(id,name,mimeType)`, { headers: { Authorization: 'Bearer ' + token } });
-    const data2 = await res2.json();
-    const items = [];
-    for (const f of (data2.files || [])) {
-      if (f.mimeType === 'application/vnd.google-apps.folder') {
-        const q3 = encodeURIComponent(`'${f.id}' in parents and trashed=false`);
-        const r3 = await fetch(`https://www.googleapis.com/drive/v3/files?q=${q3}&fields=files(id,name)`, { headers: { Authorization: 'Bearer ' + token } });
-        const d3 = await r3.json();
-        for (const ff of (d3.files || [])) {
-          if (ff.name.endsWith('.enc')) items.push({ paciente: f.name, archivo: ff.name, id: ff.id });
-        }
-      } else if (f.name.endsWith('.enc')) {
-        items.push({ paciente: '', archivo: f.name, id: f.id });
-      }
-    }
-    if (items.length === 0) { status.innerHTML = 'No se encontraron historias en Drive.'; lista.innerHTML = ''; return; }
-    window._recDriveItems = { items, token };
-    lista.innerHTML = '<strong>Historias en Drive:</strong><ul style="margin:8px 0;padding-left:18px">' +
-      items.map((it, i) => `<li><a href="#" data-idx="${i}">${esc(it.paciente ? it.paciente + ' — ' : '')}${esc(it.archivo)}</a></li>`).join('') + '</ul>';
-    lista.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', async (e) => {
-        e.preventDefault();
-        const idx = Number(a.dataset.idx);
-        const it = window._recDriveItems.items[idx];
-        const tk = window._recDriveItems.token;
-        try {
-          const rr = await fetch(`https://www.googleapis.com/drive/v3/files/${it.id}?alt=media`, { headers: { Authorization: 'Bearer ' + tk } });
-          const texto = await rr.text();
-          const json = await descifrar(texto);
-          cargarValores(root, p, JSON.parse(json));
-          status.innerHTML = `<span style="color:#16a34a">Historia recuperada de Drive: ${esc(it.archivo)}</span>`;
-          lista.innerHTML = '';
-        } catch (err) {
-          status.innerHTML = `<span style="color:#b91c1c">Error al recuperar: ${esc(err.message)}</span>`;
-        }
-      });
-    });
-    status.innerHTML = '';
-  }
-
   // Registro como herramienta modal
   const T = window.MF_TOOLS;
   if (T) {

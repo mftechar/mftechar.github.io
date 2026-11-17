@@ -299,7 +299,8 @@
           </select>
         </label>
         <label id="${p}LblFecha">Fecha de nacimiento
-          <input type="text" id="${p}Fecha" placeholder="DD/MM/AAAA" inputmode="numeric" autocomplete="off" />
+          <input type="text" id="${p}Fecha" placeholder="DDMMAAAA" inputmode="numeric" autocomplete="off" />
+          <span style="font-size:0.78rem;color:#94a3b8;display:block;margin-top:4px">Ejemplo: escribí 17112026 para ingresar 17/11/2026</span>
         </label>
         <label>Zonas de riesgo
           <select id="${p}FiebreAmarilla"><option value="0">Fiebre amarilla: no aplica</option><option value="1">Fiebre amarilla: sí (zona de riesgo)</option></select>
@@ -317,6 +318,7 @@
     const modo = root.querySelector(`#${p}Modo`);
     const lbl = root.querySelector(`#${p}LblFecha`);
     const fecha = root.querySelector(`#${p}Fecha`);
+    if (window.mfFecha && window.mfFecha.enmascararFecha) window.mfFecha.enmascararFecha(fecha);
     modo.addEventListener('change', () => {
       lbl.firstChild.textContent = modo.value === 'emb' ? 'Fecha de última menstruación (FUM)' : 'Fecha de nacimiento';
     });

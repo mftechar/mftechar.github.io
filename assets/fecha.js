@@ -79,6 +79,18 @@
     return Math.round((db.getTime() - da.getTime()) / (1000 * 60 * 60 * 24));
   }
 
+  function enmascararFecha(input) {
+    if (!input) return;
+    input.addEventListener('input', () => {
+      const v = input.value.replace(/\D/g, '').slice(0, 8);
+      let out = '';
+      if (v.length <= 2) out = v;
+      else if (v.length <= 4) out = v.slice(0, 2) + '/' + v.slice(2);
+      else out = v.slice(0, 2) + '/' + v.slice(2, 4) + '/' + v.slice(4);
+      input.value = out;
+    });
+  }
+
   window.mfFecha = {
     parseFecha,
     formatoFecha,
@@ -86,6 +98,7 @@
     formatoArchivo,
     sumarDias,
     sumarMeses,
-    diasEntre
+    diasEntre,
+    enmascararFecha
   };
 })();

@@ -63,10 +63,12 @@
           <input type="number" id="${p}_intervalo" min="0" value="1" />
         </label>
         <label>Fecha programada (cuándo debía aplicarse)
-          <input type="text" id="${p}_programada" placeholder="DD/MM/AAAA" inputmode="numeric" autocomplete="off" />
+          <input type="text" id="${p}_programada" placeholder="DDMMAAAA" inputmode="numeric" autocomplete="off" />
+          <span style="font-size:0.78rem;color:#94a3b8;display:block;margin-top:4px">Ejemplo: escribí 15012026 para ingresar 15/01/2026</span>
         </label>
         <label>Fecha de aplicación real (o prevista)
-          <input type="text" id="${p}_real" placeholder="DD/MM/AAAA" inputmode="numeric" autocomplete="off" />
+          <input type="text" id="${p}_real" placeholder="DDMMAAAA" inputmode="numeric" autocomplete="off" />
+          <span style="font-size:0.78rem;color:#94a3b8;display:block;margin-top:4px">Ejemplo: escribí 17112026 para ingresar 17/11/2026</span>
         </label>
       </div>
       <button class="btn btn-primary" id="${p}_ir">Calcular corrimiento</button>
@@ -83,6 +85,10 @@
     // default fecha real = hoy (DD/MM/AAAA)
     const hoy = formatoFecha(new Date());
     root.querySelector(`#${p}_real`).value = hoy;
+    if (window.mfFecha && window.mfFecha.enmascararFecha) {
+      window.mfFecha.enmascararFecha(root.querySelector(`#${p}_programada`));
+      window.mfFecha.enmascararFecha(root.querySelector(`#${p}_real`));
+    }
     root.querySelector(`#${p}_ir`).addEventListener('click', () => {
       const idx = Number(sel.value);
       const v = intervalos[idx];

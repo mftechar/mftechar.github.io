@@ -40,6 +40,13 @@ function esc(s) {
       <div style="background:#fef3c7;border:1px solid #f59e0b;color:#92400e;padding:10px;border-radius:8px;margin-bottom:12px">
         ⚠️ <strong>Aviso:</strong> los datos no guardados en tu PC se borran al cerrar esta página. Guardá tu trabajo periódicamente. Se realiza un respaldo automático cada 30 segundos en este navegador.
       </div>
+      <small style="display:block;font-size:0.78rem;color:#94a3b8;line-height:1.5;margin-bottom:12px">
+        <strong>Cómo recuperar y modificar una historia clínica:</strong><br>
+        1) Hacé clic en <em>“Recuperar historia guardada”</em> → <em>“Recuperar desde mi PC”</em>.<br>
+        2) Seleccioná la carpeta <code>historias clinicas</code> (o la carpeta que la contiene).<br>
+        3) Elegí el archivo <code>.enc</code> del paciente; se carga en el formulario.<br>
+        4) Editá los datos, agregá nuevas consultas al <em>Historial</em> y guardá de nuevo con <em>“Guardar en mi PC (cifrado)”</em>. El archivo se actualiza con el historial completo.
+      </small>
       <p class="tw-desc">Completá los datos del paciente y las secciones de la historia clínica electrónica. Al generar, se arma un documento imprimible.</p>
       <div class="tw-form" id="${p}_historial" style="margin-top:12px;border-top:1px solid #cbd5e1;padding-top:12px">
         <h3 style="margin:0 0 8px;font-size:16px">Historial de consultas y observaciones</h3>
@@ -369,22 +376,19 @@ function esc(s) {
     const lista = root.querySelector(`#${p}_recuperarLista`);
     status.innerHTML = 'Buscando historias guardadas...';
     try {
-      let dirHandle = await getDirHandle();
-      if (!dirHandle) {
-        dirHandle = await window.showDirectoryPicker({ mode: 'read' });
-        await setDirHandle(dirHandle);
-      }
-      const carpeta = await dirHandle.getDirectoryHandle('historias clinicas');
+      status.innerHTML = 'Seleccioná la carpeta "historias clinicas" (o la carpeta que la contiene)...';
+      const dirHandle = await window.showDirectoryPicker({ mode: 'read' });
       const items = [];
-      for await (const [name, handle] of carpeta.entries()) {
-        if (handle.kind === 'directory') {
-          for await (const [fname, fhandle] of handle.entries()) {
-            if (fhandle.kind === 'file' && fname.endsWith('.enc')) items.push({ paciente: name, archivo: fname, handle: fhandle });
+      async function recorrer(handle, nombrePaciente) {
+        for await (const [name, h] of handle.entries()) {
+          if (h.kind === 'directory') {
+            await recorrer(h, name);
+          } else if (h.kind === 'file' && name.endsWith('.enc')) {
+            items.push({ paciente: nombrePaciente || '', archivo: name, handle: h });
           }
-        } else if (handle.kind === 'file' && name.endsWith('.enc')) {
-          items.push({ paciente: '', archivo: name, handle });
         }
       }
+      await recorrer(dirHandle, '');
       if (items.length === 0) { status.innerHTML = 'No se encontraron historias guardadas.'; lista.innerHTML = ''; return; }
       window._recItems = items;
       lista.innerHTML = '<strong>Historias encontradas:</strong><ul style="margin:8px 0;padding-left:18px">' +

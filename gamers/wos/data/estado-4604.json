@@ -2,7 +2,7 @@
  "source": "WoS Atlas",
  "sourceUrl": "https://wosatlas.com",
  "serverId": "4604",
- "fetchedAt": "2026-11-18T20:58:09.834Z",
+ "fetchedAt": "2026-11-19T08:08:26.697Z",
  "boards": {
   "alliance.rank": {
    "board": "alliance.rank",
@@ -710,7 +710,7 @@
   ],
   "server_count": 4084,
   "surveyed_server_count": 4027,
-  "last_census_at": "2026-11-18T11:32:43.006+00:00"
+  "last_census_at": "2026-11-19T07:57:38.605+00:00"
  },
  "server": {
   "kind": "normal",
@@ -785,7 +785,7 @@
    "players": 2650,
    "alliances": 500,
    "player_power": 43726964342,
-   "refreshed_at": "2026-11-18T16:18:32.859786+00:00"
+   "refreshed_at": "2026-11-19T08:01:41.623794+00:00"
   },
   "season": null,
   "opened_at": "2026-08-04T05:57:31.797+00:00",
@@ -803,7 +803,7 @@
   "opened_at_precision": "month"
  },
  "summary": {
-  "as_of": "2026-11-18T16:18:32.859786+00:00",
+  "as_of": "2026-11-19T08:01:41.623794+00:00",
   "since": "2026-10-17",
   "series": [
    {
@@ -1001,18 +1001,18 @@
   ],
   "windows": {
    "7d": {
-    "from": "2026-11-11",
+    "from": "2026-11-12",
     "cities": {
      "now": 1690,
-     "pct": -4.84,
-     "then": 1776,
-     "delta": -86
+     "pct": -3.98,
+     "then": 1760,
+     "delta": -70
     },
     "players": {
      "now": 2650,
-     "pct": 0.76,
-     "then": 2630,
-     "delta": 20
+     "pct": 0.72,
+     "then": 2631,
+     "delta": 19
     },
     "alliances": {
      "now": 500,
@@ -1022,24 +1022,24 @@
     },
     "player_power": {
      "now": 43726964342,
-     "pct": 5.57,
-     "then": 41420135025,
-     "delta": 2306829317
+     "pct": 4.64,
+     "then": 41788528240,
+     "delta": 1938436102
     }
    },
    "30d": {
-    "from": "2026-10-19",
+    "from": "2026-10-20",
     "cities": {
      "now": 1690,
-     "pct": -24.32,
-     "then": 2233,
-     "delta": -543
+     "pct": -23.25,
+     "then": 2202,
+     "delta": -512
     },
     "players": {
      "now": 2650,
-     "pct": 9.1,
-     "then": 2429,
-     "delta": 221
+     "pct": 8.7,
+     "then": 2438,
+     "delta": 212
     },
     "alliances": {
      "now": 500,
@@ -1049,9 +1049,9 @@
     },
     "player_power": {
      "now": 43726964342,
-     "pct": 35.82,
-     "then": 32194745977,
-     "delta": 11532218365
+     "pct": 33.79,
+     "then": 32683416367,
+     "delta": 11043547975
     }
    }
   },

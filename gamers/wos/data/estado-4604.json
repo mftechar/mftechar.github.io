@@ -2,7 +2,7 @@
  "source": "WoS Atlas",
  "sourceUrl": "https://wosatlas.com",
  "serverId": "4604",
- "fetchedAt": "2026-11-20T07:52:37.185Z",
+ "fetchedAt": "2026-11-20T20:50:35.624Z",
  "boards": {
   "alliance.rank": {
    "board": "alliance.rank",
@@ -710,7 +710,7 @@
   ],
   "server_count": 4086,
   "surveyed_server_count": 4029,
-  "last_census_at": "2026-11-20T07:14:32.672+00:00"
+  "last_census_at": "2026-11-20T20:48:06.735+00:00"
  },
  "server": {
   "kind": "normal",
@@ -776,7 +776,7 @@
    "players": 2655,
    "alliances": 500,
    "player_power": 43827771559,
-   "refreshed_at": "2026-11-20T07:17:28.550577+00:00"
+   "refreshed_at": "2026-11-20T20:48:54.498337+00:00"
   },
   "season": null,
   "opened_at": "2026-08-04T05:57:31.797+00:00",
@@ -794,7 +794,7 @@
   "opened_at_precision": "month"
  },
  "summary": {
-  "as_of": "2026-11-20T07:17:28.550577+00:00",
+  "as_of": "2026-11-20T20:48:54.498337+00:00",
   "since": "2026-10-17",
   "series": [
    {
@@ -1061,7 +1061,7 @@
     "power": 5808689981,
     "rank_7d": 1,
     "alliance_id": "4604000012",
-    "power_delta_7d": 365212211
+    "power_delta_7d": 241771768
    },
    {
     "tag": "PHX",
@@ -1124,7 +1124,7 @@
     "power": 1595400620,
     "rank_7d": 8,
     "alliance_id": "4604000035",
-    "power_delta_7d": 102456086
+    "power_delta_7d": 70918344
    },
    {
     "tag": "LOL",
@@ -1160,7 +1160,7 @@
     "power": 1003110496,
     "rank_7d": 12,
     "alliance_id": "4604000299",
-    "power_delta_7d": 144202409
+    "power_delta_7d": 119043612
    },
    {
     "tag": "EWE",
@@ -1169,7 +1169,7 @@
     "power": 735075976,
     "rank_7d": 13,
     "alliance_id": "4604000108",
-    "power_delta_7d": 32333453
+    "power_delta_7d": 16924200
    },
    {
     "tag": "RFX",
@@ -1187,7 +1187,7 @@
     "power": 481141392,
     "rank_7d": 16,
     "alliance_id": "4604000434",
-    "power_delta_7d": 118380968
+    "power_delta_7d": 77107710
    },
    {
     "tag": "FzF",
@@ -1196,7 +1196,7 @@
     "power": 358972041,
     "rank_7d": 18,
     "alliance_id": "4604000562",
-    "power_delta_7d": 31445528
+    "power_delta_7d": 7319686
    },
    {
     "tag": "W1N",
@@ -1223,7 +1223,7 @@
     "power": 227685146,
     "rank_7d": 17,
     "alliance_id": "4604000254",
-    "power_delta_7d": -98428042
+    "power_delta_7d": -84141961
    },
    {
     "tag": "SYY",

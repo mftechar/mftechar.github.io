@@ -28,6 +28,23 @@
   <link rel="service" href="/ai/service.json" title="MF Tech AR — Servicios IT para IA" />
   <link rel="about" href="/about.html" />
 
+  <style>
+    /* Submenús del nav principal */
+    .nav-dropdown { position: relative; display: inline-block; }
+    .nav-drop-btn { background: none; border: none; cursor: pointer; padding: 8px 12px; font: inherit; color: inherit; display: inline-flex; align-items: center; gap: 4px; }
+    .nav-drop-btn::after { content: "▾"; font-size: 10px; opacity: .7; }
+    .nav-drop-menu { position: absolute; top: calc(100% + 4px); left: 0; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 6px; list-style: none; margin: 0; min-width: 200px; box-shadow: 0 8px 24px rgba(0,0,0,.12); z-index: 100; display: none; }
+    .nav-dropdown[open] .nav-drop-menu { display: block; }
+    .nav-drop-menu li { margin: 0; }
+    .nav-drop-menu li a { display: block; padding: 8px 14px; text-decoration: none; color: #1e293b; border-radius: 6px; font-size: 14px; white-space: nowrap; }
+    .nav-drop-menu li a:hover { background: #f1f5f9; color: #0b2437; }
+    .nav-dropdown summary { list-style: none; }
+    .nav-dropdown summary::-webkit-details-marker { display: none; }
+    @media (max-width: 860px) {
+      .nav-drop-menu { position: static; box-shadow: none; border: 1px solid #e2e8f0; margin-top: 4px; }
+    }
+  </style>
+
   <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="assets/style.css" />
   <link rel="stylesheet" href="assets/tools.css" />
@@ -201,18 +218,34 @@
       </button>
 
       <nav class="nav" id="mainNav" aria-label="Navegación principal">
-        <a href="#servicios">Servicios</a>
+        <details class="nav-dropdown">
+          <summary class="nav-drop-btn" aria-haspopup="true">Servicios ▾</summary>
+          <ul class="nav-drop-menu">
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="salud.html">Salud</a></li>
+            <li><a href="gamers/index.html">Gamers</a></li>
+          </ul>
+        </details>
         <a href="store/index.html">Tienda</a>
         <a href="#herramientas">Herramientas</a>
-        <a href="salud.html">Salud</a>
-        <a href="gamers/index.html">Gamers</a>
-        <a href="#como-trabajamos">Cómo trabajamos</a>
         <a href="blog/index.html">Guías</a>
-        <a href="#resenas">Reseñas</a>
-        <a href="#nosotros">Nosotros</a>
-        <a href="#redes">Redes</a>
-        <a href="/about.html">Acerca de</a>
-        <a href="#contacto">Contacto</a>
+        <details class="nav-dropdown">
+          <summary class="nav-drop-btn" aria-haspopup="true">Nosotros ▾</summary>
+          <ul class="nav-drop-menu">
+            <li><a href="#como-trabajamos">Cómo trabajamos</a></li>
+            <li><a href="#resenas">Reseñas</a></li>
+            <li><a href="/about.html">Acerca de</a></li>
+            <li><a href="#redes">Redes</a></li>
+          </ul>
+        </details>
+        <details class="nav-dropdown">
+          <summary class="nav-drop-btn" aria-haspopup="true">Contacto ▾</summary>
+          <ul class="nav-drop-menu">
+            <li><a href="#contacto">Contacto</a></li>
+            <li><a href="#redes">Redes</a></li>
+            <li><a href="https://wa.me/5492325406322?text=Hola%20Mart%C3%ADn!%20Quiero%20un%20presupuesto%20de%20MF%20Tech%20AR." target="_blank" rel="noopener">WhatsApp</a></li>
+          </ul>
+        </details>
         <a class="btn btn-small" href="https://wa.me/5492325406322?text=Hola%20Mart%C3%ADn!%20Quiero%20un%20presupuesto%20de%20MF%20Tech%20AR." target="_blank" rel="noopener" toolname="solicitarPresupuestoWhatsApp" tooldescription="Abre WhatsApp con un mensaje prellenado para solicitar un presupuesto o asesoría IT a MF Tech AR">
           <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.6-1.2A9 9 0 1 0 12 3Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M8.8 8.6c.3-.7.6-.7 1-.7h.5c.2 0 .4.1.5.5l.6 1.4c.1.3 0 .5-.2.7l-.5.6c-.1.2-.2.4 0 .7.4.7 1.1 1.5 2.1 2 .3.2.5.1.7 0l.6-.6c.2-.3.4-.3.7-.2l1.4.6c.4.2.5.3.5.5 0 .9-.5 2-1.6 2.3-.7.2-1.6.2-2.9-.4a9 9 0 0 1-3.8-3.6c-.6-1.1-.7-2-.5-2.7Z" fill="currentColor"/></svg>
           WhatsApp

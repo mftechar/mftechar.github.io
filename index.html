@@ -224,18 +224,17 @@
             <li><a href="#servicios">Servicios</a></li>
             <li><a href="salud.html">Salud</a></li>
             <li><a href="gamers/index.html">Gamers</a></li>
+            <li><a href="#herramientas">Herramientas</a></li>
+            <li><a href="blog/index.html">Guías</a></li>
           </ul>
         </details>
         <a href="store/index.html">Tienda</a>
-        <a href="#herramientas">Herramientas</a>
-        <a href="blog/index.html">Guías</a>
         <details class="nav-dropdown">
           <summary class="nav-drop-btn" aria-haspopup="true">Nosotros ▾</summary>
           <ul class="nav-drop-menu">
             <li><a href="#como-trabajamos">Cómo trabajamos</a></li>
             <li><a href="#resenas">Reseñas</a></li>
             <li><a href="/about.html">Acerca de</a></li>
-            <li><a href="#redes">Redes</a></li>
           </ul>
         </details>
         <details class="nav-dropdown">
@@ -993,5 +992,28 @@
   <script src="assets/historia.js" defer></script>
   <script src="assets/app.js" defer></script>
 <script src="assets/chatbot.js" defer></script>
+  <script>
+    (function () {
+      document.addEventListener('click', (e) => {
+        document.querySelectorAll('details.nav-dropdown').forEach((d) => {
+          if (d.open && !d.contains(e.target)) d.open = false;
+        });
+      });
+      document.querySelectorAll('.nav-drop-menu a').forEach((a) => {
+        a.addEventListener('click', () => {
+          const d = a.closest('details.nav-dropdown');
+          if (d) d.open = false;
+        });
+      });
+      document.querySelectorAll('details.nav-dropdown').forEach((d) => {
+        d.addEventListener('toggle', () => {
+          clearTimeout(d._autoCloseTimer);
+          if (d.open) {
+            d._autoCloseTimer = setTimeout(() => { if (d.open) d.open = false; }, 3000);
+          }
+        });
+      });
+    })();
+  </script>
 </body>
 </html>

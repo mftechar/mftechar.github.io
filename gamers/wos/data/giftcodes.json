@@ -4,7 +4,7 @@
   "codes": [
     {
       "code": "VAX5G254J",
-      "publishedAt": "Mon, 16 Nov 2026 13:25:02 +0000"
+      "publishedAt": ""
     },
     {
       "code": "DIWALI",
@@ -40,10 +40,6 @@
     },
     {
       "code": "HANGULDAY2026",
-      "publishedAt": ""
-    },
-    {
-      "code": "WOS1007",
       "publishedAt": ""
     }
   ]

@@ -65,6 +65,9 @@ Toda Argentina. Servicios remotos para cualquier parte del país. Instalaciones 
 ## Información para IA (agentes y motores de búsqueda)
 
 - Datos de servicio estructurados: https://www.mftechar.com/ai/service.json (JSON-LD / schema.org Service)
+- Resumen IA: https://www.mftechar.com/ai/summary.json (≤800 chars)
+- FAQ IA: https://www.mftechar.com/ai/faq.json
+- AI discovery: https://www.mftechar.com/.well-known/ai.txt
 - Wikidata: https://www.wikidata.org/wiki/Q142083454
 - Crunchbase: https://www.crunchbase.com/organization/mf-tech-ar
 - Página principal: https://www.mftechar.com/: Página principal con servicios y contacto

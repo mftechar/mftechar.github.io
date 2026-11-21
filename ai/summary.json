@@ -1,39 +1,25 @@
 {
+  "version": "1.0",
+  "lastModified": "2026-11-17T08:00:00-03:00",
   "name": "MF Tech AR",
-  "url": "https://www.mftechar.com",
-  "description": "Servicios IT para toda Argentina: asistencia remota, instalación de software, cambio de hardware, configuración de servidores, análisis de seguridad de redes, análisis de información, asesoramiento tecnológico, venta de equipos (servidores, PCs, tablets, celulares), cámaras ocultas, equipos anti-espionaje, creación de software y venta de licencias de software.",
-  "founder": "Martín Flores",
-  "areaServed": "Argentina",
-  "contact": {
-    "whatsapp": "+54 9 2325 406322",
-    "email": "contacto@mftechar.com"
-  },
-  "services": [
-    "Asistencia remota",
+  "url": "https://www.mftechar.com/",
+  "description": "MF Tech AR brinda servicios IT para toda Argentina: asistencia remota, venta de equipos, servidores, seguridad de redes, software a medida y licencias. Atención directa con Martín Flores. Presupuesto sin cargo. Servicio a distancia y en el lugar en todo el país.",
+  "serviceType": [
+    "Asistencia remota IT",
     "Instalación de software",
-    "Cambio de hardware",
+    "Cambio y upgrade de hardware",
     "Configuración de servidores",
     "Análisis de seguridad de redes",
-    "Análisis de información",
     "Asesoramiento tecnológico",
     "Venta de equipos informáticos",
-    "Cámaras ocultas",
-    "Equipos anti-espionaje",
-    "Creación de software a medida",
-    "Venta de licencias de software"
+    "Software a medida",
+    "Licencias de software"
   ],
-  "socials": [
-    "https://facebook.com/mftechar",
-    "https://instagram.com/mftechar",
-    "https://x.com/mftechar",
-    "https://youtube.com/@mftechar",
-    "https://github.com/mftechar",
-    "https://www.linkedin.com/in/martin-emmanuel-flores-99b99a65",
-    "https://www.tiktok.com/@mftechar",
-    "https://www.threads.net/@mftechar",
-    "https://t.me/mftechar"
-  ],
-  "llms": "https://www.mftechar.com/llms.txt",
-  "sitemap": "https://www.mftechar.com/sitemap.xml",
-  "lastUpdated": "2026-11-06"
+  "areaServed": "Argentina",
+  "telephone": "+5492325406322",
+  "email": "contacto@mftechar.com",
+  "address": "Luján, Provincia de Buenos Aires, Argentina",
+  "hours": "Lunes a Viernes 09:00-18:00",
+  "founder": "Martín Flores",
+  "contact": "https://wa.me/5492325406322"
 }

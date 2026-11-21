@@ -1,6 +1,8 @@
 {
   "@context": "https://schema.org",
   "@type": "Service",
+  "version": "1.0",
+  "lastModified": "2026-11-17T08:00:00-03:00",
   "name": "MF Tech AR — Servicios IT",
   "provider": {
     "@type": "Organization",

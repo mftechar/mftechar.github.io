@@ -2,7 +2,7 @@
  "source": "WoS Atlas",
  "sourceUrl": "https://wosatlas.com",
  "serverId": "4604",
- "fetchedAt": "2026-11-21T07:50:03.604Z",
+ "fetchedAt": "2026-11-21T19:52:17.349Z",
  "boards": {
   "alliance.rank": {
    "board": "alliance.rank",
@@ -710,7 +710,7 @@
   ],
   "server_count": 4086,
   "surveyed_server_count": 4029,
-  "last_census_at": "2026-11-21T07:48:34.629+00:00"
+  "last_census_at": "2026-11-21T08:18:27.239+00:00"
  },
  "server": {
   "kind": "normal",
@@ -776,7 +776,7 @@
    "players": 2655,
    "alliances": 500,
    "player_power": 43827771559,
-   "refreshed_at": "2026-11-21T07:49:32.905557+00:00"
+   "refreshed_at": "2026-11-21T08:19:31.552317+00:00"
   },
   "season": null,
   "opened_at": "2026-08-04T05:57:31.797+00:00",
@@ -794,7 +794,7 @@
   "opened_at_precision": "month"
  },
  "summary": {
-  "as_of": "2026-11-21T07:49:32.905557+00:00",
+  "as_of": "2026-11-21T08:19:31.552317+00:00",
   "since": "2026-10-17",
   "series": [
    {
@@ -1097,7 +1097,7 @@
     "power": 2746465652,
     "rank_7d": 7,
     "alliance_id": "4604000025",
-    "power_delta_7d": 360513631
+    "power_delta_7d": 246663026
    },
    {
     "tag": "TWP",
@@ -1115,7 +1115,7 @@
     "power": 2605364926,
     "rank_7d": 6,
     "alliance_id": "4604000429",
-    "power_delta_7d": 150516210
+    "power_delta_7d": 66571436
    },
    {
     "tag": "REX",
@@ -1142,7 +1142,7 @@
     "power": 1273265031,
     "rank_7d": 10,
     "alliance_id": "4604000112",
-    "power_delta_7d": 94389031
+    "power_delta_7d": 48965638
    },
    {
     "tag": "ttd",
@@ -1151,7 +1151,7 @@
     "power": 1058154793,
     "rank_7d": 11,
     "alliance_id": "4604000471",
-    "power_delta_7d": 86151141
+    "power_delta_7d": 49909425
    },
    {
     "tag": "LLN",
@@ -1160,7 +1160,7 @@
     "power": 1003110496,
     "rank_7d": 12,
     "alliance_id": "4604000299",
-    "power_delta_7d": 119043612
+    "power_delta_7d": 86545560
    },
    {
     "tag": "EWE",
@@ -1187,7 +1187,7 @@
     "power": 481141392,
     "rank_7d": 16,
     "alliance_id": "4604000434",
-    "power_delta_7d": 77107710
+    "power_delta_7d": 38344388
    },
    {
     "tag": "FzF",
@@ -1205,7 +1205,7 @@
     "power": 285479474,
     "rank_7d": 15,
     "alliance_id": "4604000115",
-    "power_delta_7d": -76368005
+    "power_delta_7d": -47131461
    },
    {
     "tag": "KDA",
@@ -1223,7 +1223,7 @@
     "power": 227685146,
     "rank_7d": 17,
     "alliance_id": "4604000254",
-    "power_delta_7d": -84141961
+    "power_delta_7d": -53994676
    },
    {
     "tag": "SYY",
@@ -1232,7 +1232,7 @@
     "power": 220637216,
     "rank_7d": 20,
     "alliance_id": "4604000595",
-    "power_delta_7d": 14550830
+    "power_delta_7d": 8707877
    }
   ]
  },

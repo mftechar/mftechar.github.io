@@ -2,7 +2,7 @@
  "source": "WoS Atlas",
  "sourceUrl": "https://wosatlas.com",
  "serverId": "4604",
- "fetchedAt": "2026-11-24T10:32:33.196Z",
+ "fetchedAt": "2026-11-24T22:50:19.158Z",
  "boards": {
   "alliance.rank": {
    "board": "alliance.rank",
@@ -462,7 +462,7 @@
      "subject_server_id": null
     },
     {
-     "name": "꧁༺ Sᴏᴢɪɴʜᴏ ༻꧂",
+     "name": "꧁༺ Sᴏᴢɪ��ʜᴏ ༻꧂",
      "rank": 16,
      "value": 8882388,
      "subject_id": "207522339",
@@ -785,7 +785,7 @@
    "players": 2669,
    "alliances": 500,
    "player_power": 45771430751,
-   "refreshed_at": "2026-11-24T10:05:13.333305+00:00"
+   "refreshed_at": "2026-11-24T10:41:47.889689+00:00"
   },
   "season": null,
   "opened_at": "2026-08-04T05:57:31.797+00:00",
@@ -803,7 +803,7 @@
   "opened_at_precision": "month"
  },
  "summary": {
-  "as_of": "2026-11-24T10:05:13.333305+00:00",
+  "as_of": "2026-11-24T10:41:47.889689+00:00",
   "since": "2026-10-17",
   "series": [
    {
@@ -1097,7 +1097,7 @@
     "power": 5978914170,
     "rank_7d": 2,
     "alliance_id": "4604000001",
-    "power_delta_7d": 816231374
+    "power_delta_7d": 443138558
    },
    {
     "tag": "ELI",
@@ -1115,7 +1115,7 @@
     "power": 3292148577,
     "rank_7d": 5,
     "alliance_id": "4604000101",
-    "power_delta_7d": 590037358
+    "power_delta_7d": 655343527
    },
    {
     "tag": "DEU",
@@ -1205,7 +1205,7 @@
     "power": 457056100,
     "rank_7d": 15,
     "alliance_id": "4604000434",
-    "power_delta_7d": -57208533
+    "power_delta_7d": 23994991
    },
    {
     "tag": "FzF",

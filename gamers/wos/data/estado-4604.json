@@ -2,7 +2,7 @@
  "source": "WoS Atlas",
  "sourceUrl": "https://wosatlas.com",
  "serverId": "4604",
- "fetchedAt": "2026-11-25T09:22:31.891Z",
+ "fetchedAt": "2026-11-25T22:02:57.781Z",
  "boards": {
   "alliance.rank": {
    "board": "alliance.rank",
@@ -462,7 +462,7 @@
      "subject_server_id": null
     },
     {
-     "name": "꧁༺ Sᴏᴢɪɴʜᴏ ༻꧂",
+     "name": "꧁༺ Sᴏᴢɪɴʜ��� ༻꧂",
      "rank": 16,
      "value": 9007999,
      "subject_id": "207522339",
@@ -785,7 +785,7 @@
    "players": 2671,
    "alliances": 500,
    "player_power": 45905465098,
-   "refreshed_at": "2026-11-25T09:08:20.133489+00:00"
+   "refreshed_at": "2026-11-25T09:22:24.816707+00:00"
   },
   "season": null,
   "opened_at": "2026-08-04T05:57:31.797+00:00",
@@ -803,7 +803,7 @@
   "opened_at_precision": "month"
  },
  "summary": {
-  "as_of": "2026-11-25T09:08:20.133489+00:00",
+  "as_of": "2026-11-25T09:22:24.816707+00:00",
   "since": "2026-10-17",
   "series": [
    {
@@ -1121,7 +1121,7 @@
     "power": 3376014481,
     "rank_7d": 6,
     "alliance_id": "4604000101",
-    "power_delta_7d": 739209431
+    "power_delta_7d": 685179497
    },
    {
     "tag": "DEU",
@@ -1175,7 +1175,7 @@
     "power": 1247907797,
     "rank_7d": 11,
     "alliance_id": "4604000471",
-    "power_delta_7d": 225314407
+    "power_delta_7d": 197739200
    },
    {
     "tag": "LLN",
@@ -1184,7 +1184,7 @@
     "power": 1126568645,
     "rank_7d": 12,
     "alliance_id": "4604000299",
-    "power_delta_7d": 162293585
+    "power_delta_7d": 135842844
    },
    {
     "tag": "EWE",
@@ -1247,7 +1247,7 @@
     "power": 238927424,
     "rank_7d": 19,
     "alliance_id": "4604000254",
-    "power_delta_7d": 6178807
+    "power_delta_7d": 14593196
    },
    {
     "tag": "SYY",

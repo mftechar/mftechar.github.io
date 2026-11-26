@@ -2,7 +2,7 @@
  "source": "WoS Atlas",
  "sourceUrl": "https://wosatlas.com",
  "serverId": "4604",
- "fetchedAt": "2026-11-25T22:02:57.781Z",
+ "fetchedAt": "2026-11-26T09:00:05.575Z",
  "boards": {
   "alliance.rank": {
    "board": "alliance.rank",
@@ -462,7 +462,7 @@
      "subject_server_id": null
     },
     {
-     "name": "꧁༺ Sᴏᴢɪɴʜ��� ༻꧂",
+     "name": "꧁༺ Sᴏᴢ��ɴʜᴏ ༻꧂",
      "rank": 16,
      "value": 9007999,
      "subject_id": "207522339",
@@ -708,9 +708,9 @@
     "subject_kind": "player"
    }
   ],
-  "server_count": 4099,
-  "surveyed_server_count": 4042,
-  "last_census_at": "2026-11-25T04:59:48.424+00:00"
+  "server_count": 4100,
+  "surveyed_server_count": 4043,
+  "last_census_at": "2026-11-26T05:08:13.43+00:00"
  },
  "server": {
   "kind": "normal",
@@ -723,16 +723,16 @@
     "since": "2026-11-22T13:44:26.899+00:00",
     "until": null,
     "alliance_id": null,
-    "last_seen_at": "2026-11-25T04:44:19.66+00:00"
+    "last_seen_at": "2026-11-26T04:52:44.941+00:00"
    },
    {
-    "uid": "207537716",
+    "uid": "207547088",
     "role": "official",
     "slot": "2",
-    "since": "2026-11-25T04:44:19.66+00:00",
+    "since": "2026-11-26T04:52:44.941+00:00",
     "until": null,
     "alliance_id": null,
-    "last_seen_at": "2026-11-25T04:44:19.66+00:00"
+    "last_seen_at": "2026-11-26T04:52:44.941+00:00"
    },
    {
     "uid": "207491956",
@@ -741,7 +741,7 @@
     "since": "2026-11-22T13:44:26.899+00:00",
     "until": null,
     "alliance_id": null,
-    "last_seen_at": "2026-11-25T04:44:19.66+00:00"
+    "last_seen_at": "2026-11-26T04:52:44.941+00:00"
    },
    {
     "uid": "207548155",
@@ -750,25 +750,34 @@
     "since": "2026-11-25T04:44:19.66+00:00",
     "until": null,
     "alliance_id": null,
-    "last_seen_at": "2026-11-25T04:44:19.66+00:00"
+    "last_seen_at": "2026-11-26T04:52:44.941+00:00"
    },
    {
-    "uid": "207521420",
+    "uid": "207565364",
+    "role": "official",
+    "slot": "5",
+    "since": "2026-11-26T04:52:44.941+00:00",
+    "until": null,
+    "alliance_id": null,
+    "last_seen_at": "2026-11-26T04:52:44.941+00:00"
+   },
+   {
+    "uid": "207551118",
     "role": "official",
     "slot": "6",
-    "since": "2026-11-25T04:44:19.66+00:00",
+    "since": "2026-11-26T04:52:44.941+00:00",
     "until": null,
     "alliance_id": null,
-    "last_seen_at": "2026-11-25T04:44:19.66+00:00"
+    "last_seen_at": "2026-11-26T04:52:44.941+00:00"
    },
    {
-    "uid": "207553579",
+    "uid": "207502193",
     "role": "official",
     "slot": "7",
-    "since": "2026-11-25T04:44:19.66+00:00",
+    "since": "2026-11-26T04:52:44.941+00:00",
     "until": null,
     "alliance_id": null,
-    "last_seen_at": "2026-11-25T04:44:19.66+00:00"
+    "last_seen_at": "2026-11-26T04:52:44.941+00:00"
    }
   ],
   "groups": [
@@ -781,11 +790,11 @@
    }
   ],
   "rollup": {
-   "cities": 1641,
-   "players": 2671,
+   "cities": 1624,
+   "players": 2673,
    "alliances": 500,
-   "player_power": 45905465098,
-   "refreshed_at": "2026-11-25T09:22:24.816707+00:00"
+   "player_power": 46446485758,
+   "refreshed_at": "2026-11-26T08:51:03.108309+00:00"
   },
   "season": null,
   "opened_at": "2026-08-04T05:57:31.797+00:00",
@@ -797,13 +806,13 @@
    "season_ends_at": null,
    "season_started_at": null
   },
-  "last_seen_at": "2026-11-25T04:44:19.66+00:00",
+  "last_seen_at": "2026-11-26T04:52:44.941+00:00",
   "first_seen_at": "2026-08-27T22:03:30.207+00:00",
   "generation_ceiling": 2,
   "opened_at_precision": "month"
  },
  "summary": {
-  "as_of": "2026-11-25T09:22:24.816707+00:00",
+  "as_of": "2026-11-26T08:59:39.955267+00:00",
   "since": "2026-10-17",
   "series": [
    {
@@ -1027,22 +1036,28 @@
     "players": 2671,
     "alliances": 500,
     "player_power": 45905465098
+   },
+   {
+    "day": "2026-11-26",
+    "players": 2673,
+    "alliances": 500,
+    "player_power": 46446485758
    }
   ],
   "windows": {
    "7d": {
-    "from": "2026-11-18",
+    "from": "2026-11-19",
     "cities": {
-     "now": 1641,
-     "pct": -2.9,
-     "then": 1690,
-     "delta": -49
+     "now": 1624,
+     "pct": -3.79,
+     "then": 1688,
+     "delta": -64
     },
     "players": {
-     "now": 2671,
-     "pct": 0.79,
-     "then": 2650,
-     "delta": 21
+     "now": 2673,
+     "pct": 0.68,
+     "then": 2655,
+     "delta": 18
     },
     "alliances": {
      "now": 500,
@@ -1051,25 +1066,25 @@
      "delta": 0
     },
     "player_power": {
-     "now": 45905465098,
-     "pct": 4.98,
-     "then": 43726964342,
-     "delta": 2178500756
+     "now": 46446485758,
+     "pct": 5.98,
+     "then": 43827771559,
+     "delta": 2618714199
     }
    },
    "30d": {
-    "from": "2026-10-26",
+    "from": "2026-10-27",
     "cities": {
-     "now": 1641,
-     "pct": -20.46,
-     "then": 2063,
-     "delta": -422
+     "now": 1624,
+     "pct": -20.16,
+     "then": 2034,
+     "delta": -410
     },
     "players": {
-     "now": 2671,
-     "pct": 7.14,
-     "then": 2493,
-     "delta": 178
+     "now": 2673,
+     "pct": 7.01,
+     "then": 2498,
+     "delta": 175
     },
     "alliances": {
      "now": 500,
@@ -1078,10 +1093,10 @@
      "delta": 5
     },
     "player_power": {
-     "now": 45905465098,
-     "pct": 33.2,
-     "then": 34464719762,
-     "delta": 11440745336
+     "now": 46446485758,
+     "pct": 32.08,
+     "then": 35164685186,
+     "delta": 11281800572
     }
    }
   },
@@ -1281,7 +1296,7 @@
     "leader_name": "RY4N",
     "join_min_power": 6000000,
     "home_server_id": "4604",
-    "last_seen_at": "2026-11-25T08:46:27.18+00:00"
+    "last_seen_at": "2026-11-26T04:52:44.941+00:00"
    },
    {
     "tag": "PHX",
@@ -1293,163 +1308,163 @@
     "leader_name": "Rara",
     "join_min_power": 20000000,
     "home_server_id": "4604",
-    "last_seen_at": "2026-11-25T08:46:27.18+00:00"
+    "last_seen_at": "2026-11-26T04:52:44.941+00:00"
    },
    {
     "tag": "ELI",
     "name": "ELITE",
     "power": 5015101305,
-    "member_count": 97,
+    "member_count": 94,
     "max_members": 100,
     "alliance_level": 11,
     "leader_name": "KOR_Shin",
     "join_min_power": 25000000,
     "home_server_id": "4604",
-    "last_seen_at": "2026-11-25T08:46:27.18+00:00"
+    "last_seen_at": "2026-11-26T04:52:44.941+00:00"
    },
    {
     "tag": "TWP",
     "name": "ThePack",
     "power": 3376014481,
-    "member_count": 98,
+    "member_count": 96,
     "max_members": 100,
     "alliance_level": 11,
     "leader_name": "MarcoPolo FGO",
     "join_min_power": 20000000,
     "home_server_id": "4604",
-    "last_seen_at": "2026-11-25T08:46:27.18+00:00"
+    "last_seen_at": "2026-11-26T04:52:44.941+00:00"
    },
    {
     "tag": "DEU",
     "name": "DieKämpfer",
     "power": 2886141351,
-    "member_count": 99,
+    "member_count": 82,
     "max_members": 100,
     "alliance_level": 11,
     "leader_name": "Melicious",
     "join_min_power": 350000,
     "home_server_id": "4604",
-    "last_seen_at": "2026-11-25T08:46:27.18+00:00"
+    "last_seen_at": "2026-11-26T04:52:44.941+00:00"
    },
    {
     "tag": "Skb",
     "name": "Skullbocks",
     "power": 2703643155,
-    "member_count": 98,
+    "member_count": 67,
     "max_members": 100,
     "alliance_level": 11,
     "leader_name": "Maykel",
     "join_min_power": 30000000,
     "home_server_id": "4604",
-    "last_seen_at": "2026-11-25T08:46:27.18+00:00"
+    "last_seen_at": "2026-11-26T04:52:44.941+00:00"
    },
    {
     "tag": "RIP",
     "name": "RESTINPEACE",
     "power": 2206667343,
-    "member_count": 65,
+    "member_count": 54,
     "max_members": 100,
     "alliance_level": 11,
     "leader_name": "Yenna1",
     "join_min_power": 15000000,
     "home_server_id": "4604",
-    "last_seen_at": "2026-11-25T08:46:27.18+00:00"
+    "last_seen_at": "2026-11-26T04:52:44.941+00:00"
    },
    {
     "tag": "LOL",
     "name": "HavingFun",
     "power": 1857900507,
-    "member_count": 96,
+    "member_count": 87,
     "max_members": 100,
     "alliance_level": 11,
     "leader_name": "qIIdmII",
     "join_min_power": 5000000,
     "home_server_id": "4604",
-    "last_seen_at": "2026-11-25T08:46:27.18+00:00"
+    "last_seen_at": "2026-11-26T04:52:44.941+00:00"
    },
    {
     "tag": "REX",
     "name": "universal",
     "power": 1620069421,
-    "member_count": 50,
+    "member_count": 48,
     "max_members": 100,
     "alliance_level": 11,
     "leader_name": "FdLmnsr",
     "join_min_power": 1,
     "home_server_id": "4604",
-    "last_seen_at": "2026-11-25T08:46:27.18+00:00"
+    "last_seen_at": "2026-11-26T04:52:44.941+00:00"
    },
    {
     "tag": "ttd",
     "name": "TTDacademy",
     "power": 1247907797,
-    "member_count": 68,
+    "member_count": 67,
     "max_members": 100,
     "alliance_level": 11,
     "leader_name": "Lil MissTortoise",
     "join_min_power": 250000,
     "home_server_id": "4604",
-    "last_seen_at": "2026-11-25T08:46:27.18+00:00"
+    "last_seen_at": "2026-11-26T04:52:44.941+00:00"
    },
    {
     "tag": "LLN",
     "name": "LaLégionNoir",
     "power": 1126568645,
-    "member_count": 86,
+    "member_count": 54,
     "max_members": 100,
     "alliance_level": 11,
     "leader_name": "MarioCX",
     "join_min_power": 500000,
     "home_server_id": "4604",
-    "last_seen_at": "2026-11-25T08:46:27.18+00:00"
+    "last_seen_at": "2026-11-26T04:52:44.941+00:00"
    },
    {
     "tag": "EWE",
     "name": "EASTWESTEQUALITY",
     "power": 722207806,
-    "member_count": 42,
+    "member_count": 19,
     "max_members": 100,
     "alliance_level": 11,
     "leader_name": "Robertos Sanchos",
     "join_min_power": 5000000,
     "home_server_id": "4604",
-    "last_seen_at": "2026-11-25T08:46:27.18+00:00"
+    "last_seen_at": "2026-11-26T04:52:44.941+00:00"
    },
    {
     "tag": "phx",
     "name": "PHOENIXACADEMY",
     "power": 465187920,
-    "member_count": 51,
+    "member_count": 28,
     "max_members": 100,
     "alliance_level": 11,
     "leader_name": "Hui",
     "join_min_power": null,
     "home_server_id": "4604",
-    "last_seen_at": "2026-11-25T08:46:27.18+00:00"
+    "last_seen_at": "2026-11-26T04:52:44.941+00:00"
    },
    {
     "tag": "RFX",
     "name": "Greeneyes",
     "power": 370500915,
-    "member_count": 22,
+    "member_count": 21,
     "max_members": 96,
     "alliance_level": 11,
     "leader_name": "Nicoletha",
     "join_min_power": 0,
     "home_server_id": "4604",
-    "last_seen_at": "2026-11-25T08:46:27.18+00:00"
+    "last_seen_at": "2026-11-26T04:52:44.941+00:00"
    },
    {
     "tag": "FzF",
     "name": "FrozenFist",
     "power": 344773552,
-    "member_count": 24,
+    "member_count": 14,
     "max_members": 84,
     "alliance_level": 11,
     "leader_name": "King Holman",
     "join_min_power": 750000,
     "home_server_id": "4604",
-    "last_seen_at": "2026-11-25T08:46:27.18+00:00"
+    "last_seen_at": "2026-11-26T04:52:44.941+00:00"
    },
    {
     "tag": "SCL",
@@ -1461,43 +1476,43 @@
     "leader_name": "QueenUncool",
     "join_min_power": 0,
     "home_server_id": "4604",
-    "last_seen_at": "2026-11-25T08:46:27.18+00:00"
+    "last_seen_at": "2026-11-26T04:52:44.941+00:00"
    },
    {
     "tag": "KDA",
     "name": "KDA",
     "power": 273139156,
-    "member_count": 46,
+    "member_count": 11,
     "max_members": 80,
     "alliance_level": 7,
     "leader_name": "Mike lang",
     "join_min_power": null,
     "home_server_id": "4604",
-    "last_seen_at": "2026-11-25T08:46:27.18+00:00"
+    "last_seen_at": "2026-11-26T04:52:44.941+00:00"
    },
    {
     "tag": "BST",
     "name": "Blackstorm",
     "power": 238927424,
-    "member_count": 26,
+    "member_count": 8,
     "max_members": 80,
     "alliance_level": 9,
     "leader_name": "iProMaX",
     "join_min_power": 1000000,
     "home_server_id": "4604",
-    "last_seen_at": "2026-11-25T08:46:27.18+00:00"
+    "last_seen_at": "2026-11-26T04:52:44.941+00:00"
    },
    {
     "tag": "SYY",
     "name": "SKRAGGA",
     "power": 230127345,
-    "member_count": 64,
+    "member_count": 11,
     "max_members": 64,
     "alliance_level": 6,
     "leader_name": "CpT_n3m0",
     "join_min_power": null,
     "home_server_id": "4604",
-    "last_seen_at": "2026-11-25T08:46:27.18+00:00"
+    "last_seen_at": "2026-11-26T04:52:44.941+00:00"
    },
    {
     "tag": "Gha",
@@ -1509,7 +1524,7 @@
     "leader_name": "Chief Bogo",
     "join_min_power": 2000000,
     "home_server_id": "4604",
-    "last_seen_at": "2026-11-25T04:44:19.66+00:00"
+    "last_seen_at": "2026-11-26T04:52:44.941+00:00"
    }
   ]
  }

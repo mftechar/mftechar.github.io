@@ -3,6 +3,10 @@
   "note": "Actualizado por GitHub Actions. No editar a mano.",
   "codes": [
     {
+      "code": "GUDOKYTKOR",
+      "publishedAt": "Fri, 27 Nov 2026 01:10:02 +0000"
+    },
+    {
       "code": "THANKYOU26",
       "publishedAt": "Thu, 26 Nov 2026 12:30:01 +0000"
     },
@@ -15,12 +19,12 @@
       "publishedAt": "Tue, 24 Nov 2026 03:10:02 +0000"
     },
     {
-      "code": "WORKERSTHANKS",
-      "publishedAt": "Mon, 23 Nov 2026 10:05:08 +0000"
-    },
-    {
       "code": "WOS27TGS",
       "publishedAt": "Mon, 23 Nov 2026 10:05:02 +0000"
+    },
+    {
+      "code": "WORKERSTHANKS",
+      "publishedAt": ""
     },
     {
       "code": "A7K9M2",
@@ -56,10 +60,6 @@
     },
     {
       "code": "SPORTSDAY26",
-      "publishedAt": ""
-    },
-    {
-      "code": "INS400K",
       "publishedAt": ""
     }
   ]
